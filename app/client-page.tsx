@@ -109,7 +109,7 @@ const servers = [
 // ============================================================================
 // DOMAINS
 // ============================================================================
-const domains = [
+const staticDomains = [
   { domain: "dokukiste.de", dns: "Cloudflare", status: "active", server: "minicon-web" },
   { domain: "minicon.eu", dns: "Cloudflare", status: "active", server: "minicon-web" },
   { domain: "dorfkiste.org", dns: "Cloudflare", status: "active", server: "dorfkiste-web" },
@@ -142,6 +142,8 @@ function StatusBadge({ status }: { status: string }) {
     'in-progress': 'text-yellow-500',
     'running': 'bg-green-500',
     'failed': 'bg-red-500',
+    'down': 'bg-red-500',
+    'up': 'bg-green-500',
   };
   return <span className={`w-2 h-2 rounded-full ${colors[status] || 'bg-gray-500'}`}></span>;
 }
@@ -170,26 +172,63 @@ function SiteCard({ site }: { site: { name: string; url: string; status: string;
 
 export default function ClientHome({ initialData }: { initialData: { automationSites: any[] } }) {
   const [sites, setSites] = useState(initialData.automationSites.length > 0 ? initialData.automationSites : initialWebsiteAutomation.sites);
+  const [domains, setDomains] = useState(staticDomains);
 
+  // Poll for company/site updates
   useEffect(() => {
-    // If we have fresh data from prop, use it. Otherwise, keep default or fetch if needed.
-    // The prop data comes from the server component, so it's fresh on page load.
-    if (initialData.automationSites.length > 0) {
-      setSites(initialData.automationSites);
-    }
-  }, [initialData]);
-
-  // Refresh mechanism (optional)
-  const refresh = async () => {
-    try {
-      const res = await fetch('/api/companies');
-      if (res.ok) {
-        // In a real app we'd map this data properly again
-        // For now, reload the page to get server data again
-        window.location.reload();
+    const fetchCompanies = async () => {
+      try {
+        const res = await fetch('/api/companies');
+        if (res.ok) {
+          const companies = await res.json();
+          // Map API companies to SiteCard format
+          const mappedSites = companies.map((c: any) => ({
+            name: c.name,
+            url: c.deployment?.url || c.websiteUrl || '#',
+            status: c.deployment?.status === 'live' ? 'live' : c.websiteAnalysis?.status === 'completed' ? 'pending' : 'in-progress',
+            description: c.websiteUrl,
+            legalCheck: 'pending' // Default for now
+          }));
+          
+          if (mappedSites.length > 0) {
+            setSites(mappedSites);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch companies", e);
       }
-    } catch (e) { console.error(e); }
-  };
+    };
+
+    // Poll for Uptime Kuma status
+    const fetchStatus = async () => {
+      try {
+        const res = await fetch('/api/status/domains');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.monitors) {
+            // Update domains status based on monitors
+            setDomains(prevDomains => prevDomains.map(d => {
+              const monitor = data.monitors.find((m: any) => m.name.includes(d.domain) || d.domain.includes(m.name));
+              return monitor ? { ...d, status: monitor.status === 'up' ? 'active' : 'down' } : d;
+            }));
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch domain status", e);
+      }
+    };
+
+    // Initial fetches
+    fetchCompanies();
+    fetchStatus();
+
+    const interval = setInterval(() => {
+      fetchCompanies();
+      fetchStatus();
+    }, 30000); // 30s polling
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <main className="min-h-screen bg-gray-950 text-white p-8">
@@ -199,9 +238,7 @@ export default function ClientHome({ initialData }: { initialData: { automationS
             <h1 className="text-4xl font-bold mb-2">🚀 Minicon Command Center</h1>
             <p className="text-gray-400">Projekte, Server, Agenten & Infrastruktur</p>
           </div>
-          <button onClick={() => fetch('/api/cron/discovery', { method: 'POST' }).then(() => refresh())} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
-            Run Discovery
-          </button>
+          {/* Removed Run Discovery button */}
         </div>
 
         {/* ================================================================ */}
@@ -228,7 +265,6 @@ export default function ClientHome({ initialData }: { initialData: { automationS
               </div>
             </div>
             
-            {/* ... (Roadmap & Ideas omitted for brevity, keeping original look) ... */}
              <div className="mb-4">
               <h3 className="text-sm font-semibold text-gray-500 uppercase mb-2">Roadmap</h3>
               <div className="grid grid-cols-2 gap-2">
@@ -284,7 +320,7 @@ export default function ClientHome({ initialData }: { initialData: { automationS
                 {sites.map((site: any) => (
                   <SiteCard key={site.name} site={site} />
                 ))}
-                {sites.length === 0 && <p className="text-sm text-gray-500">No sites found. Run Discovery.</p>}
+                {sites.length === 0 && <p className="text-sm text-gray-500">No sites found.</p>}
               </div>
             </div>
 
@@ -360,7 +396,7 @@ export default function ClientHome({ initialData }: { initialData: { automationS
                   <div className="flex items-center gap-2 text-xs text-gray-500">
                     <span>{d.server}</span>
                     <span className={`px-2 py-0.5 rounded ${
-                      d.status === 'active' ? 'bg-green-900/50 text-green-400' : 'bg-yellow-900/50 text-yellow-400'
+                      d.status === 'active' ? 'bg-green-900/50 text-green-400' : d.status === 'down' ? 'bg-red-900/50 text-red-400' : 'bg-yellow-900/50 text-yellow-400'
                     }`}>
                       {d.status}
                     </span>
