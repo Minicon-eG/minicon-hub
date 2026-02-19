@@ -12,70 +12,51 @@ Das System arbeitet als Pipeline autonomer intelligenter Agenten.
 ### Systemarchitektur
 Das folgende Diagramm veranschaulicht die hybride Architektur zwischen der lokalen Entwicklungsumgebung (wo Agenten laufen) und dem Produktionsserver (wo Daten und Websites liegen).
 
-```mermaid
-graph TB
-    subgraph "Lokal / Dev-Umgebung (Gemini)"
-        A[Discovery Agent]
-        B[Analysis Agent]
-        C[Content Agent]
-        D[Deployment Agent]
-        E[Sales Agent]
-        Cron[OpenClaw Cron]
-    end
-
-    subgraph "Tunnel / Netzwerk"
-        SSH[SSH Tunnel :27018 -> :27017]
-    end
-
-    subgraph "Produktion (minicon-web / Hetzner)"
-        LB[Traefik Reverse Proxy]
-        Hub[Minicon Hub (Next.js)]
-        DB[(MongoDB)]
-        
-        Sites[Wildcard Sites *.minicon.eu]
-    end
-
-    Cron --> A & B & C & D & E
-    A & B & C & D & E --Schreibt Daten--> SSH --Weiterleitung--> DB
-    LB --Route--> Hub
-    Hub --Liest Daten--> DB
-    Hub --Rendert--> Sites
-    
-    style DB fill:#f9f,stroke:#333,stroke-width:2px
-    style Hub fill:#ccf,stroke:#333,stroke-width:2px
+```text
++-------------------------------------------------------+           +-------------------------------------------------------+
+|           LOKALE ENTWICKLUNGSUMGEBUNG (DEV)           |           |              PRODUKTIONSSERVER (HETZNER)              |
+|                                                       |           |                                                       |
+|   +-----------------------------------------------+   |           |   +-----------------------------------------------+   |
+|   |  OpenClaw Agenten (Gemini)                    |   |           |   |  Infrastruktur (Docker)                       |   |
+|   |                                               |   |           |   |                                               |   |
+|   |  [🔎 Discovery] --> [⚖️ Analysis]             |   |           |   |  [🌐 Traefik Reverse Proxy]                   |   |
+|   |         |                 |                   |   |           |   |             |                                 |   |
+|   |         v                 v                   |   |           |   |             v                                 |   |
+|   |  [✍️ Content]   --> [🏗️ Deployment]           |   |           |   |  [🖥️ Minicon Hub (Next.js)]                  |   |
+|   |                                               |   |           |   |             |                                 |   |
+|   +-----------+-----------------------------------+   |           |   +-------------+---------------------------------+   |
+|               |                                       |           |                 |                                     |
+|               | (Schreibt Daten via Tunnel)           |           |                 | (Liest Daten lokal)                 |
+|               v                                       |           |                 v                                     |
+|   +-----------+-----------+                           |           |   +-------------+-------------+                       |
+|   |  SSH Tunnel (:27018)  | ----------------------------------------> |  MongoDB (:27017)         |                       |
+|   +-----------------------+                           |           |   +---------------------------+                       |
++-------------------------------------------------------+           +-------------------------------------------------------+
 ```
 
 ### Autonomer Pipeline-Prozess
 Der logische Datenfluss von der Entdeckung bis zur Live-Website.
 
-```mermaid
-sequenceDiagram
-    participant Source as OpenStreetMap / Web
-    participant Disc as Discovery Agent
-    participant DB as MongoDB
-    participant Ana as Analysis Agent
-    participant Gen as Content Agent
-    participant Dep as Deployment Agent
-    participant Live as Live Website
+```text
+ZEITRAHMEN: Alle 2 Stunden (Cronjob)
 
-    Source->>Disc: Firma gefunden (z.B. Pizzeria)
-    Disc->>DB: Erstelle Firma (Status: Analyzing)
-    
-    loop Alle 2 Stunden
-        DB->>Ana: Hole ausstehende Analysen
-        Ana->>Source: Crawle existierende Seite (falls vorh.)
-        Ana->>Ana: Prüfe SSL, Mobile, Rechtliches
-        Ana->>DB: Speichere Score & Probleme
-        
-        DB->>Gen: Hole analysierte Firma
-        Gen->>Gen: Generiere AIDA-Text & Logo
-        Gen->>DB: Speichere GeneratedContent
-        
-        DB->>Dep: Hole fertigen Content
-        Dep->>DB: Setze Status 'Live'
-    end
-    
-    DB->>Live: Rendere dynamische Seite
+1. ENTDECKUNG 🔎
+   [OpenStreetMap] --(Daten)--> [Discovery Agent] --(Neu)--> [Datenbank: Status 'Analyzing']
+
+2. ANALYSE ⚖️
+   [Datenbank] --(Pending)--> [Analysis Agent] --(Crawl)--> [Website Check (SSL/Recht)]
+                                      |
+                                      +--(Score)--> [Datenbank: Status 'Analyzed']
+
+3. GENERIERUNG ✍️
+   [Datenbank] --(Analyzed)--> [Content Agent] --(AI)--> [Texte & Logo]
+                                      |
+                                      +--(Content)--> [Datenbank: Status 'ContentReady']
+
+4. DEPLOYMENT 🏗️
+   [Datenbank] --(Ready)--> [Deployment Agent] --(Build)--> [Status 'Live']
+                                      |
+                                      +--(URL)--> [ https://kunde.minicon.eu ]
 ```
 
 ### Agenten-Orchestrierung & Laufzeitumgebung 🧠
