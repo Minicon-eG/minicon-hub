@@ -78,6 +78,21 @@ sequenceDiagram
     DB->>Live: Render Dynamic Site
 ```
 
+### Agent Orchestration & Runtime 🧠
+
+The intelligence of the platform is strictly separated from the production infrastructure.
+
+*   **Orchestrator:** **OpenClaw** (running the `Gemini` agent session).
+    *   OpenClaw manages the state, memory, and task dispatching.
+    *   It utilizes internal **Cron Jobs** to trigger pipelines every 2 hours.
+*   **Runtime Environment:** **Local Development Environment** (Dev Server / Workstation).
+    *   **Security Policy:** AI Agents do NOT run on the production server (`minicon-web`) to minimize attack surface and resource load.
+    *   **Connectivity:** Agents connect to the production MongoDB via a secure **SSH Tunnel** (Port 27018 -> 27017).
+*   **Why this architecture?**
+    1.  **Security:** Production keys and agent logic stay off the public web server.
+    2.  **Performance:** Heavy AI processing (LLM calls, scraping) happens off-site, not slowing down customer websites.
+    3.  **Control:** Human-in-the-loop validation is easier in the dev environment.
+
 ### Phase 1: Discovery (The Scout) 🕵️‍♂️
 *   **Agent:** `Discovery Agent`
 *   **Source:** OpenStreetMap (Overpass API)
