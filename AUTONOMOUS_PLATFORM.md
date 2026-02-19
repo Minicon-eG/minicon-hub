@@ -1,20 +1,20 @@
-# Autonomous Website Deployment Platform - System Documentation
+# Autonome Website-Deployment-Plattform - Systemdokumentation
 
-## 1. Overview
-The **Autonomous Deployment Platform** is a fully automated system designed to discover local businesses, analyze their web presence, generate modern, legally compliant websites, and deploy them to production subdomains (`*.minicon.eu`).
+## 1. Überblick
+Die **Autonome Deployment-Plattform** ist ein vollautomatisiertes System, das lokale Unternehmen entdeckt, ihre Webpräsenz analysiert, moderne, rechtskonforme Websites generiert und auf Produktions-Subdomains (`*.minicon.eu`) bereitstellt.
 
-**Goal:** To provide an end-to-end "Web Agency on Autopilot".
+**Ziel:** Eine End-to-End "Web-Agentur auf Autopilot".
 
-## 2. Architecture & Workflow
+## 2. Architektur & Arbeitsablauf
 
-The system operates as a pipeline of autonomous intelligent agents.
+Das System arbeitet als Pipeline autonomer intelligenter Agenten.
 
-### System Architecture
-The following diagram illustrates the hybrid architecture between the local Development Environment (where Agents run) and the Production Server (where data and sites live).
+### Systemarchitektur
+Das folgende Diagramm veranschaulicht die hybride Architektur zwischen der lokalen Entwicklungsumgebung (wo Agenten laufen) und dem Produktionsserver (wo Daten und Websites liegen).
 
 ```mermaid
 graph TB
-    subgraph "Local / Dev Environment (Gemini)"
+    subgraph "Lokal / Dev-Umgebung (Gemini)"
         A[Discovery Agent]
         B[Analysis Agent]
         C[Content Agent]
@@ -23,11 +23,11 @@ graph TB
         Cron[OpenClaw Cron]
     end
 
-    subgraph "Tunnel / Network"
+    subgraph "Tunnel / Netzwerk"
         SSH[SSH Tunnel :27018 -> :27017]
     end
 
-    subgraph "Production (minicon-web / Hetzner)"
+    subgraph "Produktion (minicon-web / Hetzner)"
         LB[Traefik Reverse Proxy]
         Hub[Minicon Hub (Next.js)]
         DB[(MongoDB)]
@@ -36,17 +36,17 @@ graph TB
     end
 
     Cron --> A & B & C & D & E
-    A & B & C & D & E --Write Data--> SSH --Forward--> DB
+    A & B & C & D & E --Schreibt Daten--> SSH --Weiterleitung--> DB
     LB --Route--> Hub
-    Hub --Read Data--> DB
-    Hub --Render--> Sites
+    Hub --Liest Daten--> DB
+    Hub --Rendert--> Sites
     
     style DB fill:#f9f,stroke:#333,stroke-width:2px
     style Hub fill:#ccf,stroke:#333,stroke-width:2px
 ```
 
-### Autonomous Pipeline Process
-The logical flow of data from discovery to a live website.
+### Autonomer Pipeline-Prozess
+Der logische Datenfluss von der Entdeckung bis zur Live-Website.
 
 ```mermaid
 sequenceDiagram
@@ -58,103 +58,103 @@ sequenceDiagram
     participant Dep as Deployment Agent
     participant Live as Live Website
 
-    Source->>Disc: Found Company (e.g. Pizzeria)
-    Disc->>DB: Create Company (Status: Analying)
+    Source->>Disc: Firma gefunden (z.B. Pizzeria)
+    Disc->>DB: Erstelle Firma (Status: Analyzing)
     
-    loop Every 2 Hours
-        DB->>Ana: Fetch Pending Analysis
-        Ana->>Source: Crawl Existing Site (if any)
-        Ana->>Ana: Check SSL, Mobile, Legal
-        Ana->>DB: Save Score & Issues
+    loop Alle 2 Stunden
+        DB->>Ana: Hole ausstehende Analysen
+        Ana->>Source: Crawle existierende Seite (falls vorh.)
+        Ana->>Ana: Prüfe SSL, Mobile, Rechtliches
+        Ana->>DB: Speichere Score & Probleme
         
-        DB->>Gen: Fetch Analyzed Company
-        Gen->>Gen: Generate AIDA Text & Logo
-        Gen->>DB: Save GeneratedContent
+        DB->>Gen: Hole analysierte Firma
+        Gen->>Gen: Generiere AIDA-Text & Logo
+        Gen->>DB: Speichere GeneratedContent
         
-        DB->>Dep: Fetch Ready Content
-        Dep->>DB: Set Status 'Live'
+        DB->>Dep: Hole fertigen Content
+        Dep->>DB: Setze Status 'Live'
     end
     
-    DB->>Live: Render Dynamic Site
+    DB->>Live: Rendere dynamische Seite
 ```
 
-### Agent Orchestration & Runtime 🧠
+### Agenten-Orchestrierung & Laufzeitumgebung 🧠
 
-The intelligence of the platform is strictly separated from the production infrastructure.
+Die Intelligenz der Plattform ist strikt von der Produktionsinfrastruktur getrennt.
 
-*   **Orchestrator:** **OpenClaw** (running the `Gemini` agent session).
-    *   OpenClaw manages the state, memory, and task dispatching.
-    *   It utilizes internal **Cron Jobs** to trigger pipelines every 2 hours.
-*   **Runtime Environment:** **Local Development Environment** (Dev Server / Workstation).
-    *   **Security Policy:** AI Agents do NOT run on the production server (`minicon-web`) to minimize attack surface and resource load.
-    *   **Connectivity:** Agents connect to the production MongoDB via a secure **SSH Tunnel** (Port 27018 -> 27017).
-*   **Why this architecture?**
-    1.  **Security:** Production keys and agent logic stay off the public web server.
-    2.  **Performance:** Heavy AI processing (LLM calls, scraping) happens off-site, not slowing down customer websites.
-    3.  **Control:** Human-in-the-loop validation is easier in the dev environment.
+*   **Orchestrator:** **OpenClaw** (führt die `Gemini` Agenten-Session aus).
+    *   OpenClaw verwaltet Status, Speicher und Aufgabenverteilung.
+    *   Es nutzt interne **Cronjobs**, um Pipelines alle 2 Stunden zu triggern.
+*   **Laufzeitumgebung:** **Lokale Entwicklungsumgebung** (Dev Server / Workstation).
+    *   **Sicherheitsrichtlinie:** KI-Agenten laufen NICHT auf dem Produktionsserver (`minicon-web`), um die Angriffsfläche und Ressourcenlast zu minimieren.
+    *   **Konnektivität:** Agenten verbinden sich mit der Produktions-MongoDB über einen sicheren **SSH-Tunnel** (Port 27018 -> 27017).
+*   **Warum diese Architektur?**
+    1.  **Sicherheit:** Produktionsschlüssel und Agentenlogik bleiben fern vom öffentlichen Webserver.
+    2.  **Performance:** Rechenintensive KI-Prozesse (LLM-Aufrufe, Scraping) finden extern statt und verlangsamen keine Kundenwebsites.
+    3.  **Kontrolle:** Human-in-the-loop Validierung ist in der Dev-Umgebung einfacher.
 
-### Phase 1: Discovery (The Scout) 🕵️‍♂️
+### Phase 1: Entdeckung (Der Scout) 🕵️‍♂️
 *   **Agent:** `Discovery Agent`
-*   **Source:** OpenStreetMap (Overpass API)
-*   **Target:** Local businesses (Restaurants, Craftsmen, Retail) in a specific region (e.g., Dahn).
-*   **Action:**
-    *   Fetches real-world data (Name, Address, Industry).
-    *   Checks for existing websites.
-    *   Creates a `Company` record in the MongoDB database.
+*   **Quelle:** OpenStreetMap (Overpass API)
+*   **Ziel:** Lokale Unternehmen (Restaurants, Handwerker, Einzelhandel) in einer bestimmten Region (z.B. Dahn).
+*   **Aktion:**
+    *   Ruft Echtdaten ab (Name, Adresse, Branche).
+    *   Prüft auf bestehende Webseiten.
+    *   Erstellt einen `Company`-Eintrag in der MongoDB-Datenbank.
 
-### Phase 2: Analysis (The Auditor) ⚖️
+### Phase 2: Analyse (Der Auditor) ⚖️
 *   **Agent:** `Analysis Agent`
-*   **Action:**
-    *   **Technical Check:** SSL, Mobile Responsiveness, SEO Score.
-    *   **Legal Check:** Scans for "Impressum", "Datenschutzerklärung" (DSGVO), and "Cookie Banner".
-    *   **Scoring:** Calculates a 0-100 score. Missing legal pages result in severe penalties.
-*   **Output:** `WebsiteAnalysis` record.
+*   **Aktion:**
+    *   **Technik-Check:** SSL, Mobile Responsiveness, SEO-Score.
+    *   **Rechts-Check:** Scannt nach "Impressum", "Datenschutzerklärung" (DSGVO) und "Cookie Banner".
+    *   **Bewertung:** Berechnet einen Score von 0-100. Fehlende rechtliche Seiten führen zu massiven Abzügen.
+*   **Output:** `WebsiteAnalysis`-Eintrag.
 
-### Phase 3: Content Generation (The Creator) ✍️
+### Phase 3: Content-Generierung (Der Schöpfer) ✍️
 *   **Agent:** `Generation Agent`
-*   **Action:**
-    *   **Content:** Generates AIDA-structured text (Hero, Features, About) customized for the industry.
-    *   **Legal:** Generates specific legal texts (Impressum, Privacy Policy) based on company data.
-    *   **Design:** Creates prompts for Logos and defines Color Schemes.
-*   **Output:** `GeneratedContent` record.
+*   **Aktion:**
+    *   **Inhalt:** Generiert AIDA-strukturierten Text (Hero, Features, Über uns), angepasst an die Branche.
+    *   **Rechtliches:** Generiert spezifische Rechtstexte (Impressum, Datenschutz) basierend auf Firmendaten.
+    *   **Design:** Erstellt Prompts für Logos und definiert Farbschemata.
+*   **Output:** `GeneratedContent`-Eintrag.
 
-### Phase 4: Construction (The Builder) 🏗️
+### Phase 4: Konstruktion (Der Baumeister) 🏗️
 *   **Agent:** `Structure Agent` & `Deployment Agent`
-*   **Requirement:** Full multi-page website, not just a landing page.
-*   **Structure:**
-    *   `/` (Home - AIDA optimized)
+*   **Anforderung:** Vollständige Multi-Page-Website, nicht nur eine Landingpage.
+*   **Struktur:**
+    *   `/` (Startseite - AIDA optimiert)
     *   `/leistungen` (Services)
-    *   `/kontakt` (Contact)
-    *   `/impressum` (Legal Notice)
-    *   `/datenschutz` (Privacy Policy)
-*   **Compliance:** Implements a functional **Cookie Consent Banner** that blocks non-essential scripts until accepted.
+    *   `/kontakt` (Kontakt)
+    *   `/impressum` (Impressum)
+    *   `/datenschutz` (Datenschutzerklärung)
+*   **Compliance:** Implementiert einen funktionalen **Cookie Consent Banner**, der nicht-essenzielle Skripte blockiert, bis zugestimmt wurde.
 
-### Phase 5: Deployment (The Engineer) 🚀
-*   **Infrastructure:**
+### Phase 5: Deployment (Der Ingenieur) 🚀
+*   **Infrastruktur:**
     *   **Server:** `minicon-web` (Hetzner)
-    *   **Routing:** Traefik Reverse Proxy with Wildcard support (`*.minicon.eu`).
-    *   **App:** Next.js (App Router) rendering dynamic content from MongoDB.
+    *   **Routing:** Traefik Reverse Proxy mit Wildcard-Support (`*.minicon.eu`).
+    *   **App:** Next.js (App Router) rendert dynamische Inhalte aus MongoDB.
 *   **CI/CD:**
-    *   GitHub Actions builds Docker image -> Pushes to GHCR.
-    *   Production server pulls image and restarts.
+    *   GitHub Actions baut das Docker-Image -> Pusht zu GHCR.
+    *   Produktionsserver zieht das Image und startet neu.
 
-### Phase 6: Sales (The Closer) 💼
+### Phase 6: Vertrieb (Der Verkäufer) 💼
 *   **Agent:** `Sales Agent`
-*   **Action:** Generates personalized pitch emails referencing specific analysis findings (e.g., "Your site lacks a cookie banner").
+*   **Aktion:** Generiert personalisierte Pitch-E-Mails, die sich auf spezifische Analyseergebnisse beziehen (z.B. "Ihrer Seite fehlt ein Cookie-Banner").
 
-## 3. Data Model (MongoDB/Prisma)
+## 3. Datenmodell (MongoDB/Prisma)
 
-*   **Company:** Master data (Name, Domain, Address).
-*   **WebsiteAnalysis:** Audit results & Score.
-*   **GeneratedContent:** AI-written text, design assets, and structure definitions.
-*   **Deployment:** Status tracking (Queued -> Live) and URL.
+*   **Company:** Stammdaten (Name, Domain, Adresse).
+*   **WebsiteAnalysis:** Audit-Ergebnisse & Score.
+*   **GeneratedContent:** KI-geschriebene Texte, Design-Assets und Strukturdefinitionen.
+*   **Deployment:** Statusverfolgung (Warteschlange -> Live) und URL.
 
-## 4. Operational Guidelines
+## 4. Betriebsrichtlinien
 
-*   **Autonomy:** Agents run on the development environment and push data to the production MongoDB via secure tunnel.
-*   **Updates:** The Hub (`hub.minicon.eu`) reflects the live state of the database.
-*   **Compliance First:** No website goes live without a valid Impressum and Privacy Policy.
+*   **Autonomie:** Agenten laufen in der Entwicklungsumgebung und pushen Daten über einen sicheren Tunnel in die Produktions-MongoDB.
+*   **Updates:** Der Hub (`hub.minicon.eu`) spiegelt den Live-Status der Datenbank wider.
+*   **Compliance First:** Keine Website geht ohne gültiges Impressum und Datenschutzerklärung online.
 
-## 5. Future Roadmap
-*   **Payment Integration:** Automated Stripe checkout for customers to "claim" their site.
-*   **Repo Eject:** Automated creation of a standalone GitHub repository for paying customers.
+## 5. Zukünftige Roadmap
+*   **Zahlungsintegration:** Automatisierter Stripe-Checkout für Kunden, um ihre Seite zu "beanspruchen".
+*   **Repo Eject:** Automatisierte Erstellung eines eigenständigen GitHub-Repositories für zahlende Kunden.
