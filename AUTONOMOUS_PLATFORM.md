@@ -9,6 +9,75 @@ The **Autonomous Deployment Platform** is a fully automated system designed to d
 
 The system operates as a pipeline of autonomous intelligent agents.
 
+### System Architecture
+The following diagram illustrates the hybrid architecture between the local Development Environment (where Agents run) and the Production Server (where data and sites live).
+
+```mermaid
+graph TB
+    subgraph "Local / Dev Environment (Gemini)"
+        A[Discovery Agent]
+        B[Analysis Agent]
+        C[Content Agent]
+        D[Deployment Agent]
+        E[Sales Agent]
+        Cron[OpenClaw Cron]
+    end
+
+    subgraph "Tunnel / Network"
+        SSH[SSH Tunnel :27018 -> :27017]
+    end
+
+    subgraph "Production (minicon-web / Hetzner)"
+        LB[Traefik Reverse Proxy]
+        Hub[Minicon Hub (Next.js)]
+        DB[(MongoDB)]
+        
+        Sites[Wildcard Sites *.minicon.eu]
+    end
+
+    Cron --> A & B & C & D & E
+    A & B & C & D & E --Write Data--> SSH --Forward--> DB
+    LB --Route--> Hub
+    Hub --Read Data--> DB
+    Hub --Render--> Sites
+    
+    style DB fill:#f9f,stroke:#333,stroke-width:2px
+    style Hub fill:#ccf,stroke:#333,stroke-width:2px
+```
+
+### Autonomous Pipeline Process
+The logical flow of data from discovery to a live website.
+
+```mermaid
+sequenceDiagram
+    participant Source as OpenStreetMap / Web
+    participant Disc as Discovery Agent
+    participant DB as MongoDB
+    participant Ana as Analysis Agent
+    participant Gen as Content Agent
+    participant Dep as Deployment Agent
+    participant Live as Live Website
+
+    Source->>Disc: Found Company (e.g. Pizzeria)
+    Disc->>DB: Create Company (Status: Analying)
+    
+    loop Every 2 Hours
+        DB->>Ana: Fetch Pending Analysis
+        Ana->>Source: Crawl Existing Site (if any)
+        Ana->>Ana: Check SSL, Mobile, Legal
+        Ana->>DB: Save Score & Issues
+        
+        DB->>Gen: Fetch Analyzed Company
+        Gen->>Gen: Generate AIDA Text & Logo
+        Gen->>DB: Save GeneratedContent
+        
+        DB->>Dep: Fetch Ready Content
+        Dep->>DB: Set Status 'Live'
+    end
+    
+    DB->>Live: Render Dynamic Site
+```
+
 ### Phase 1: Discovery (The Scout) 🕵️‍♂️
 *   **Agent:** `Discovery Agent`
 *   **Source:** OpenStreetMap (Overpass API)
