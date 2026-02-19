@@ -3,13 +3,14 @@ FROM node:18-alpine AS base
 
 # Stage 2: Deps
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci
 
 # Stage 3: Builder
 FROM base AS builder
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -20,8 +21,8 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 
-# Install docker-cli for stats
-RUN apk add --no-cache docker-cli
+# Install docker-cli for stats and openssl for Prisma
+RUN apk add --no-cache docker-cli openssl
 
 ENV NODE_ENV production
 ENV PORT 3000

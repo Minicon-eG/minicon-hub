@@ -3,15 +3,16 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Company {
-  id          String   @id @default(uuid())
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   domain      String   @unique
   industry    String?
@@ -31,8 +32,8 @@ model Company {
 }
 
 model WebsiteAnalysis {
-  id          String   @id @default(uuid())
-  companyId   String
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  companyId   String   @db.ObjectId
   company     Company  @relation(fields: [companyId], references: [id])
   
   status      String   // e.g., "pending", "analyzing", "completed", "failed"
@@ -46,8 +47,8 @@ model WebsiteAnalysis {
 }
 
 model Deployment {
-  id          String   @id @default(uuid())
-  companyId   String
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  companyId   String   @db.ObjectId
   company     Company  @relation(fields: [companyId], references: [id])
   
   status      String   // "queued", "deploying", "live", "failed"
