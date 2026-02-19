@@ -95,16 +95,23 @@ Die Intelligenz der Plattform ist strikt von der Produktionsinfrastruktur getren
 *   **Agent:** `Generation Agent`
 *   **Aktion:**
     *   **Inhalt:** Generiert AIDA-strukturierten Text (Hero, Features, Über uns), angepasst an die Branche.
-    *   **Rechtliches:** Generiert spezifische Rechtstexte (Impressum, Datenschutz) basierend auf Firmendaten.
+    *   **Rechtliches:** Generiert spezifische Rechtstexte (Impressum, Datenschutz, AGB) basierend auf Firmendaten.
     *   **Design:** Erstellt Prompts für Logos und definiert Farbschemata.
 *   **Output:** `GeneratedContent`-Eintrag.
 
-### Phase 4: Konstruktion (Die Repo-Fabrik) 🏗️
+### Phase 4: Konstruktion (Der Baumeister) 🏗️
 *   **Agent:** `Repo Builder Agent`
-*   **Prinzip:** "Infrastructure as Code" – Jeder Kunde erhält ein eigenes, isoliertes Repository (wie `schdubb` oder `gem`).
-*   **Ablauf:**
+*   **Prinzip:** "Kontext-Sensitiver Relaunch" – Wir bauen keine leeren Hüllen, sondern intelligente Upgrades.
+*   **Logik:**
+    1.  **Kontext-Analyse:** Der Agent lädt die komplette `WebsiteAnalysis` (Stärken, Schwächen, rechtliche Mängel).
+    2.  **Content-Recycling:**
+        *   *Existierende Website:* Alle auffindbaren Texte (Über uns, Leistungen, Kontakt) werden gescrapt, aufbereitet und in das neue Layout integriert.
+        *   *Keine Website:* Hochwertige KI-Texte werden basierend auf Branche und Name generiert.
+    3.  **Modernisierung:** Das Layout wird komplett modernisiert (Mobile-First, Tailwind), aber mit Bezug zur alten Identität (falls vorhanden/gewünscht).
+    4.  **Problembehebung:** Identifizierte Mängel (z.B. fehlendes Impressum) werden automatisch durch generierte Rechtstexte behoben.
+*   **Ablauf (Technisch):**
     1.  **Clone:** Klont das `website-template` (Next.js Boilerplate).
-    2.  **Inject:** Schreibt die Inhalte aus der DB (Texte, Farben, Assets) fest in den Code (`json` oder `tsx`).
+    2.  **Inject:** Schreibt die intelligent kombinierten Inhalte (Alt + Neu) in den Code.
     3.  **Create:** Erstellt ein neues privates Repository auf GitHub: `Minicon-eG/website-[kunde]`.
     4.  **Push:** Überträgt den fertigen Code.
 
