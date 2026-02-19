@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id          String   @id @default(uuid())
+  name        String
+  domain      String   @unique
+  industry    String?
+  address     String?
+  contactEmail String?
+  
+  // Legal details
+  managingDirector String? // Geschäftsführer
+  registerEntry    String? // Handelsregister
+  vatId            String? // USt-IdNr.
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  analyses    WebsiteAnalysis[]
+  deployments Deployment[]
+}
+
+model WebsiteAnalysis {
+  id          String   @id @default(uuid())
+  companyId   String
+  company     Company  @relation(fields: [companyId], references: [id])
+  
+  status      String   // e.g., "pending", "analyzing", "completed", "failed"
+  score       Int?
+  issues      String?  // JSON string or comma-separated list
+  
+  legalCheckStatus String @default("pending") // "pending", "passed", "failed"
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Deployment {
+  id          String   @id @default(uuid())
+  companyId   String
+  company     Company  @relation(fields: [companyId], references: [id])
+  
+  status      String   // "queued", "deploying", "live", "failed"
+  liveUrl     String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
