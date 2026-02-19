@@ -99,25 +99,23 @@ Die Intelligenz der Plattform ist strikt von der Produktionsinfrastruktur getren
     *   **Design:** Erstellt Prompts für Logos und definiert Farbschemata.
 *   **Output:** `GeneratedContent`-Eintrag.
 
-### Phase 4: Konstruktion (Der Baumeister) 🏗️
-*   **Agent:** `Structure Agent` & `Deployment Agent`
-*   **Anforderung:** Vollständige Multi-Page-Website, nicht nur eine Landingpage.
-*   **Struktur:**
-    *   `/` (Startseite - AIDA optimiert)
-    *   `/leistungen` (Services)
-    *   `/kontakt` (Kontakt)
-    *   `/impressum` (Impressum)
-    *   `/datenschutz` (Datenschutzerklärung)
-*   **Compliance:** Implementiert einen funktionalen **Cookie Consent Banner**, der nicht-essenzielle Skripte blockiert, bis zugestimmt wurde.
+### Phase 4: Konstruktion (Die Repo-Fabrik) 🏗️
+*   **Agent:** `Repo Builder Agent`
+*   **Prinzip:** "Infrastructure as Code" – Jeder Kunde erhält ein eigenes, isoliertes Repository (wie `schdubb` oder `gem`).
+*   **Ablauf:**
+    1.  **Clone:** Klont das `website-template` (Next.js Boilerplate).
+    2.  **Inject:** Schreibt die Inhalte aus der DB (Texte, Farben, Assets) fest in den Code (`json` oder `tsx`).
+    3.  **Create:** Erstellt ein neues privates Repository auf GitHub: `Minicon-eG/website-[kunde]`.
+    4.  **Push:** Überträgt den fertigen Code.
 
-### Phase 5: Deployment (Der Ingenieur) 🚀
-*   **Infrastruktur:**
-    *   **Server:** `minicon-web` (Hetzner)
-    *   **Routing:** Traefik Reverse Proxy mit Wildcard-Support (`*.minicon.eu`).
-    *   **App:** Next.js (App Router) rendert dynamische Inhalte aus MongoDB.
+### Phase 5: Deployment (Die Container-Werft) 🚀
 *   **CI/CD:**
-    *   GitHub Actions baut das Docker-Image -> Pusht zu GHCR.
-    *   Produktionsserver zieht das Image und startet neu.
+    *   Jedes Kunden-Repo hat eine GitHub Action.
+    *   Baut den Container -> Pusht nach GHCR (`ghcr.io/minicon-eg/website-[kunde]`).
+*   **Produktion:**
+    *   Der Server (`minicon-web`) zieht das neue Image.
+    *   Ein Eintrag wird (automatisch) zur `docker-compose.yml` hinzugefügt.
+    *   Traefik routet `[kunde].minicon.eu` auf den dedizierten Container.
 
 ### Phase 6: Vertrieb (Der Verkäufer) 💼
 *   **Agent:** `Sales Agent`
