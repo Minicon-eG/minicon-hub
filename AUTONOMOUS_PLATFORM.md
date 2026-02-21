@@ -124,7 +124,15 @@ Die Intelligenz der Plattform ist strikt von der Produktionsinfrastruktur getren
     *   Ein Eintrag wird (automatisch) zur `docker-compose.yml` hinzugefügt.
     *   Traefik routet `[kunde].minicon.eu` auf den dedizierten Container.
 
-### Phase 6: Vertrieb (Der Verkäufer) 💼
+### Phase 6: Verifikation & Quality Assurance (QA) ✅
+*   **Grundsatz:** "Ein Deployment ist erst abgeschlossen, wenn der Link funktioniert."
+*   **Ablauf:**
+    1.  **Container-Check:** Läuft der Container (`docker ps`)?
+    2.  **Route-Check:** Liefert `curl https://[kunde].minicon.eu` einen HTTP 200 OK?
+    3.  **Datenbank-Sync:** Stimmt die `liveUrl` im `Deployment`-Record mit der echten URL überein?
+    4.  **Hub-Refresh:** Cache des Hubs leeren, damit der neue Link sichtbar wird.
+
+### Phase 7: Vertrieb (Der Verkäufer) 💼
 *   **Agent:** `Sales Agent`
 *   **Aktion:** Generiert personalisierte Pitch-E-Mails, die sich auf spezifische Analyseergebnisse beziehen (z.B. "Ihrer Seite fehlt ein Cookie-Banner").
 
