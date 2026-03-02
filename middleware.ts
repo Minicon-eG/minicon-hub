@@ -6,6 +6,11 @@ export function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') || '';
   console.log('Middleware debug:', hostname, url.pathname);
 
+  // Skip middleware for /database
+  if (url.pathname.startsWith('/database')) {
+    return NextResponse.next();
+  }
+
   // Clean hostname (remove port if present)
   const domain = hostname.split(':')[0];
 

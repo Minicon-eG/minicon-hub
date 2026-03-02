@@ -2,6 +2,8 @@ import prisma from '@/lib/prisma';
 import { Brain, Map, Activity, Globe, ExternalLink, Lightbulb, CheckCircle, Circle, Clock, Server, Container, Cpu } from "lucide-react";
 import ClientHome from './client-page'; 
 
+export const dynamic = 'force-dynamic';
+
 // This file is a Server Component by default in Next.js 13+ App Router
 // We will fetch data directly from DB here to avoid internal API call issues during build/runtime.
 

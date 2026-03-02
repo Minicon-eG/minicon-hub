@@ -1,0 +1,43 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    container_name: control-plane-db
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - control-plane-net
+
+  api:
+    image: nitr0n/pdfmanagement-control-plane:latest
+    container_name: control-plane-api
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5000
+      - Email__SmtpHost=localhost
+      - Email__ApiKey=re_REDACTED_2026-04-09
+      - ConnectionStrings__MongoDB=mongodb://mongodb:27017
+      - Cors__AllowedOrigins=https://dokukiste.de,https://www.dokukiste.de,https://app.dokukiste.de
+      - Stripe__SecretKey=sk_test_51PH6smIFB7dgD5FDCYGi8wobwHvSHRXQkpUKnLQ10Af5WKWtBRuXdVLhsRA70CW5GQ63yA7TmzaQipTfBvOxu7nc00eULmy7NF
+      - Stripe__PublishableKey=pk_test_51PH6smIFB7dgD5FDkpqxsjTek7VEhekl0y166bIn24du925nQrEY9ociEYkPOgKxinIQUCCN387z6CZejIPfgSiP00pUI5qnKc
+      - Stripe__WebhookSecret=whsec_6sgCCNMxvzvb6pWC5SG3m1JUKQZFC9pt
+      - Stripe__TrialDays=14
+      - Stripe__Prices__StarterMonthly=price_1T13jtIFB7dgD5FDClIbTF0s
+      - Stripe__Prices__ProfessionalMonthly=price_1T13kKIFB7dgD5FD2YlcLOaL
+      - Stripe__Prices__EnterpriseMonthly=price_1T13kwIFB7dgD5FDsS1Q1DcX
+    depends_on:
+      - mongodb
+    networks:
+      - control-plane-net
+      - web
+
+networks:
+  control-plane-net:
+    driver: bridge
+  web:
+    external: true
+
+volumes:
+  mongodb-data:

@@ -1,80 +1,57 @@
-
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function main() {
-  try {
-    const companies = await prisma.company.count();
-    const pendingAnalysis = await prisma.websiteAnalysis.count({
-      where: { status: 'pending' }
-    });
-    const completedAnalysis = await prisma.websiteAnalysis.count({
-      where: { status: 'completed' }
-    });
-    const pendingDeployment = await prisma.deployment.count({
-      where: { status: 'queued' }
-    });
-    const liveDeployments = await prisma.deployment.count({
-      where: { status: 'live' }
-    });
-
-    console.log(`Companies Discovered: ${companies}`);
-    console.log(`Pending Analysis: ${pendingAnalysis}`);
-    console.log(`Analyzed (Ready for Deployment?): ${completedAnalysis}`); // Depending on logic
-    console.log(`Pending Deployment: ${pendingDeployment}`);
-    console.log(`Live Deployments: ${liveDeployments}`);
-
-    // Fetch details for pending tasks
-    const pendingAnalysesDetails = await prisma.websiteAnalysis.findMany({
-      where: { status: 'pending' },
-      include: { company: true },
-      take: 5
-    });
-
-    // Find companies WITHOUT any analysis
-    const companiesWithoutAnalysis = await prisma.company.findMany({
-      where: {
-        analyses: {
-          none: {}
-        }
-      }
-    });
-
-    console.log(`Companies without Analysis: ${companiesWithoutAnalysis.length}`);
-    if (companiesWithoutAnalysis.length > 0) {
-      console.log('--- Companies needing Analysis ---');
-      companiesWithoutAnalysis.forEach(c => {
-        console.log(`- ${c.name} (${c.domain}) [ID: ${c.id}]`);
-      });
+  // Companies
+  const totalCompanies = await prisma.company.count();
+  
+  // Analyses by status
+  const analyses = await prisma.websiteAnalysis.groupBy({
+    by: ['status'],
+    _count: true
+  });
+  
+  // Deployments by status
+  const deployments = await prisma.deployment.groupBy({
+    by: ['status'],
+    _count: true
+  });
+  
+  // Pending analyses (companies without completed analysis)
+  const companiesWithAnalysis = await prisma.websiteAnalysis.findMany({
+    where: { status: 'completed' },
+    select: { companyId: true }
+  });
+  const analyzedIds = companiesWithAnalysis.map(a => a.companyId);
+  
+  const pendingAnalysis = await prisma.company.count({
+    where: { id: { notIn: analyzedIds.length ? analyzedIds : ['000000000000000000000000'] } }
+  });
+  
+  // Ready for deployment (completed analysis, no deployment yet)
+  const companiesWithDeployment = await prisma.deployment.findMany({
+    select: { companyId: true }
+  });
+  const deployedIds = companiesWithDeployment.map(d => d.companyId);
+  
+  const readyForDeployment = analyzedIds.length ? await prisma.company.count({
+    where: {
+      id: { in: analyzedIds, notIn: deployedIds.length ? deployedIds : ['000000000000000000000000'] }
     }
-    
-    // Fetch pending deployments
-     const pendingDeploymentsDetails = await prisma.deployment.findMany({
-      where: { status: 'queued' },
-      include: { company: true },
-      take: 5
-    });
-    
-    // List all companies with their status
-    const allCompanies = await prisma.company.findMany({
-      include: {
-        analyses: true,
-        deployments: true
-      }
-    });
-
-    console.log('\n--- All Companies ---');
-    allCompanies.forEach(c => {
-      const analysisStatus = c.analyses.map(a => a.status).join(', ') || 'None';
-      const deploymentStatus = c.deployments.map(d => d.status).join(', ') || 'None';
-      console.log(`- ${c.name} (${c.domain}) [Analysis: ${analysisStatus}] [Deployment: ${deploymentStatus}]`);
-    });
-
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await prisma.$disconnect();
-  }
+  }) : 0;
+  
+  console.log('=== AUTONOMOUS PLATFORM STATUS ===');
+  console.log('Total Companies:', totalCompanies);
+  console.log('');
+  console.log('--- Analyses ---');
+  analyses.forEach(a => console.log(a.status + ':', a._count));
+  console.log('Pending (no analysis):', pendingAnalysis);
+  console.log('');
+  console.log('--- Deployments ---');
+  deployments.forEach(d => console.log(d.status + ':', d._count));
+  console.log('Ready for deployment:', readyForDeployment);
+  
+  await prisma.$disconnect();
 }
 
-main();
+main().catch(e => { console.error(e); process.exit(1); });

@@ -14,7 +14,8 @@ datasource db {
 model Company {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  domain      String   @unique
+  domain      String?  // Their real/original website
+  generatedDomain String? // Our generated .minicon.eu site
   industry    String?
   address     String?
   contactEmail String?
@@ -23,6 +24,8 @@ model Company {
   managingDirector String? // Geschäftsführer
   registerEntry    String? // Handelsregister
   vatId            String? // USt-IdNr.
+  
+  hasOwnWebsite Boolean @default(false) // true if they have a real website
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -56,4 +59,11 @@ model Deployment {
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model AgentActivity {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  agentName String
+  summary   String
+  createdAt DateTime @default(now())
 }
