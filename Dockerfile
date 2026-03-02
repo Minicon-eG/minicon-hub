@@ -10,6 +10,12 @@ RUN npm ci
 
 # Stage 3: Builder
 FROM base AS builder
+ARG DATABASE_URL
+ARG BUILD_VERSION=dev
+ARG BUILD_DATE
+ENV DATABASE_URL=$DATABASE_URL
+ENV NEXT_PUBLIC_BUILD_VERSION=$BUILD_VERSION
+ENV NEXT_PUBLIC_BUILD_DATE=$BUILD_DATE
 RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -19,6 +25,12 @@ RUN npm run build
 
 # Stage 4: Runner
 FROM base AS runner
+ARG DATABASE_URL
+ARG BUILD_VERSION=dev
+ARG BUILD_DATE
+ENV DATABASE_URL=$DATABASE_URL
+ENV NEXT_PUBLIC_BUILD_VERSION=$BUILD_VERSION
+ENV NEXT_PUBLIC_BUILD_DATE=$BUILD_DATE
 WORKDIR /app
 
 # Install docker-cli for stats and openssl for Prisma
@@ -34,6 +46,7 @@ RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/prisma ./prisma
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing

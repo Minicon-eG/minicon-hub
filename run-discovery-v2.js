@@ -88,15 +88,8 @@ out center;
         domain = `${tags.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}.local`;
       }
 
-      // Check by NAME first (case-insensitive, normalized)
-      const normalizedName = tags.name.toLowerCase().replace(/[^a-z0-9]/g, '');
       const existing = await prisma.company.findFirst({
-        where: {
-          name: {
-            equals: tags.name,
-            mode: 'insensitive'
-          }
-        }
+        where: { domain: domain }
       });
 
       if (!existing) {
@@ -105,26 +98,13 @@ out center;
             name: tags.name,
             domain: domain,
             industry: tags.amenity || 'Restaurant',
-            address: tags['addr:street'] || 'Unknown Address',
-            hasOwnWebsite: tags.website ? true : false
+            address: tags['addr:street'] || 'Unknown Address'
           }
         });
         console.log(`  ✓ New Company: ${tags.name} (${domain})`);
         newCompanies++;
       } else {
-        // Update if we found a real website (better than .local or no domain)
-        if (tags.website && existing.domain && existing.domain.includes('.local')) {
-          await prisma.company.update({
-            where: { id: existing.id },
-            data: {
-              domain: domain,
-              hasOwnWebsite: true
-            }
-          });
-          console.log(`  ↑ Updated: ${tags.name} with real domain (${domain})`);
-        } else {
-          console.log(`  - Exists: ${tags.name}`);
-        }
+        console.log(`  - Exists: ${tags.name}`);
       }
     }
     

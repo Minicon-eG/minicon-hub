@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant Source as OpenStreetMap / Web
+    participant Disc as Discovery Agent
+    participant DB as MongoDB
+    participant Ana as Analysis Agent
+    participant Gen as Content Agent
+    participant Dep as Deployment Agent
+    participant Live as Live Website
+
+    Source->>Disc: Firma gefunden (z.B. Pizzeria)
+    Disc->>DB: Erstelle Firma (Status: Analyzing)
+    
+    loop Alle 2 Stunden
+        DB->>Ana: Hole ausstehende Analysen
+        Ana->>Source: Crawle existierende Seite (falls vorh.)
+        Ana->>Ana: Prüfe SSL, Mobile, Rechtliches
+        Ana->>DB: Speichere Score & Probleme
+        
+        DB->>Gen: Hole analysierte Firma
+        Gen->>Gen: Generiere AIDA-Text & Logo
+        Gen->>DB: Speichere GeneratedContent
+        
+        DB->>Dep: Hole fertigen Content
+        Dep->>DB: Setze Status 'Live'
+    end
+    
+    DB->>Live: Rendere dynamische Seite

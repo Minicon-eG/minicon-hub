@@ -14,13 +14,16 @@ const dokukisteProject = {
     { name: "Landing Page", url: "https://dokukiste.de", status: "live" },
     { name: "App", url: "https://app.dokukiste.de", status: "live" },
     { name: "API", url: "https://api.dokukiste.de", status: "live" },
+    { name: "www", url: "https://www.dokukiste.de", status: "live" },
   ],
   roadmap: [
     { task: "Single-Tenant Architektur", status: "done" },
     { task: "Onboarding-Flow", status: "done" },
     { task: "Stripe Billing", status: "done" },
     { task: "Control Plane API", status: "done" },
-    { task: "5 Beta-Kunden", status: "pending" },
+    { task: "Billing/Stripe LIVE", status: "done" },
+    { task: "dokukiste.de LIVE", status: "done" },
+    { task: "5 Beta-Kunden", status: "in-progress" },
     { task: "DATEV-Integration", status: "pending" },
   ],
   ideas: [
@@ -39,19 +42,28 @@ const initialWebsiteAutomation = {
   icon: "🌐",
   concept: "Automatisierte Erstellung von Webseiten für lokale Unternehmen. Subdomains unter minicon.eu, später eigene Domains.",
   sites: [
-    { name: "Pälzer Schdubb", url: "https://schdubb.minicon.eu", status: "demo", description: "Restaurant in Dahn" },
-    { name: "GEM", url: "https://gem.minicon.eu", status: "demo", description: "Demo-Seite" },
-    { name: "Krankenhaus", url: "https://krankenhaus.minicon.eu", status: "demo", description: "Krankenhaus-Simulation" },
+    { name: "Waldhütte", url: "https://waldhuette.minicon.eu", status: "live", description: "Waldhütte Dahn" },
+    { name: "Pizzeria Ischia", url: "https://pizzeria-ischia.minicon.eu", status: "live", description: "Pizza & Pasta" },
+    { name: "Pastaria", url: "https://pastaria.minicon.eu", status: "pending", description: "Pastaria Restaurant" },
+    { name: "Ivalticare", url: "https://ivalticare.minicon.eu", status: "pending", description: "Pflegedienst" },
+    { name: "High Stakes", url: "https://high-stake.minicon.eu", status: "pending", description: "Restaurant/Bar" },
+    { name: "Felsengraf", url: "https://felsengraf.minicon.eu", status: "pending", description: "Weingut" },
+    { name: "Dahner Hütte", url: "https://dahner-huette.minicon.eu", status: "pending", description: "Hütte/Restaurant" },
+    { name: "Asia Wok", url: "https://asia-wok.minicon.eu", status: "live", description: "Asiatisches Restaurant" },
+    { name: "Pälzer Schdubb", url: "https://schdubb.minicon.eu", status: "live", description: "Restaurant in Dahn (529 Google-Bewertungen)" },
+    { name: "GEM", url: "https://gem.minicon.eu", status: "live", description: "Demo-Seite" },
+    { name: "Krankenhaus", url: "https://krankenhaus.minicon.eu", status: "live", description: "Krankenhaus-Simulation" },
+    { name: "Minicon Website", url: "https://minicon.eu", status: "live", description: "Hauptwebsite" },
   ],
   pipeline: [
     { step: "Google Maps Recherche", status: "done" },
-    { step: "Template-System", status: "in-progress" },
-    { step: "Automatische Generierung", status: "pending" },
-    { step: "Cloudflare Tunnel Setup", status: "pending" },
-    { step: "Akquise Dahn/Pfalz", status: "pending" },
+    { step: "Template-System", status: "done" },
+    { step: "Automatische Generierung", status: "done" },
+    { step: "Cloudflare Tunnel Setup", status: "done" },
+    { step: "Akquise Dahn/Pfalz", status: "in-progress" },
   ],
   targets: [
-    { name: "Pälzer Schdubb", reviews: "529 Google-Bewertungen", status: "demo-ready" },
+    { name: "Pälzer Schdubb", reviews: "529 Google-Bewertungen", status: "live" },
     { name: "Weitere Restaurants Dahn", reviews: "~50 potenzielle Kunden", status: "researched" },
   ]
 };
@@ -84,13 +96,13 @@ const servers = [
       { name: "dokukiste", status: "running", ports: "80", description: "Landing Page" },
       { name: "control-plane-api", status: "running", ports: "5000", description: "Dokukiste API" },
       { name: "control-plane-web", status: "running", ports: "3001", description: "Dokukiste App" },
-      { name: "control-plane-db", status: "running", ports: "27017", description: "MongoDB" },
+      { name: "hub-mongo", status: "running", ports: "27017", description: "Hub MongoDB" },
       { name: "krankenhaus", status: "running", ports: "80", description: "Frontend" },
       { name: "krankenhaus-backend", status: "running", ports: "3000", description: "API" },
       { name: "minicon", status: "running", ports: "80", description: "Website" },
-      { name: "schdubb", status: "running", ports: "80", description: "Demo" },
-      { name: "gem", status: "running", ports: "80", description: "Demo" },
-      { name: "dorfkiste-frontend", status: "running", ports: "3000", description: "Mirror" },
+      { name: "monitoring_grafana", status: "running", ports: "3000", description: "Monitoring" },
+      { name: "monitoring_loki", status: "running", ports: "3100", description: "Log Aggregation" },
+      { name: "monitoring_promtail", status: "running", ports: "9080", description: "Log Forwarder" },
     ]
   },
   {
@@ -113,7 +125,7 @@ const staticDomains = [
   { domain: "dokukiste.de", dns: "Cloudflare", status: "active", server: "minicon-web" },
   { domain: "minicon.eu", dns: "Cloudflare", status: "active", server: "minicon-web" },
   { domain: "dorfkiste.org", dns: "Cloudflare", status: "active", server: "dorfkiste-web" },
-  { domain: "dorfkiste.com", dns: "Cloudflare", status: "pending", server: "dorfkiste-web" },
+  { domain: "dorfkiste.com", dns: "Cloudflare", status: "active", server: "dorfkiste-web" },
   { domain: "minicon-eg.de", dns: "Cloudflare", status: "pending", server: "minicon-web" },
   { domain: "minicon-genossenschaft.de", dns: "Cloudflare", status: "pending", server: "minicon-web" },
 ];
@@ -171,27 +183,58 @@ function SiteCard({ site }: { site: { name: string; url: string; status: string;
 }
 
 export default function ClientHome({ initialData }: { initialData: { automationSites: any[] } }) {
-  const [sites, setSites] = useState(initialData.automationSites.length > 0 ? initialData.automationSites : initialWebsiteAutomation.sites);
+  // Combine static sites with DB sites (avoid duplicates by name)
+  const dbSites = initialData.automationSites || [];
+  const staticSiteNames = initialWebsiteAutomation.sites.map(s => s.name);
+  const filteredDbSites = dbSites.filter((s: any) => !staticSiteNames.includes(s.name));
+  const allSites = [...initialWebsiteAutomation.sites, ...filteredDbSites];
+  
+  const [sites, setSites] = useState(allSites);
   const [domains, setDomains] = useState(staticDomains);
+  const [selectedAgent, setSelectedAgent] = useState<string | null>(null);
+  const [agentActivities, setAgentActivities] = useState<any[]>([]);
+  const [agentLoading, setAgentLoading] = useState(false);
+
+  const openAgentModal = async (agentName: string) => {
+    setSelectedAgent(agentName);
+    setAgentLoading(true);
+    setAgentActivities([]);
+    try {
+      const res = await fetch(`/api/agents/activity?name=${encodeURIComponent(agentName)}&hours=72`);
+      if (res.ok) {
+        const data = await res.json();
+        setAgentActivities(data);
+      }
+    } catch (e) {
+      console.error('Failed to fetch agent activities', e);
+    } finally {
+      setAgentLoading(false);
+    }
+  };
 
   // Poll for company/site updates
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const res = await fetch('/api/companies');
+        const res = await fetch(`/api/companies?t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const companies = await res.json();
           // Map API companies to SiteCard format
           const mappedSites = companies.map((c: any) => ({
             name: c.name,
-            url: c.deployment?.url || c.websiteUrl || '#',
-            status: c.deployment?.status === 'live' ? 'live' : c.websiteAnalysis?.status === 'completed' ? 'pending' : 'in-progress',
-            description: c.websiteUrl,
-            legalCheck: 'pending' // Default for now
+            url: c.deployment?.liveUrl || c.domain ? `https://${c.domain}` : null,
+            status: c.deployment?.status === 'live' ? 'live' : c.analyses?.[0]?.status === 'completed' ? 'demo' : 'pending',
+            description: c.industry || c.domain,
+            legalCheck: c.analyses?.[0]?.legalCheckStatus || 'unknown'
           }));
           
-          if (mappedSites.length > 0) {
-            setSites(mappedSites);
+          // Only update sites if they have valid URLs (don't overwrite static sites with broken ones)
+          const validDbSites = mappedSites.filter((s: any) => s.url);
+          if (validDbSites.length > 0) {
+            // Merge: keep static sites + add valid DB sites
+            const staticUrls = new Set(initialWebsiteAutomation.sites.map(s => s.url));
+            const newDbSites = validDbSites.filter((s: any) => !staticUrls.has(s.url));
+            setSites([...initialWebsiteAutomation.sites, ...newDbSites]);
           }
         }
       } catch (e) {
@@ -470,7 +513,8 @@ export default function ClientHome({ initialData }: { initialData: { automationS
             {agents.map((agent) => (
               <div
                 key={agent.name}
-                className="bg-gray-900 border border-gray-800 rounded-lg p-4 text-center"
+                onClick={() => openAgentModal(agent.name)}
+                className="bg-gray-900 border border-gray-800 rounded-lg p-4 text-center cursor-pointer hover:border-blue-600 hover:bg-gray-800/80 transition-colors"
               >
                 <div className="w-12 h-12 bg-gray-800 rounded-full mx-auto mb-2 flex items-center justify-center text-2xl">
                   {agent.emoji}
@@ -484,11 +528,61 @@ export default function ClientHome({ initialData }: { initialData: { automationS
               </div>
             ))}
           </div>
+
+          {/* Agent Activity Modal */}
+          {selectedAgent && (
+            <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" onClick={() => setSelectedAgent(null)}>
+              <div className="bg-gray-900 border border-gray-700 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden" onClick={e => e.stopPropagation()}>
+                <div className="flex items-center justify-between p-6 border-b border-gray-800">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{agents.find(a => a.name === selectedAgent)?.emoji}</span>
+                    <div>
+                      <h3 className="text-xl font-bold">{selectedAgent}</h3>
+                      <p className="text-sm text-gray-400">Aktivitäten der letzten 72 Stunden</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setSelectedAgent(null)} className="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+                </div>
+                <div className="p-6 overflow-y-auto max-h-[60vh]">
+                  {agentLoading ? (
+                    <div className="text-center text-gray-400 py-8">
+                      <Clock className="w-6 h-6 animate-spin mx-auto mb-2" />
+                      Lade Aktivitäten...
+                    </div>
+                  ) : agentActivities.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">Keine Aktivitäten in den letzten 72 Stunden</p>
+                  ) : (
+                    <div className="space-y-4">
+                      {agentActivities.map((activity: any) => (
+                        <div key={activity.id} className="bg-gray-800/50 rounded-lg p-4">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs text-gray-500">
+                              {new Date(activity.createdAt).toLocaleString('de-DE', { 
+                                day: '2-digit', month: '2-digit', year: 'numeric',
+                                hour: '2-digit', minute: '2-digit' 
+                              })}
+                            </span>
+                          </div>
+                          <p className="text-sm text-gray-300 whitespace-pre-wrap">{activity.summary}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Footer */}
-        <footer className="text-center text-gray-600 text-sm">
+        <footer className="text-center text-gray-600 text-sm border-t border-gray-800 pt-6 mt-8">
           <p>Minicon eG Command Center • {new Date().getFullYear()}</p>
+          <p className="text-xs text-gray-500 mt-2">
+            <a href="/database" className="underline hover:text-gray-400">Database</a>
+            {' • '}
+            Version: {process.env.NEXT_PUBLIC_BUILD_VERSION || '1.0.0'} • 
+            Deployed: {process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toLocaleDateString('de-DE')}
+          </p>
         </footer>
       </div>
     </main>
