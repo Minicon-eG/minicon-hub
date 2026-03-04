@@ -1,0 +1,30 @@
+graph TB
+    subgraph "Lokal / Dev-Umgebung (Gemini)"
+        A[Discovery Agent]
+        B[Analysis Agent]
+        C[Content Agent]
+        D[Deployment Agent]
+        E[Sales Agent]
+        Cron[OpenClaw Cron]
+    end
+
+    subgraph "Tunnel / Netzwerk"
+        SSH[SSH Tunnel :27018 -> :27017]
+    end
+
+    subgraph "Produktion (minicon-web / Hetzner)"
+        LB[Traefik Reverse Proxy]
+        Hub["Minicon Hub (Next.js)"]
+        DB[("MongoDB")]
+        
+        Sites[Wildcard Sites *.minicon.eu]
+    end
+
+    Cron --> A & B & C & D & E
+    A & B & C & D & E --Schreibt Daten--> SSH --Weiterleitung--> DB
+    LB --Route--> Hub
+    Hub --Liest Daten--> DB
+    Hub --Rendert--> Sites
+    
+    style DB fill:#f9f,stroke:#333,stroke-width:2px
+    style Hub fill:#ccf,stroke:#333,stroke-width:2px

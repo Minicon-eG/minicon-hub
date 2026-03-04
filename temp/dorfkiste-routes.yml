@@ -1,0 +1,47 @@
+# Dorfkiste Routes - Frontend + API
+http:
+  routers:
+    dorfkiste-frontend-com:
+      rule: "Host(`dorfkiste.com`) || Host(`www.dorfkiste.com`)"
+      service: dorfkiste-frontend
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: cloudflare
+
+    dorfkiste-frontend-org:
+      rule: "Host(`dorfkiste.org`) || Host(`www.dorfkiste.org`)"
+      service: dorfkiste-frontend
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: cloudflare
+
+    dorfkiste-api-com:
+      rule: "(Host(`dorfkiste.com`) || Host(`www.dorfkiste.com`)) && PathPrefix(`/api`)"
+      service: dorfkiste-backend
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: cloudflare
+      priority: 100
+
+    dorfkiste-api-org:
+      rule: "(Host(`dorfkiste.org`) || Host(`www.dorfkiste.org`)) && PathPrefix(`/api`)"
+      service: dorfkiste-backend
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: cloudflare
+      priority: 100
+
+  services:
+    dorfkiste-frontend:
+      loadBalancer:
+        servers:
+          - url: "http://172.18.0.4:3000"
+
+    dorfkiste-backend:
+      loadBalancer:
+        servers:
+          - url: "http://172.18.0.3:8080"

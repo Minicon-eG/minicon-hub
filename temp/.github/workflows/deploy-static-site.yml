@@ -1,0 +1,105 @@
+name: Deploy Static Site
+
+on:
+  workflow_call:
+    inputs:
+      site_name:
+        description: 'Name des Site-Ordners auf dem Server (z.B. waldhuette)'
+        required: true
+        type: string
+      domain:
+        description: 'Domain der Website (z.B. waldhuette.minicon.eu)'
+        required: true
+        type: string
+      server:
+        description: 'Server IP'
+        required: false
+        type: string
+        default: '91.98.30.140'
+      cloudflare_zone:
+        description: 'Cloudflare Zone Name (z.B. minicon.eu)'
+        required: false
+        type: string
+        default: 'minicon.eu'
+      node_version:
+        description: 'Node.js Version'
+        required: false
+        type: string
+        default: '20'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node_version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "out" ]; then
+            echo "❌ Build-Ordner 'out' nicht gefunden!"
+            exit 1
+          fi
+          echo "✅ Build erfolgreich: $(find out -type f | wc -l) Dateien"
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY_B64 }}" | base64 -d > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H ${{ inputs.server }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy to server
+        run: |
+          # Upload files
+          scp -i ~/.ssh/id_deploy -r out/* root@${{ inputs.server }}:/opt/sites/${{ inputs.site_name }}/
+
+          # Fix permissions
+          ssh -i ~/.ssh/id_deploy root@${{ inputs.server }} "chmod -R 755 /opt/sites/${{ inputs.site_name }}/"
+
+          # Fix container (volume mount + Traefik labels)
+          ssh -i ~/.ssh/id_deploy root@${{ inputs.server }} "bash /opt/scripts/fix-container.sh ${{ inputs.site_name }} ${{ inputs.domain }}"
+
+      - name: Purge Cloudflare Cache
+        run: |
+          ZONE_MAP='{"minicon.eu":"14fde5a7044280362d78ab47f2d41390","dokukiste.de":"16da448fcf790355a5bb74b7fe8c7816","minicon-eg.de":"99811eaeaf7e0a6c70a5b7089c4f8dda","minicon-genossenschaft.de":"1b6b6fd296af8d4beab2ae8fbf80ad73","dorfkiste.org":"2d5e93525211cb229e8ed93b8d33cbf8","dorfkiste.com":"a5489adaeb8bf2751010346a6702352d"}'
+          ZONE_ID=$(echo "$ZONE_MAP" | jq -r '."${{ inputs.cloudflare_zone }}"')
+
+          if [ "$ZONE_ID" != "null" ] && [ -n "$ZONE_ID" ]; then
+            RESULT=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/purge_cache" \
+              -H "X-Auth-Email: ${{ secrets.CLOUDFLARE_EMAIL }}" \
+              -H "X-Auth-Key: ${{ secrets.CLOUDFLARE_API_KEY }}" \
+              -H "Content-Type: application/json" \
+              --data '{"purge_everything":true}')
+            
+            if echo "$RESULT" | jq -e '.success' > /dev/null 2>&1; then
+              echo "✅ Cloudflare Cache gepurged für ${{ inputs.cloudflare_zone }}"
+            else
+              echo "⚠️ Cache Purge fehlgeschlagen: $RESULT"
+            fi
+          else
+            echo "⚠️ Keine Cloudflare Zone für ${{ inputs.cloudflare_zone }} gefunden"
+          fi
+
+      - name: Verify deployment
+        run: |
+          sleep 5
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://${{ inputs.domain }}")
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ https://${{ inputs.domain }} ist live (HTTP $HTTP_CODE)"
+          else
+            echo "❌ https://${{ inputs.domain }} gibt HTTP $HTTP_CODE zurück!"
+            exit 1
+          fi

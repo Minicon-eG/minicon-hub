@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<meta charset="utf-8">
+<!-- 
+	This website is powered by TYPO3 - inspiring people to share!
+	TYPO3 is a free open source Content Management Framework initially created by Kasper Skaarhoj and licensed under GNU/GPL.
+	TYPO3 is copyright 1998-2026 of Kasper Skaarhoj. Extensions are copyright of their respective owners.
+	Information and contribution at https://typo3.org/
+-->
+
+
+
+<title>deutsches-sportabzeichen.de</title>
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<meta name="generator" content="TYPO3 CMS">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="twitter:card" content="summary">
+<meta name="format-detection" content="telephone=no">
+
+
+<link rel="stylesheet" href="/_assets/f81406596b3c0617dd4f2a153fe2a8f3/Ext_Cookieman/Css/cookieman-theme.css" media="all">
+<link crossorigin="true" href="/_assets/f81406596b3c0617dd4f2a153fe2a8f3/Frontend/Css/base.min.css?1769680632" rel="stylesheet" >
+<link crossorigin="true" href="/_assets/f81406596b3c0617dd4f2a153fe2a8f3/Frontend/Css/base-sportabzeichen.min.css?1736369044" rel="stylesheet" >
+
+
+<script src="/_assets/168defa00504c36dfb5bfee5f1b657a0/JavaScript/topwire.js?1765542938" type="module" async="1" defer="defer"></script>
+
+<script crossorigin="true" type="module" src="/_assets/f81406596b3c0617dd4f2a153fe2a8f3/Frontend/JavaScript/base.min.js?1759386815"></script>
+
+
+<link rel="shortcut icon" href="/_assets/f81406596b3c0617dd4f2a153fe2a8f3/Frontend/Images/favicon.ico" />
+<link rel="dns-prefetch" href="https://cdn.dosb.de">
+<link rel="canonical" href="https://deutsches-sportabzeichen.de/?tx_news_pi1%5Baction%5D=detail&amp;tx_news_pi1%5Bcontroller%5D=News&amp;cHash=7e5ca015f8e75764d1cb0c4e6480c8d8"/>
+
+<!-- This site is optimized with the Yoast SEO for TYPO3 plugin - https://yoast.com/typo3-extensions-seo/ -->
+<script type="application/ld+json">[{"@context":"https:\/\/www.schema.org","@type":"WebSite","url":"https:\/\/deutsches-sportabzeichen.de\/","name":"deutsches-sportabzeichen.de"},{"@context":"https:\/\/www.schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https:\/\/deutsches-sportabzeichen.de\/","name":"deutsches-sportabzeichen.de"}}]}]</script>
+</head>
+<body class="no-animation">
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+
+
+    
+    
+    
+    
+    
+
+
+    <a href="#main" class="show-on-focus py-4 px-8" data-smoothscroll="true">Zum Inhalt springen</a>
+
+    <header class="header" data-disable-nav-up="false" data-lenis-prevent="">
+        <div class="container">
+            <div class="container__wide-padded">
+                <nav aria-label="main">
+                    <a class="header__logo" href="/">
+                        <img
+                                src="/_assets/f81406596b3c0617dd4f2a153fe2a8f3/Frontend/Images/logo-sportabzeichen.svg"
+                                onerror="this.src='/_assets/f81406596b3c0617dd4f2a153fe2a8f3/Frontend/Images/logo-sportabzeichen.png';this.onerror=null;"
+                                alt="DOSB"
+                                width="200"
+                                height="40"
+                        >
+                    </a>
+    
+                    <toggle-section-nav class="toggle-section toggle-section--nav">
+                        <a class="nav:hidden" href="/suche">
+                            <span class="icon icon--custom-icons:search" aria-hidden="true"></span>
+                            <span class="sr-only">Suche</span>
+                        </a>
+                        <button class="toggle-section__heading" aria-hidden="true">
+                            <span class="toggle-section__heading-text sr-only">Menü</span>
+                            <span class="icon-bar icon-bar--top" aria-hidden="true"></span>
+                            <span class="icon-bar icon-bar--middle" aria-hidden="true"></span>
+                            <span class="icon-bar icon-bar--bottom" aria-hidden="true"></span>
+                        </button>
+    
+                        <div class="toggle-section__content toggle-section-group">
+                            
+    <ul class="header__main">
+        
+            
+                <li>
+                    
+                            
+    
+            <a href="/sportabzeichen-erwerben">Sportabzeichen erwerben</a>
+        
+
+                        
+                </li>
+            
+                <li>
+                    
+                            
+    
+            <a href="/prueferinnen">Prüfer*innen</a>
+        
+
+                        
+                </li>
+            
+                <li>
+                    
+                            
+    
+            <a href="/materialien">Materialien</a>
+        
+
+                        
+                </li>
+            
+                <li>
+                    
+                            
+    
+            <a href="/kontakt">Kontakt</a>
+        
+
+                        
+                </li>
+            
+        
+    </ul>
+
+                            
+    <ul class="header__sub">
+        <li class="has-addon lt-nav:hidden">
+            
+	
+
+	
+			<form method="get" id="tx-solr-search-form-pi-results" action="/suche" data-suggest="/suche?type=7384" data-suggest-header="Top Results" accept-charset="utf-8">
+				
+				<label for="search" class="sr-only">Suche</label>
+				<input type="text" id="search" class="tx-solr-q js-solr-q tx-solr-suggest tx-solr-suggest-focus form-control" name="tx_solr[q]" value="" placeholder="Suche"/>
+				<button type="submit" class="has-addon__addon" tabindex="">
+					<span class="sr-only">Suche eingeben</span>
+					<span class="icon icon--custom-icons:search" aria-hidden="true"></span>
+				</button>
+			</form>
+		
+
+
+
+
+        </li>
+        
+        <li>
+            <label class="toggleAnimation link-with-icon">
+                <input type="checkbox" class="toggleAnimation__toggle sr-only" id="toggleAnimationCheckbox" tabindex="">
+                <span class="toggleAnimation__icon icon icon--fa6-solid:pause" aria-hidden="true"></span>
+                <span class="toggleAnimation__text">Animationen stoppen</span>
+            </label>
+        </li>
+        <li>
+            <a class="link-easy-lang" href="https://www.dosb.de/leichte-sprache/startseite">
+                <span class="link-easy-lang__static-icon icon icon--custom-icons:user-book" aria-hidden="true"></span>
+                <span class="link-easy-lang__toggle">
+                    <span class="icon icon--custom-icons:cross" aria-hidden="true"></span>
+                </span>
+                <span class="link-easy-lang__text">Leichte Sprache</span>
+                <span class="sr-only">einschalten</span>
+            </a>
+        </li>
+    </ul>
+
+                        </div>
+                    </toggle-section-nav>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+
+
+	
+<toggle-section class="toggle-section toggle-section--sidenav"><ul class="toggle-section__content"><li><a href="https://www.dosb.de/" class="teaser-icon"><span class="teaser-icon__icon-wrapper"><span class="teaser-icon__icon icon icon--custom-icons:shield" aria-hidden="true"></span></span><span class="teaser-icon__title">
+                                    Vereine &amp; Verbände
+                                </span></a></li><li><a href="https://www.dosb.de/" class="teaser-icon"><span class="teaser-icon__icon-wrapper"><span class="teaser-icon__icon icon icon--custom-icons:newspaper" aria-hidden="true"></span></span><span class="teaser-icon__title">
+                                    Presse
+                                </span></a></li><li><a href="https://www.dosb.de/" class="teaser-icon"><span class="teaser-icon__icon-wrapper"><span class="teaser-icon__icon icon icon--custom-icons:briefcase" aria-hidden="true"></span></span><span class="teaser-icon__title">
+                                    Stellenangebote
+                                </span></a></li><li><a href="https://www.dosb.de/aktuelles/newsletter#c92" title="Newsletter-Abo" class="teaser-icon"><span class="teaser-icon__icon-wrapper"><span class="teaser-icon__icon icon icon--custom-icons:envelope" aria-hidden="true"></span></span><span class="teaser-icon__title">
+                                    Newsletter-Abo
+                                </span></a></li></ul><button class="toggle-section__heading"><span class="icon icon--custom-icons:arrow-up" aria-hidden="true"></span><span class="sr-only">Navigation aufklappen</span></button></toggle-section>
+
+
+
+
+
+
+	    <main id="main">
+			<div class="container">
+
+				
+
+				<!--TYPO3SEARCH_begin-->
+				
+						
+						<div class="readspeaker-content">
+							
+							
+							
+							
+							
+								
+								
+<div id="c3076"><div class="container__wide animate" style=margin-top:20px;><div data-animation="reveal-vertical"><div class="relative"><video width="1500" height="521" controls autoplay muted class="w-full"><source src="https://cdn.dosb.de/user_upload/www.deutsches-sportabzeichen.de/ONE8Y_DOSB_DSA_RelaunchClip.mp4" type="video/mp4"></video></div></div></div></div>
+
+
+							
+								
+										
+											
+
+                                                    
+                                                    
+                                                    
+                                                        
+                                                    
+
+                                                    <div class="container__narrower mt-lg flex flex-wrap gap-sm xs:gap-md">
+                                                        <div id="readspeaker_button1" class="!mb0 rs_skip rsbtn rs_preserve">
+                                                            <a rel="nofollow"
+                                                               class="rsbtn_play"
+                                                               title="Um den Text anzuhören, verwenden Sie bitte ReadSpeaker"
+                                                               href="https://app-eu.readspeaker.com/cgi-bin/rsent?customerid=7176&lang=de_de&voice=Klara&stattype=demo-site&readclass=readspeaker-content&url=https://deutsches-sportabzeichen.de/">
+															<span class="rsbtn_left rsimg rspart">
+																<span class="rsbtn_text"><span>Vorlesen</span></span>
+															</span>
+                                                                <span class="rsbtn_right rsimg rsplay rspart"></span>
+                                                            </a>
+                                                        </div>
+
+                                                        
+                                                        
+                                                    </div>
+												
+
+											
+										
+									
+								
+<div id="c3075" class=" mt-2xl"><div class="container__narrower animate"><div class="space-vertical-md" data-animation="up-md"><h1 class="">
+            Das Ehrenzeichen für eure Fitness
+            </h1><div class="text-xl sm:text-2xl space-vertical-sm"><p>Das Deutsche Sportabzeichen ist eine Legende, die jedes Jahr aufs Neue befeuert wird - und das von über 1 Millionen Menschen aller Altersklassen mit und ohne Behinderung. Über die Hälfte von ihnen erhält die Auszeichnung, offiziell ein „Ehrenzeichen der Bundesrepublik Deutschland mit Ordenscharakter“.&nbsp;</p></div><p>Das Deutsche Sportabzeichen erhältst du für Ausdauer, Kraft, Schnelligkeit und Koordination. Nicht in einer Sportart, sondern in vielen. Laufen, Schwimmen oder Radfahren. Kugelstoßen, Tanzen, den Medizinball werfen, Barren oder Reck. Das Abzeichen bekommst du, weil du in vielen Disziplinen stark bist. Das Gute daran: Du wählst aus jeder Kategorie die Disziplin, die deiner Stärke entspricht. Noch besser: auf das Abzeichen musst du nicht allein trainieren. Die Sportabzeichen-Community trifft sich überall in Deutschland und ganz bestimmt auch <a href="https://app.bewegungslandkarte.de/?lat=50.0684942&amp;lng=8.5304656&amp;z=13&amp;filters=%7B%22genderTargetGroup%22%3Anull%2C%22environments%22%3Anull%2C%22weekdays%22%3Anull%2C%22ageTargetGroup%22%3Anull%2C%22sportsCertificate%22%3A%5B%22DeutschesSportabzeichenCertificate%22%5D%2C%22inclusivities%22%3Anull%2C%22timePeriods%22%3Anull%2C%22rehaSportsDisciplines%22%3Anull%2C%22isSeverelyDisabled%22%3Afalse%2C%22isSportsEvent%22%3Afalse%2C%22isZppCertified%22%3Afalse%2C%22rehaDiagnosis%22%3Anull%2C%22zppCertificates%22%3Anull%2C%22bewegungsorteAnlageTypen%22%3Anull%2C%22sportsDisciplines%22%3Anull%2C%22isEuropeanSportsWeek%22%3Afalse%7D" target="_blank" rel="noreferrer">in deiner Nähe</a>.</p></div></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c2776" class=" mt-2xl"><div class="container__narrower"><ul class="list-unstyled grid grid-cols-2 sm:grid-cols-4 gap-sm sm:gap-md"><li><a href="/neues-logo" target="_blank" class="teaser-icon"><span class="teaser-icon__circle"><span class="teaser-icon__icon icon icon--custom-icons:shield" aria-hidden="true"></span></span><span class="teaser-icon__title">
+                                Neues Logo
+                            </span></a></li><li><a href="https://app.bewegungslandkarte.de/" target="_blank" rel="noreferrer" class="teaser-icon"><span class="teaser-icon__circle"><span class="teaser-icon__icon icon icon--custom-icons:betriebssport" aria-hidden="true"></span></span><span class="teaser-icon__title">
+                                Sportabzeichen-Treffs
+                            </span></a></li><li><a href="/statistik" class="teaser-icon"><span class="teaser-icon__circle"><span class="teaser-icon__icon icon icon--custom-icons:mentale-gesundheit" aria-hidden="true"></span></span><span class="teaser-icon__title">
+                                Sportabzeichen in Zahlen
+                            </span></a></li><li><a href="/datenschutz" class="teaser-icon"><span class="teaser-icon__circle"><span class="teaser-icon__icon icon icon--custom-icons:newspaper" aria-hidden="true"></span></span><span class="teaser-icon__title">
+                                Datenschutz
+                            </span></a></li></ul></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c4877" class=" mt-2xl"><div align="center" float="left">Anzeige
+<p><a href="https://sportabzeichen-wettbewerb.de/" target="_blank"><img src="https://cdn.dosb.de/user_upload/www.deutsches-sportabzeichen.de/DtSpAbz_PA_sprint_1200x150_neu.gif" width="850"  alt="sportabzeichen-wettbewerb.de"></a></p><p style="margin-left: 1500 px"></p></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c1284" class=" mt-2xl"><div class="container__full px-sm sm:px-md 2xl:px-xl  space-vertical-md animate"><h2 data-animation="reduce-lg">Service</h2><splide-multi-slider class="splide splide--multi splide--multi-8 mt-lg" role="group" aria-labelledby="carousel-splide-multi" data-animation="reduce-md"><div class="splide__track"><ul class="splide__list"><li class="splide__slide"><div class="card gap-sm bg-white"><div class="card__img w-full"><img class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/2/4/csm_DSA-digital-Mockup-Tablet-Logo1_2_707f780017.jpg" width="386" height="257" alt="" /></div><div class="card__content space-vertical-sm   "><h2 class="h4"><a href="https://sportabzeichen-digital.de/" target="_blank" rel="noreferrer" class="card__link">
+                                                                Sportabzeichen-Digital
+                                                            </a></h2><p>Leistungsanforderungen einsehen, Sportabzeichen einreichen und beurkunden. Hier hast du zahlreiche Möglichkeiten der digitalen Bearbeitung.</p></div></div></li><li class="splide__slide"><div class="card gap-sm bg-white"><div class="card__img w-full"><img class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/5/1/csm_DOSB-Kazma-03262_903fecc8f8.jpeg" width="386" height="257" alt="" /></div><div class="card__content space-vertical-sm   "><h2 class="h4"><a href="https://www.dbs-npc.de/deutsches-sportabzeichen.html" target="_blank" rel="noreferrer" class="card__link">
+                                                                Menschen mit Behinderung
+                                                            </a></h2><p>Alles Wissenswerte zum Deutschen Sportabzeichen für Menschen mit Behinderung gibt es auf der Seite des Deutschen Behinderten-sportverbands.</p></div></div></li><li class="splide__slide"><div class="card gap-sm bg-white"><div class="card__img w-full"><img class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/2/5/csm_cKazma-08585_7991d6efe4.jpg" width="386" height="257" alt="" /></div><div class="card__content space-vertical-sm   "><h2 class="h4"><a href="/service/sportabzeichen-und-schule" target="_blank" class="card__link">
+                                                                Sportabzeichen und Schule
+                                                            </a></h2><p>Hier findest du als Schule oder Lehrkraft alle wichtigen Infos und Hilfestellungen, um das Sportabzeichen mit deinen Klassen abzulegen.</p></div></div></li><li class="splide__slide"><div class="card gap-sm bg-white"><div class="card__img w-full"><img class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/1/9/csm_cKazma-08808_e7954bc4a9.jpg" width="386" height="257" alt="" /></div><div class="card__content space-vertical-sm   "><h2 class="h4"><a href="/service/sportabzeichen-tour" target="_blank" class="card__link">
+                                                                Sportabzeichen-Tour
+                                                            </a></h2><p>Sei dabei, ob als Sportler*in oder Veranstalter, hier findest du alle Termine und Unterlagen.</p></div></div></li><li class="splide__slide"><div class="card gap-sm bg-white"><div class="card__img w-full"><img class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/6/f/csm_DSC09006_be0fad7970.jpeg" width="386" height="257" alt="" /></div><div class="card__content space-vertical-sm   "><h2 class="h4"><a href="https://www.dsm-olympia.de/kunden-partner/partner#sport-fuer-alle" target="_blank" rel="noreferrer" class="card__link">
+                                                                Wettbewerbe
+                                                            </a></h2><p>Der Sportabzeichen-Wettbewerb der Sparkassen-Finanzgruppe für Sportvereine und Schulen.</p></div></div></li><li class="splide__slide"><div class="card gap-sm bg-white"><div class="card__img w-full"><img class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/3/0/csm_cKazma-08697_3dbd5664eb.jpg" width="386" height="257" alt="" /></div><div class="card__content space-vertical-sm   "><h2 class="h4"><a href="/service/foerderer" target="_blank" class="card__link">
+                                                                Förderer
+                                                            </a></h2><p>Ein starkes Team, dank unserer Förderer!</p></div></div></li></ul></div><div class="splide__controls mt-md"><div class="splide__arrows"><button class="splide__arrow splide__arrow--prev"><span class="icon icon--custom-icons:arrow-left" aria-hidden="true"></span><span class="sr-only">Voriges</span></button><button class="splide__arrow splide__arrow--next"><span class="icon icon--custom-icons:arrow-right" aria-hidden="true"></span><span class="sr-only">Nächstes</span></button></div></div></splide-multi-slider></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c815" class=" mt-2xl"><div class="container__full has-bg-primary color-gray-100 pt-xl pb-lg relative animate"><div class="absolute bg-primary left-0 right-0 top-0 bottom-0" data-animation="scale-y-md"></div><splide-inline-slider class="splide splide--inline" role="group" data-animation="left-slow" aria-labelledby="carousel-splide-multi"><div class="splide__track"><ul class="splide__list"><li class="splide__slide"><strong>1,0</strong>
+                            
+                            
+                            
+                                Mio. Aktive pro Jahr
+                            
+                        </li><li class="splide__slide"><strong>560</strong>
+                            
+                            
+                            
+                                Tsd. Sportabzeichen pro Jahr
+                            
+                        </li><li class="splide__slide"><strong>60</strong>
+                            
+                            
+                            
+                                Tsd. Prüfer*innen
+                            
+                        </li><li class="splide__slide"><strong>5</strong>
+                            
+                            
+                            
+                                Tourstopps
+                            
+                        </li></ul></div><div class="splide__controls mt-md"><div class="splide__arrows"><button class="splide__arrow splide__arrow--prev"><span class="icon icon--custom-icons:arrow-left" aria-hidden="true"></span><span class="sr-only">Voriges</span></button><button class="splide__arrow splide__arrow--next"><span class="icon icon--custom-icons:arrow-right" aria-hidden="true"></span><span class="sr-only">Nächstes</span></button></div></div></splide-inline-slider></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c4249" class=" mt-0">
+	<div class="tx-dosbnewsfilter">
+		
+    <div class="mt-2xl">
+        <div class="animate">
+            
+                <h2 data-animation="reduce-lg"><p>Sportabzeichen-News</p></h2>
+            
+            
+                <div class="mt-lg">
+                    <div class="card card--lg">
+                        <div class="card__img" data-animation="reduce-md">
+                            
+                                
+                                    <div class="teaser__img">
+                                        <img class="img-responsive w-full" alt="eine Gruppe von Menschen schauen sich am Rand eines Sportplatzes die Bedingung für das Deutsche Sportabzeichen an" src="https://cdn.dosb.de/_processed_/7/3/csm_DSA_Neuerungen_2026_a42e4e78ba.jpg" width="793" height="529" />
+                                    </div>
+                                
+                            
+                        </div>
+                        <div class="card__content space-vertical-sm" data-animation="left-md">
+                            <h3>
+                                <a data-turbo="false" class="card__link" href="/sportabzeichen-news/detail/deutsches-sportabzeichen-2026-das-sind-die-neuerungen">Deutsches Sportabzeichen 2026 - das sind die Neuerungen!</a>
+                            </h3>
+                            <p>Der neue Prüfungswegweiser ist online! Neben einem optischen Facelift gibt es auch ein paar inhaltliche Anpassungen, die Sportabzeichen-Prüfer*innen wissen sollten. Hier die wichtigsten Neuerungen im...</p>
+
+                            <div class="flex flex-wrap gap-x-xs text-sm">
+                                <span>14.01.2026</span>
+                                
+                                        <span>DOSB Redaktion</span>
+                                    
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+
+        </div>
+    </div>
+
+    <div class="mt-2xl">
+        <div class="container__narrow space-vertical-md">
+            <div class="row">
+                
+                    
+                
+                    
+                        
+                                <div class="animate col-span-full sm:col-span-6">
+                                    <div class="card card--sm" data-animation="up-md">
+                                        <div class="card__img">
+                                            
+                                                
+                                                    <div class="teaser__img">
+                                                        <img class="img-responsive w-full" alt="Drei Sportlerinnen schauen sich auf dem Tablet die Leistungsanforderungen vom Sportabzeichen an" src="https://cdn.dosb.de/_processed_/c/8/csm_DSA-2025_12f95f99ae.jpg" width="490" height="326" />
+                                                    </div>
+                                                
+                                            
+                                        </div>
+                                        <div class="card__content space-vertical-sm">
+                                            <h3>
+                                                <a data-turbo="false" class="card__link" href="/sportabzeichen-news/detail/deutsches-sportabzeichen-pruefungswegweiser-2026-das-solltet-ihr-bereits-jetzt-wissen">Deutsches Sportabzeichen 2026 - das solltet ihr bereits jetzt wissen!</a>
+                                            </h3>
+                                            <p>Ab dem 1. Januar 2026 wird der neue Sportabzeichen-Prüfungswegweiser abrufbar sein. Es werden drei Änderungen in den Regularien vorgenommen, die Sportabzeichen-Prüfer*innen bereits jetzt wissen...</p>
+                                            <div class="flex flex-wrap gap-x-xs text-sm">
+                                                <span>05.11.2025</span>
+                                                
+                                                        <span>DOSB Redaktion</span>
+                                                    
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                    
+                
+                    
+                        
+                                <div class="animate col-span-full sm:col-span-6 sm:mt-2xl">
+                                    <div class="card card--sm" data-animation="up-md">
+                                        <div class="card__img">
+                                            
+                                                
+                                                    <div class="teaser__img">
+                                                        <img class="img-responsive w-full" alt="Prüfer kniet am Boden und misst beim Weitsprung" src="https://cdn.dosb.de/_processed_/8/6/csm_Pruefer-Sportabzeichen-cKazma-00376_e0b89f4a08.jpg" width="490" height="326" title="Prüfer*innen, Übungsleiter*innen oder Trainer*innen sind als Unterstützer*innen gefragt." />
+                                                    </div>
+                                                
+                                            
+                                        </div>
+                                        <div class="card__content space-vertical-sm">
+                                            <h3>
+                                                <a data-turbo="false" class="card__link" href="/sportabzeichen-news/detail/mitmachen-mitgestalten-neue-koordinationsuebungen-fuer-das-deutsche-sportabzeichen">Mitmachen &amp; Mitgestalten: Neue Koordinationsübungen für das Deutsche Sportabzeichen</a>
+                                            </h3>
+                                            <p>Wir testen fünf neue Koordinationsübungen, um das Sportabzeichen noch attraktiver - besonders für junge Erwachsene - zu gestalten. Dafür brauchen wir eure Unterstützung als Prüfer*innen,...</p>
+                                            <div class="flex flex-wrap gap-x-xs text-sm">
+                                                <span>31.10.2025</span>
+                                                
+                                                        <span>DOSB Redaktion</span>
+                                                    
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                    
+                
+                    
+                        
+                                <div class="animate col-span-full sm:col-span-6">
+                                    <div class="card card--sm" data-animation="up-md">
+                                        <div class="card__img">
+                                            
+                                                
+                                                    <div class="teaser__img">
+                                                        <img class="img-responsive w-full" alt="Eine Gruppe von Menschen unterschiedlichen Alters freut sich über die Sportabzeichenurkunde" src="https://cdn.dosb.de/_processed_/5/4/csm_cKazma-00303-SportabzeichenurkundeDOSB_f7e8278b43.jpg" width="490" height="326" title="Das Sportabzeichen ist bei Jung und Alt begehrt." />
+                                                    </div>
+                                                
+                                            
+                                        </div>
+                                        <div class="card__content space-vertical-sm">
+                                            <h3>
+                                                <a data-turbo="false" class="card__link" href="/sportabzeichen-news/detail/ein-sportabzeichen-veteran-und-eine-die-es-noch-werden-will">Ein Sportabzeichen-Veteran und eine, die es noch werden will</a>
+                                            </h3>
+                                            <p>Bodo Schöngarth hat das 70. Deutsche Sportabzeichen abgelegt. Ein Rekord in Hamburg. Ein Ziel, das Mirja Thal noch erreichen möchte.</p>
+                                            <div class="flex flex-wrap gap-x-xs text-sm">
+                                                <span>27.08.2025</span>
+                                                
+                                                        <span>Andrea Marunde</span>
+                                                    
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                    
+                
+                    
+                        
+                                <div class="animate col-span-full sm:col-span-6 sm:mt-2xl">
+                                    <div class="card card--sm" data-animation="up-md">
+                                        <div class="card__img">
+                                            
+                                                
+                                                    <div class="teaser__img">
+                                                        <img class="img-responsive w-full" alt="Simone Terodde und Eli Seitz beim Tourstopp in Rhede mit Kindern" src="https://cdn.dosb.de/_processed_/e/6/csm_Rhede-Terodde-Seitz-Kinder-cKazma-02085_e81b8c3846.jpg" width="490" height="326" title="Siomon Terodde und Eli Seitz waren zu Gast beim Tourstopp in Rhede." />
+                                                    </div>
+                                                
+                                            
+                                        </div>
+                                        <div class="card__content space-vertical-sm">
+                                            <h3>
+                                                <a data-turbo="false" class="card__link" href="/sportabzeichen-news/detail/die-sportabzeichen-tour-2025-das-finale-in-rhede-in-nordrhein-westfalen">Die Sportabzeichen-Tour 2025 - das Finale in Rhede in Nordrhein-Westfalen</a>
+                                            </h3>
+                                            <p>1.500 Sportbegeisterte, eine Spitzensportlerin, eine Fußballlegende und ein Ministerpräsident machten den Tourstopp in Rhede zu einem würdigen Finale der diesjährigen Sportabzeichen-Tour. </p>
+                                            <div class="flex flex-wrap gap-x-xs text-sm">
+                                                <span>09.07.2025</span>
+                                                
+                                                        <span>DOSB Redaktion</span>
+                                                    
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                    
+                
+            </div>
+            
+                <div class="animate">
+                    <a href='/sportabzeichen-news' class="btn btn--ghost" data-animation="up-md">Übersicht Aktuelles</a>
+                </div>
+            
+        </div>
+    </div>
+
+	</div>
+</div>
+
+
+							
+								
+										
+									
+								
+<div id="c3436" class=" mt-2xl"><div class="animate"><div class="row items-center "><div class="col-span-full sm:col-span-6 lg:col-span-6"><div class="relative"><img data-animation="reduce-md" class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/b/0/csm_Icons_DSA_77ac12c009.png" width="804" height="446" alt="" /></div></div><div class="col-span-full sm:col-span-6 lg:col-span-6 space-vertical-md " data-animation="left-md"><h3><strong>Überdurchschnittlich vielseitig</strong></h3><p>Das Deutsche Sportabzeichen wird als Leistungsabzeichen für <strong>überdurchschnittliche</strong> und <strong>vielseitige</strong> körperliche Leistungsfähigkeit verliehen. Du beweist darin deine Ausdauer, Kraft, Schnelligkeit und Koordinationsfähigkeit. Kurzum: es geht um deine Vielseitigkeit, deine Fitness. Und darum, über dich hinauszuwachsen. Ob du für Bronze, Silber oder Gold trainierst: Jedes Training bringt dich näher an dein Ziel heran. Und allein das schon zeichnet dich aus.</p></div></div></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c3437" class=" mt-2xl"><div class="animate"><div class="row items-center "><div class="col-span-full sm:col-span-6 lg:col-span-6"><div class="relative"><img data-animation="reduce-md" data-animation-origin="right" class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/0/7/csm_DOSB-Kazma-03562_5b3347e28e.jpeg" width="804" height="536" alt="" title="©️DOSB/Kazma" /></div></div><div class="col-span-full sm:col-span-6 lg:col-span-6 space-vertical-md sm:order-first" data-animation="right-md"><h3><strong>Sport für alle ist alle gemeinsam</strong></h3><p>Beim Deutschen Sportabzeichen können alle mitmachen und alle meint alle. Egal wie alt du bist, ob ihr als Familie teilnehmen wollt, als Kolleg*innen, oder als Einzelkämpfer*innen. Hauptsache, du bist bereit, deine beste Leistung zu erbringen. Denn das ist der Kern des Sports: dass wir uns gemeinsam durch und mit ihm weiterentwickeln. Die <a href="/materialien#c2350" target="_blank">Leistungsanforderungen</a> des Sportabzeichens sind individuell angepasst, und das gilt selbstverständlich auch für <a href="https://www.dbs-npc.de/deutsches-sportabzeichen.html" target="_blank" rel="noreferrer">Menschen mit Behinderung</a>.&nbsp;</p><p>Sport für alle – diese Leistung erbringen jährlich auch unsere über 60.000 Prüfer*innen, die dafür sorgen, dass das Deutsche Sportabzeichen seine hohen Standards verlässlich einhält.&nbsp;</p></div></div></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c3438" class=" mt-2xl"><div class="animate"><div class="row items-center "><div class="col-span-full sm:col-span-6 lg:col-span-6"><div class="relative"><img data-animation="reduce-md" class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/8/f/csm_DOSB-Kazma-01867_9c166be04f.jpeg" width="804" height="536" alt="" title="©️DOSB/Kazma" /></div></div><div class="col-span-full sm:col-span-6 lg:col-span-6 space-vertical-md " data-animation="left-md"><h3><strong>Weltweit und über den organisierten Sport hinaus</strong></h3><p>Für das Deutsche Sportabzeichen kannst du in und mit deinem Sportverein trainieren. Aber auch mit deiner Feuerwehrabteilung oder ganz für dich allein. In der Schule, bei der (Bundes-)Polizei und sogar im Ausland erwerben jährlich viele Menschen das Abzeichen! Du wählst das Setting, in dem du deine beste Leistung aufbauen kannst. Denn darum geht es: konstantes Training. Erfahren, was in dir steckt. Besser werden. Die Freude am Sport erleben. Dass du nebenbei massiv etwas für deine Gesundheit tust, ist allein schon eine Auszeichnung wert!&nbsp;</p></div></div></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c3439" class=" mt-2xl"><div class="animate"><div class="row items-center "><div class="col-span-full sm:col-span-6 lg:col-span-6"><div class="relative"><img data-animation="reduce-md" data-animation-origin="right" class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/b/f/csm_DOSB-Kazma-03493_72dd1b7b03.jpeg" width="804" height="536" alt="" title="©️DOSB/Kazma" /></div></div><div class="col-span-full sm:col-span-6 lg:col-span-6 space-vertical-md sm:order-first" data-animation="right-md"><h3><strong>Immer am Puls der Zeit</strong></h3><p>Das Deutsche Sportabzeichen gibt es mittlerweile seit über 100 Jahren. Es ist Sportkultur pur. Seine ungebrochene Popularität verdankt es aber nicht seiner Tradition. Sondern seiner Lebendigkeit. Denn das Abzeichen wurde und wird seit 1913 ständig weiterentwickelt. Aktuelle Trends findest du im Sportabzeichen daher ebenso integriert wie die Online-Plattform Sportabzeichen-Digital, die Organisatorisches so viel mehr erleichtert. Das Deutsche Sportabzeichen ist übrigens eine staatlich anerkannte Auszeichnung.&nbsp;</p><p>Hier findest du ein paar weitere Hintergründe zum Deutschen Sportabzeichen:</p><ul><li><a href="https://cdn.dosb.de/Relaunch_2024/Sportabzeichen/Materialien_2025/DSA-100_Jahre_DSA-Finalfassung_ImageBroschuere.pdf">100 Jahre Deutsches Sportabzeichen - Imagebroschüre</a></li><li><a href="https://cdn.dosb.de/Relaunch_2024/Sportabzeichen/Materialien_2025/DSA-100_Jahre-Finalfassung_1988-2013.pdf" target="_blank" rel="noreferrer">100 Jahre Deutsches Sportabzeichen - Dokumentation</a></li><li><a href="https://cdn.dosb.de/Relaunch_2024/Sportabzeichen/Materialien_2025/DSA-Reformprozess_Olav_Schmid.pdf" target="_blank" rel="noreferrer">Reformprozess des Deutschen Sportabzeichens - Broschüre</a></li><li><a href="https://cdn.dosb.de/Relaunch_2024/Sportabzeichen/Materialien_2025/DSA-Bundesanzeiger_2012.pdf" target="_blank" rel="noreferrer">Anerkennung Ehrenabzeichen</a></li></ul></div></div></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c1283" class=" mt-2xl"><div class="animate"><h2 class="" data-animation="reduce-lg" data-animation-origin="">
+                4-Wochen-Challenge
+            </h2><div class="row items-center mt-lg"><div class="col-span-full sm:col-span-6 lg:col-span-6"><div class="relative"><img data-animation="reduce-md" class="img-responsive w-full" src="https://cdn.dosb.de/_processed_/0/9/csm_230414_DOSB-BiB_Motive-fuer-Web_1920x1080px_web-final-1_2318c1d1f9.jpg" width="804" height="453" alt="" /></div></div><div class="col-span-full sm:col-span-6 lg:col-span-6 space-vertical-md " data-animation="left-md"><h3>Bewegt im Betrieb</h3><p>Die „4-Wochen-Challenge“ zum Deutschen Sportabzeichen bringt dich und deine Kolleg*innen in Bewegung und sorgt für das nötige Durchhaltevermögen. Einfach und flexibel in der Anwendung, lassen sich die Tagesaufgaben nahtlos in den Arbeitsalltag einpassen, egal ob im Büro, der industriellen Fertigung oder im Homeoffice. Wochen Check-Ins, Tagesaufgaben und die individuelle Belohnungspyramide begleiten durch die Challenge, welche nach vier Wochen beliebig weiter angewendet werden kann.</p><p><strong>Wege zum Mitmachen</strong> → Bestelle die Broschüre für dich und dein Team entweder über das <a href="https://forms.office.com/e/Lf1ixJ52cu" target="_blank" rel="noreferrer">Bestellformular</a> oder lade dir die <a href="https://cdn.dosb.de/Relaunch_2024/Sportabzeichen/Materialien_2025/DSA-Broschuere-Bewegt_im_Betrieb_21x21cm_final_barr.pdf" target="_blank" rel="noreferrer">digitale Broschüre</a> runter.</p><p>Die 4-Wochen-Challenge wird auch zeitnah wieder hier online zur Verfügung stehen.</p></div></div></div></div>
+
+
+							
+								
+										
+									
+								
+<div id="c3440" class=" mt-2xl"><div class="container__narrow animate"><div class="space-vertical-md" data-animation="up-md"><h2 class="">
+            Playlist Deutsches Sportabzeichen
+            </h2><figure data-animation="up-md"><video-element class="video-element"><div class="cookieconsent-optout-statistics"><button class="video-element__btn"><span class="icon icon--fa6-brands:youtube" aria-hidden="true"></span><span class="sr-only">Öffnet Video nach Cookie Zustimmung</span></button><div class="video-element__warning space-vertical-md"><p>
+                        Beim Laden von Videos aus externen Quellen werden Statistik-Cookies gesetzt.<br><button onclick="cookieman.show()">Mehr erfahren</button></p><button class="video-element__accept btn">Video anzeigen</button></div><iframe id="player" type="text/html" width="640" height="360"  allow="encrypted-media; fullscreen" frameborder="0" title="Playlist Deutsches Sportabzeichen" data-src="https://www.youtube-nocookie.com/embed/https://youtube.com/playlist?list=PLB56E66F5AFB703A8&amp;si=IaagifDPoiiG3o-5"></iframe></div></video-element></figure></div></div></div>
+
+
+							
+							<script src="//cdn1.readspeaker.com/script/7176/webReader/webReader.js?pids=wr" type="text/javascript"></script>
+						</div>
+					
+				<!--TYPO3SEARCH_end-->
+			</div>
+        </main>
+	
+
+
+    
+            
+<aside class="mt-4xl"><div class="container"><div class="container__wide-padded space-vertical-md"><h2>Partner</h2><div class="row gap-y-lg lg:gap-x-2xl xl:gap-x-md"><div class="col-span-full sm:col-span-7 xl:col-span-5 space-vertical-sm"><h3 class="h4 pl-95px md:pl-123px">
+                                Nationaler Förderer
+                            </h3><div class="flex mx-0 gap-sm"><div class="basis-80px md:basis-107px grow-0 shrink-0"><img class="mx-auto" src="https://cdn.dosb.de/_processed_/c/2/csm_DOSB_Deutsches_Sportabzeichen_Logo_Hoch_RGB_Bunt_0b8bcff122.jpg" width="75" height="90" loading="lazy" alt="" /></div><ul class="list-partner"><li><a href="https://sportabzeichen-wettbewerb.de/" target="_blank" rel="noreferrer"><img src="https://cdn.dosb.de/user_upload/www.deutsches-sportabzeichen.de/Bilder/Logos/DSA_Logo_S_Sparkasse_100x30mm.jpg" width="1159" height="320" loading="lazy" alt="" /></a></li></ul></div><div class="flex mx-0 gap-sm"></div></div><div class="col-span-full sm:col-span-5 space-vertical-sm lt-md:pl-95px at-xl:-ms-sm  at-xl:me-sm"><h3 class="h4">Hersteller</h3><ul class="list-partner"><li><a href="https://fullservice-stuco.de/" target="_blank" rel="noreferrer"><img src="https://cdn.dosb.de/Relaunch_2024/DOSB/STUCO_logo.png" width="4755" height="1192" loading="lazy" alt="" /></a></li></ul></div><div class="col-span-full sm:col-span-5 xl:col-span-2 space-vertical-sm pl-95px md:pl-123px xl:pl-0 at-xl:-ms-lg"></div></div></div></div></aside>
+
+
+        
+
+    
+<footer class="footer"><div class="container"><div class="container__wide-padded"><div class="row gap-y-lg xl:gap-x-xl"><div class="col-span-full sm:col-span-6 md:col-span-4 xl:col-span-5 space-vertical-sm"><h2 class="text-3xl">
+                                Sportabzeichen
+                            </h2><div class="relative"><span class="absolute top-0 left-0 text-4xl icon icon--custom-icons:external" aria-hidden="true"></span><ul class="list pl-60px"><li><a href="https://www.sterne-des-sports.de/">
+                                                    Sterne des Sports
+                                                </a></li><li><a href="https://integration.dosb.de/">
+                                                    Integration durch Sport
+                                                </a></li><li><a href="https://bewegungslandkarte.de/" target="_blank">
+                                                    Die Bewegungslandkarte
+                                                </a></li><li><a href="https://deine-spiele.de/" target="_blank" rel="noreferrer">
+                                                    DEINE IDEEN. DEINE SPIELE.
+                                                </a></li><li><a href="https://www.sportdeutschland.de/" target="_blank" rel="noreferrer">
+                                                    Sportdeutschland 
+                                                </a></li></ul></div><h2 class="text-3xl mt-xl">
+                                Quicklinks
+                            </h2><div class="relative"><ul class="list pl-60px"><li><a href="https://sportabzeichen-digital.de/login">
+                                                    Sportabzeichen Digital
+                                                </a></li><li><a href="/materialien">
+                                                    Materialien
+                                                </a></li><li><a href="/prueferinnen">
+                                                    Prüfer*innen
+                                                </a></li></ul></div></div><div class="col-span-full sm:col-span-6 md:col-span-4  xl:col-span-4 space-vertical-lg"><a href="https://www.dosb.de/" class="link-btn-txt"><span class="icon icon--custom-icons:whistle" aria-hidden="true"></span><p class="h5">Vorfall melden, gegen Antisemitismus!</p></a><div class="space-vertical-sm"><h3 class="h5">Newsletter Deutsches Sportabzeichen</h3><a href="https://www.dosb.de/aktuelles/newsletter" class="btn btn--ghost">
+                                    Jetzt abonnieren
+                                </a></div><div class="space-vertical-sm"><h3 class="h5 mt-lg lg:mt-lg xl:mt-0">
+                                    Social Media
+                                </h3><ul class="list-inline gap-x-xs"><li><a href="https://www.youtube.com/c/DOSBvideo" title="YouTube" class="btn btn--icon has-tooltip"><span class="icon icon--fa6-brands:youtube"></span></a></li><li><a href="https://www.linkedin.com/company/deutscher-olympischer-sportbund/?viewAsMember=true" target="_blank" rel="noreferrer" title="LinkedIn" class="btn btn--icon has-tooltip"><span class="icon icon--fa6-brands:linkedin-in"></span></a></li><li><a href="https://x.com/DOSB" target="_blank" rel="noreferrer" title="X" class="btn btn--icon has-tooltip"><span class="icon icon--fa6-brands:x-twitter"></span></a></li></ul></div><ul class="footer__meta list-inline gap-y-2xs gap-x-xs md:mt-xl xl:mt-5xl"><li class="w-full">
+                                © 2026 DOSB
+                            </li><li><a href="https://www.dosb.de/datenschutz">
+                                                Datenschutz
+                                            </a></li><li><a href="https://www.dosb.de/kontakt">
+                                                Kontakt
+                                            </a></li><li><a href="https://www.dosb.de/impressum">
+                                                Impressum
+                                            </a></li></ul></div><div class="col-span-full sm:col-span-4 md:order-first xl:col-span-3 md:relative xl:static"><img class="footer__sport" src="/fileadmin/_processed_/4/f/csm_footer-sport_58a20fce3c.png" width="624" height="624" loading="lazy" alt="" /></div></div></div></div></footer>
+
+
+
+
+
+<dialog id="dialogLightbox" class="dialog" aria-labelledby="dialogLightboxTitle">
+	<div class="dialog__header">
+		<h2 class="dialog__title h3" id="dialogLightboxTitle">Title</h2>
+		<button class="close">
+			<span class="icon icon--fa-solid:times" aria-hidden="true"></span>
+			<span class="sr-only">schliessen</span>
+		</button>
+	</div>
+	<div class="dialog__body">
+		<img src="" width="1222" height="814" alt="" class="dialog__img img-responsive" loading="lazy" >
+	</div>
+</dialog>
+
+<dialog id="dialogVideo" class="dialog dialog--video" aria-labelledby="dialogVideoTitle">
+	<div class="dialog__header adsf">
+		<h2 class="dialog__title h3" id="dialogVideoTitle">Title</h2>
+		<button class="close">
+			<span class="icon icon--fa-solid:times" aria-hidden="true"> </span>
+			<span class="sr-only">schliessen</span>
+		</button>
+	</div>
+	<div class="dialog__body">
+		<div class="embed-responsive"></div>
+	</div>
+</dialog>
+
+
+
+
+
+
+
+<div id="cookieman-modal"
+     data-cookieman-showonce="1"
+     data-cookieman-settings="{&quot;groups&quot;:{&quot;mandatory&quot;:{&quot;preselected&quot;:true,&quot;disabled&quot;:true,&quot;trackingObjects&quot;:[&quot;CookieConsent&quot;,&quot;Matomo&quot;]},&quot;Marketing&quot;:{&quot;trackingObjects&quot;:[&quot;Adition&quot;]},&quot;GoogleMaps&quot;:{&quot;trackingObjects&quot;:[&quot;GoogleMaps&quot;]},&quot;YouTube&quot;:{&quot;trackingObjects&quot;:[&quot;YouTube&quot;]}},&quot;trackingObjects&quot;:{&quot;CookieConsent&quot;:{&quot;show&quot;:{&quot;CookieConsent&quot;:{&quot;duration&quot;:&quot;1&quot;,&quot;durationUnit&quot;:&quot;year&quot;,&quot;type&quot;:&quot;cookie_http+html&quot;,&quot;provider&quot;:&quot;Website&quot;}}},&quot;Matomo&quot;:{&quot;inject&quot;:&quot;\u003C!-- Matomo --\u003E\u003Cscript\u003Evar _paq = window._paq = window._paq || [];\/* tracker methods like \&quot;setCustomDimension\&quot; should be called before \&quot;trackPageView\&quot; *\/_paq.push([&#039;trackPageView&#039;]);_paq.push([&#039;enableLinkTracking&#039;]);(function() {var u=\&quot;\/\/matomo.c-1442.maxcluster.net\/\&quot;;_paq.push([&#039;setTrackerUrl&#039;, u+&#039;matomo.php&#039;]);_paq.push([&#039;setSiteId&#039;, &#039;3&#039;]);var d=document, g=d.createElement(&#039;script&#039;), s=d.getElementsByTagName(&#039;script&#039;)[0];g.async=true; g.src=u+&#039;matomo.js&#039;; s.parentNode.insertBefore(g,s);})();\u003C\/script\u003E\u003C!-- End Matomo Code --\u003E&quot;},&quot;Adition&quot;:{&quot;inject&quot;:&quot;\u003Cimg src=\&quot;https:\/\/ad1.adfarm1.adition.com\/tagging?type=image&amp;network=3342&amp;tag[dsmo.dosb]&amp;gdpr=${GDPR}&amp;gdpr_consent=${GDPR_CONSENT_40}\&quot; width=\&quot;1\&quot; height=\&quot;1\&quot; \/\u003E&quot;,&quot;show&quot;:{&quot;UserID&quot;:{&quot;duration&quot;:&quot;2&quot;,&quot;durationUnit&quot;:&quot;years&quot;,&quot;type&quot;:&quot;cookie_http+html&quot;,&quot;provider&quot;:&quot;Adition technologies AG (https:\/\/www.adition.com\/datenschutz\/)&quot;}}},&quot;GoogleMaps&quot;:{&quot;inject&quot;:&quot;\u003C!-- Google Maps --\u003E                \u003Cscript\u003E                var map;                \/\/ Anzeige der Google Karte                if($(&#039;#google-maps&#039;).length !== 0){                    \/\/ Create the script tag, set the appropriate attributes                    var script = document.createElement(&#039;script&#039;);                    script.src = &#039;https:\/\/maps.googleapis.com\/maps\/api\/js?key=AIzaSyBK3jcjdZEiLBzQixs2UIGH4ENb32SbOyM&amp;callback=initMap&#039;;                    script.async = true;                    \/\/ Attach your callback function to the `window` object                    window.initMap = function() {                      if (cookieman.hasConsented(&#039;GoogleMaps&#039;)){                            var mapDiv = document.getElementById(&#039;google-maps&#039;).hasAttribute(&#039;data-use-div&#039;) ? &#039;google-maps&#039; : &#039;start&#039;;                            var long = Number(document.getElementById(&#039;longitude&#039;)?.value);                            var lat = Number(document.getElementById(&#039;latitude&#039;)?.value);                            var event = document.getElementById(&#039;resultName&#039;)?.value;                            var zoom = document.getElementById(&#039;zoom&#039;)?.value ? Number(document.getElementById(&#039;zoom&#039;)?.value) : 15;                            map = new google.maps.Map(document.getElementById(mapDiv), {                                center: {lat: lat, lng: long},                                zoom: zoom,                                controlSize: 50,                                \/\/disableDefaultUI: true,                                scrollwheel: false,                                scaleControl: false,                                streetViewControl: false,                                mapTypeControl: false,                                fullscreenControl:false,                                zoomControl:false,                            });                            if(!document.getElementById(&#039;noMarker&#039;)?.value){                                var marker = new google.maps.Marker({                                    position: {lat: lat, lng: long},                                    map: map,                                    title: event                                });                            }                        }                    };                    \/\/ Append the &#039;script&#039; element to &#039;head&#039;                    document.head.appendChild(script);                }                $(\&quot;#consent-button\&quot;).hide();                \u003C\/script\u003E                \u003C!-- End Google Maps --\u003E&quot;,&quot;show&quot;:{&quot;GoogleMaps&quot;:{&quot;duration&quot;:&quot;1&quot;,&quot;durationUnit&quot;:&quot;hours&quot;,&quot;type&quot;:&quot;cookie_http+html&quot;,&quot;provider&quot;:&quot;Google&quot;}}},&quot;YouTube&quot;:{&quot;inject&quot;:&quot;TEXT&quot;,&quot;show&quot;:{&quot;YouTube&quot;:{&quot;duration&quot;:&quot;&quot;,&quot;durationUnit&quot;:&quot;none&quot;,&quot;type&quot;:&quot;connection&quot;,&quot;provider&quot;:&quot;YouTube&quot;}}}}}"
+     class="modal fade" tabindex="-1" role="dialog" aria-label="Cookie Dialog"
+><div class="modal-dialog modal-lg modal-dialog-centered" role="document"><div class="modal-content"><div class="h5 modal-header" id="cookieman-modal-title">
+                Hinweis zu Cookies
+            </div><div class="modal-body"><p>
+                    Unsere Webseite verwendet Cookies. Diese haben zwei Funktionen: Zum einen sind sie erforderlich für die grundlegende Funktionalität unserer Website. Zum anderen können wir mit Hilfe der Cookies unsere Inhalte für Sie immer weiter verbessern. Hierzu werden pseudonymisierte Daten von Website-Besuchern gesammelt und ausgewertet. Das Einverständnis in die Verwendung der Cookies können Sie jederzeit widerrufen. Weitere Informationen zu Cookies auf dieser Website finden Sie in unserer <a href="https://www.dosb.de/datenschutz"
+    >Datenschutzerklärung</a> und zu uns im <a href="https://www.dosb.de/impressum"
+    >Impressum</a>.
+                </p><button class="btn btn-secondary btn-sm float-right collapsed pr-5"
+                        type="button" data-toggle="collapse"
+                        data-target="#cookieman-settings" aria-expanded="false" aria-controls="cookieman-settings">
+                    Einstellungen
+                </button><div class="clearfix"></div><div class="collapse" id="cookieman-settings"><form data-cookieman-form class="mt-3"
+                          data-cookieman-dnt-enabled="Sie haben bereits über die &lt;a target=&quot;_blank&quot; rel=&quot;noopener&quot; href=&quot;https://de.wikipedia.org/wiki/Do_Not_Track_(Software)&quot;&gt;Do-Not-Track-Funktion Ihres Browsers&lt;/a&gt; der Erstellung von Nutzungsprofilen widersprochen. Dies akzeptieren wir. Sie können diese Funktion über die Einstellungen Ihres Browsers anpassen."
+                    ><div id="cookieman-acco" class="accordion"><div class="card"><div class="card-header" id="cookieman-acco-h-mandatory"><a href="" class="collapsed" data-toggle="collapse"
+                                           data-target="#cookieman-acco-mandatory" role="button"
+                                           aria-expanded="false" aria-controls="cookieman-acco-mandatory">
+                                            Erforderlich
+                                        </a></div><div id="cookieman-acco-mandatory" class="collapse card-body"
+                                         aria-labelledby="cookieman-acco-h-mandatory"
+                                         data-parent="#cookieman-acco"><div class="alert alert-primary"><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="mandatory" name="mandatory"
+                                                       checked="checked"
+                                                disabled="disabled"
+                                                ><label class="form-check-label" for="mandatory">
+                                                    Zustimmen
+                                                </label></div></div><p>
+                                            Diese Cookies werden für eine reibungslose Funktion unserer Website benötigt.
+                                        </p><div class="table-responsive"><table class="table table-hover table-sm"><thead><tr><th>Name</th><th>Zweck</th><th>Ablauf</th><th>Typ</th><th>Anbieter</th></tr></thead><tbody><tr><td>
+                CookieConsent
+            </td><td>
+                Speichert Ihre Einwilligung zur Verwendung von Cookies.
+            </td><td>
+                1
+                Jahr
+            </td><td>
+                HTML
+            </td><td>
+                
+                    Website
+                
+            </td></tr></tbody></table></div></div></div><div class="card"><div class="card-header" id="cookieman-acco-h-Marketing"><a href="" class="collapsed" data-toggle="collapse"
+                                           data-target="#cookieman-acco-Marketing" role="button"
+                                           aria-expanded="false" aria-controls="cookieman-acco-Marketing">
+                                            Marketing
+                                        </a></div><div id="cookieman-acco-Marketing" class="collapse card-body"
+                                         aria-labelledby="cookieman-acco-h-Marketing"
+                                         data-parent="#cookieman-acco"><div class="alert alert-primary"><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="Marketing" name="Marketing"
+                                                       
+                                                
+                                                ><label class="form-check-label" for="Marketing">
+                                                    Zustimmen
+                                                </label></div></div><p></p><div class="table-responsive"><table class="table table-hover table-sm"><thead><tr><th>Name</th><th>Zweck</th><th>Ablauf</th><th>Typ</th><th>Anbieter</th></tr></thead><tbody><tr><td>
+                UserID
+            </td><td>
+                missing translation:
+                trackingobject.UserID.desc
+            </td><td>
+                2
+                Jahre
+            </td><td>
+                HTML
+            </td><td>
+                
+                    Adition technologies AG (https://www.adition.com/datenschutz/)
+                
+            </td></tr></tbody></table></div></div></div><div class="card"><div class="card-header" id="cookieman-acco-h-GoogleMaps"><a href="" class="collapsed" data-toggle="collapse"
+                                           data-target="#cookieman-acco-GoogleMaps" role="button"
+                                           aria-expanded="false" aria-controls="cookieman-acco-GoogleMaps">
+                                            GoogleMaps
+                                        </a></div><div id="cookieman-acco-GoogleMaps" class="collapse card-body"
+                                         aria-labelledby="cookieman-acco-h-GoogleMaps"
+                                         data-parent="#cookieman-acco"><div class="alert alert-primary"><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="GoogleMaps" name="GoogleMaps"
+                                                       
+                                                
+                                                ><label class="form-check-label" for="GoogleMaps">
+                                                    Zustimmen
+                                                </label></div></div><p></p><div class="table-responsive"><table class="table table-hover table-sm"><thead><tr><th>Name</th><th>Zweck</th><th>Ablauf</th><th>Typ</th><th>Anbieter</th></tr></thead><tbody><tr><td>
+                GoogleMaps
+            </td><td>
+                Es wird eine Verbindung mit Google Maps hergestellt, um Karten anzuzeigen.
+            </td><td>
+                1
+                Stunden
+            </td><td>
+                HTML
+            </td><td>
+                
+                    Google
+                
+            </td></tr></tbody></table></div></div></div><div class="card"><div class="card-header" id="cookieman-acco-h-YouTube"><a href="" class="collapsed" data-toggle="collapse"
+                                           data-target="#cookieman-acco-YouTube" role="button"
+                                           aria-expanded="false" aria-controls="cookieman-acco-YouTube">
+                                            YouTube
+                                        </a></div><div id="cookieman-acco-YouTube" class="collapse card-body"
+                                         aria-labelledby="cookieman-acco-h-YouTube"
+                                         data-parent="#cookieman-acco"><div class="alert alert-primary"><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="YouTube" name="YouTube"
+                                                       
+                                                
+                                                ><label class="form-check-label" for="YouTube">
+                                                    Zustimmen
+                                                </label></div></div><p></p><div class="table-responsive"><table class="table table-hover table-sm"><thead><tr><th>Name</th><th>Zweck</th><th>Ablauf</th><th>Typ</th><th>Anbieter</th></tr></thead><tbody><tr><td>
+                YouTube
+            </td><td>
+                Es wird eine Verbindung mit YouTube hergestellt, um Videos anzuzeigen.
+            </td><td>
+                
+                keine
+            </td><td>
+                Verbindung
+            </td><td>
+                
+                    YouTube
+                
+            </td></tr></tbody></table></div></div></div></div></form></div></div><div class="modal-footer"><div class="btn-group" role="group"><button
+                        data-cookieman-accept-none data-cookieman-save
+                        class="btn btn-primary"
+                    >
+                        Alle Cookies ablehnen
+                    </button><button
+                        data-cookieman-save
+                        class="btn btn-default"
+                    >
+                        Speichern
+                    </button><button
+                        data-cookieman-accept-all data-cookieman-save
+                        class="btn btn-primary"
+                    >
+                        Alle Cookies akzeptieren
+                    </button></div></div></div></div></div>
+
+<script src="/_assets/ace5d898df31977df562bca5e4aead68/Js/js.cookie.min.js?1733917858"></script>
+<script src="/_assets/ace5d898df31977df562bca5e4aead68/Js/cookieman.min.js?1733917858"></script>
+<script src="/_assets/f81406596b3c0617dd4f2a153fe2a8f3/Ext_Cookieman/Js/cookieman-theme.js"></script>
+<script src="/_assets/ace5d898df31977df562bca5e4aead68/Js/cookieman-init.min.js?1733917858"></script>
+
+
+
+</body>
+</html>

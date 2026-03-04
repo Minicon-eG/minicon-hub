@@ -1,0 +1,1 @@
+db.Company.find({}, {name:1, status:1, subdomain:1, _id:0}).sort({name:1}).forEach(c => print(c.status + " | " + (c.subdomain||"--") + " | " + c.name))

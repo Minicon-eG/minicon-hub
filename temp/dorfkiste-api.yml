@@ -1,0 +1,15 @@
+# Backend API Route
+http:
+  routers:
+    dorfkiste-api:
+      rule: "PathPrefix(`/api`)"
+      service: dorfkiste-backend
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: cloudflare
+  services:
+    dorfkiste-backend:
+      loadBalancer:
+        servers:
+          - url: "http://172.18.0.3:8080"
