@@ -1,0 +1,13 @@
+[startup] Connecting to MongoDB: mongodb://hub-mongo:27017/minicon-website-service
+(node:1) [MONGOOSE] Warning: Duplicate schema index on {"email":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1) [MONGOOSE] Warning: Duplicate schema index on {"receivedAt":1} found. This is often due to declaring an index using both "index: true" and "schema.index()". Please remove the duplicate index definition.
+[startup] MongoDB connected
+[bot] Support bot polling started (every 30s)
+[dev-worker] Started (polling every 60s)
+[startup] minicon-website-service listening on port 4000
+[startup] Environment: production
+[startup] CORS origins: https://www.minicon.eu, https://minicon.eu, https://mein.minicon.eu
+[smtp] SMTP server listening on port 2525
+[smtp] Email received: michael.nikolaus@minicon.eu → tv-dahn@support.minicon.eu (tv-dahn): Re: Anpassungen der Webseite — Änderung in Bearbeitung
+[bot] Replied as Thomas: tv-dahn — Re: Anpassungen der Webseite — Änderung in Bearbeitung

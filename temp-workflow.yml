@@ -1,0 +1,24 @@
+name: Deploy TV Dahn (preview + production)
+
+on:
+  push:
+    branches: [main, preview]
+
+jobs:
+  deploy-preview:
+    if: github.ref_name == 'preview'
+    uses: Minicon-eG/.github/.github/workflows/deploy-static-site.yml@main
+    with:
+      site_name: preview-tv-dahn
+      domain: preview-tv-dahn.minicon.eu
+      cloudflare_zone: minicon.eu
+    secrets: inherit
+
+  deploy-production:
+    if: github.ref_name == 'main'
+    uses: Minicon-eG/.github/.github/workflows/deploy-static-site.yml@main
+    with:
+      site_name: tv-dahn
+      domain: tv-dahn.minicon.eu
+      cloudflare_zone: minicon.eu
+    secrets: inherit
