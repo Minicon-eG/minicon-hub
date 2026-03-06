@@ -1,0 +1,16 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/api/agents/discovery/route": "app/api/agents/discovery/route.js",
+  "/api/companies/route": "app/api/companies/route.js",
+  "/api/cron/route": "app/api/cron/route.js",
+  "/api/agents/deployment/route": "app/api/agents/deployment/route.js",
+  "/api/analyses/route": "app/api/analyses/route.js",
+  "/api/status/domains/route": "app/api/status/domains/route.js",
+  "/api/deployments/route": "app/api/deployments/route.js",
+  "/sites/[site]/page": "app/sites/[site]/page.js",
+  "/metrics/page": "app/metrics/page.js",
+  "/api/stats/route": "app/api/stats/route.js",
+  "/api/agents/activity/route": "app/api/agents/activity/route.js",
+  "/page": "app/page.js",
+  "/database/page": "app/database/page.js"
+}
