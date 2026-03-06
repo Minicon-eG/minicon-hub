@@ -1,0 +1,282 @@
+# =============================================================================
+# Traefik Routes Configuration - minicon-web (91.98.30.140)
+# =============================================================================
+# Versioniert in: C:\working\atlas\infra\minicon-web\traefik\
+# Deploy mit: scripts\sync-traefik.ps1
+# =============================================================================
+
+http:
+  # =========================================================================
+  # MIDDLEWARES
+  # =========================================================================
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+    
+    cors-api:
+      headers:
+        accessControlAllowMethods: [GET, POST, PUT, DELETE, OPTIONS]
+        accessControlAllowHeaders: [Content-Type, Authorization, X-API-Key]
+        accessControlAllowOriginList:
+          - https://dokukiste.de
+          - https://www.dokukiste.de
+          - https://app.dokukiste.de
+        accessControlMaxAge: 86400
+        addVaryHeader: true
+
+    cors-website-service:
+      headers:
+        accessControlAllowMethods: [GET, POST, PATCH, PUT, DELETE, OPTIONS]
+        accessControlAllowHeaders: [Content-Type, Authorization, X-API-Key, Stripe-Signature]
+        accessControlAllowOriginList:
+          - https://minicon.eu
+          - https://www.minicon.eu
+          - https://mein.minicon.eu
+          - https://preview-mein.minicon.eu
+        accessControlMaxAge: 86400
+        addVaryHeader: true
+
+    # Basic Auth fÔö£ÔòØr app.dokukiste.de
+    # User: admin, Password: dokukiste
+    basic-auth-app:
+      basicauth:
+        users:
+          - "admin:$2y$10$5sFBHwRadJ9vNn467wmXY.NW1esDNVmHHDGBuyABD/qqgrUMDKmfu"
+
+  # =========================================================================
+  # ROUTERS
+  # =========================================================================
+  routers:
+    # PREVIEW - KUNDENPORTAL
+    preview-kundenportal:
+      rule: "Host(\preview-mein.minicon.eu\)"
+      service: preview-kundenportal
+      entryPoints: [websecure]
+      priority: 200
+      tls:
+        certResolver: cloudflare
+
+    # PREVIEW - WEBSITE SERVICE
+    preview-website-service:
+      rule: "Host(\preview-api.minicon.eu\)"
+      service: preview-website-service
+      entryPoints: [websecure]
+      priority: 200
+      middlewares: [cors-website-service]
+      tls:
+        certResolver: cloudflare
+
+    # -------------------------------------------------------------------------
+    # PREVIEW WILDCARD
+    # -------------------------------------------------------------------------
+    preview:
+      rule: "HostRegexp(`^preview-.+[.]minicon[.]eu$`)"
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: cloudflare
+        domains:
+          - main: "*.minicon.eu"
+      service: preview
+    # -------------------------------------------------------------------------
+    # DOKUKISTE
+    # -------------------------------------------------------------------------
+    dokukiste:
+      rule: "Host(`dokukiste.de`) || Host(`www.dokukiste.de`)"
+      service: dokukiste
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    control-api:
+      rule: "Host(`api.dokukiste.de`)"
+      service: control-api
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+      middlewares: [cors-api]
+
+    # -------------------------------------------------------------------------
+    # KUNDENPORTAL
+    # -------------------------------------------------------------------------
+    kundenportal:
+      rule: "Host(`mein.minicon.eu`)"
+      service: kundenportal
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    # -------------------------------------------------------------------------
+    # WEBSITE SERVICE API
+    # -------------------------------------------------------------------------
+    website-service:
+      rule: "Host(`api.minicon.eu`)"
+      service: website-service
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+      middlewares: [cors-website-service]
+
+    control-plane-web:
+      rule: "Host(`app.dokukiste.de`)"
+      service: control-plane-web
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+      middlewares: [basic-auth-app]
+
+    # -------------------------------------------------------------------------
+    # MINICON
+    # -------------------------------------------------------------------------
+    minicon-eu:
+      rule: "Host(`minicon.eu`) || Host(`www.minicon.eu`)"
+      service: minicon
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    # Minicon eG Domains (NS auf Cloudflare umgestellt 17.02.2026)
+    minicon-eg:
+      rule: "Host(`minicon-eg.de`) || Host(`www.minicon-eg.de`) || Host(`minicon-genossenschaft.de`) || Host(`www.minicon-genossenschaft.de`)"
+      service: minicon
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    # -------------------------------------------------------------------------
+    # DORFKISTE (Frontend + API)
+    # -------------------------------------------------------------------------
+    dorfkiste-frontend:
+      rule: "Host(`dorfkiste.com`) || Host(`www.dorfkiste.com`) || Host(`dorfkiste.org`) || Host(`www.dorfkiste.org`)"
+      service: dorfkiste-frontend
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    dorfkiste-api:
+      rule: "(Host(`dorfkiste.com`) || Host(`www.dorfkiste.com`) || Host(`dorfkiste.org`) || Host(`www.dorfkiste.org`)) && PathPrefix(`/api`)"
+      service: dorfkiste-backend
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+      priority: 100
+
+    # -------------------------------------------------------------------------
+    # KRANKENHAUS
+    # -------------------------------------------------------------------------
+    krankenhaus:
+      rule: "Host(`krankenhaus.minicon.eu`)"
+      service: krankenhaus
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    # -------------------------------------------------------------------------
+    # ANDERE SUBDOMAINS
+    # -------------------------------------------------------------------------
+    datagen:
+      rule: "Host(`datagen.minicon.eu`)"
+      service: datagen
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    gem:
+      rule: "Host(`gem.minicon.eu`)"
+      service: gem
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    schdubb:
+      rule: "Host(`schdubb.minicon.eu`)"
+      service: schdubb
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+  # =========================================================================
+  # SERVICES
+  # =========================================================================
+  services:
+    # Dokukiste
+    dokukiste:
+      loadBalancer:
+        servers:
+          - url: "http://dokukiste:80"
+
+    control-api:
+      loadBalancer:
+        servers:
+          - url: "http://control-plane-api:5000"
+
+    control-plane-web:
+      loadBalancer:
+        servers:
+          - url: "http://control-plane-web:3001"
+
+    # Minicon
+    minicon:
+      loadBalancer:
+        servers:
+          - url: "http://minicon:80"
+
+    # Dorfkiste
+    dorfkiste-frontend:
+      loadBalancer:
+        servers:
+          - url: "http://dorfkiste-frontend:3000"
+
+    dorfkiste-backend:
+      loadBalancer:
+        servers:
+          - url: "http://dorfkiste-backend:8080"
+
+    # Krankenhaus
+    krankenhaus:
+      loadBalancer:
+        servers:
+          - url: "http://krankenhaus:3000"
+
+    # Andere
+    kundenportal:
+      loadBalancer:
+        servers:
+          - url: "http://kundenportal:3000"
+
+    website-service:
+      loadBalancer:
+        servers:
+          - url: "http://website-service:4000"
+
+    datagen:
+      loadBalancer:
+        servers:
+          - url: "http://172.17.0.1:3002"
+
+    gem:
+      loadBalancer:
+        servers:
+          - url: "http://gem:80"
+
+    schdubb:
+      loadBalancer:
+        servers:
+          - url: "http://schdubb:80"
+
+    preview-kundenportal:
+      loadBalancer:
+        servers:
+          - url: "http://preview-kundenportal:3000"
+
+    preview-website-service:
+      loadBalancer:
+        servers:
+          - url: "http://preview-website-service:4000"
+
+    preview:
+      loadBalancer:
+        servers:
+          - url: "http://preview-nginx:80"
