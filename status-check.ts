@@ -3,9 +3,9 @@ import { PrismaClient } from '@prisma/client';
 const p = new PrismaClient();
 
 p.company.count().then(companies => {
-  return p.analysis.count().then(analysesTotal => {
-    return p.analysis.count({ where: { status: 'RUNNING' }}).then(analysesRunning => {
-      return p.analysis.count({ where: { status: 'COMPLETED' }}).then(analysesCompleted => {
+  return p.websiteAnalysis.count().then(analysesTotal => {
+    return p.websiteAnalysis.count({ where: { status: 'RUNNING' }}).then(analysesRunning => {
+      return p.websiteAnalysis.count({ where: { status: 'COMPLETED' }}).then(analysesCompleted => {
         return p.deployment.count().then(deploymentsTotal => {
           return p.deployment.count({ where: { status: 'LIVE' }}).then(deploymentsLive => {
             return p.deployment.count({ where: { status: 'PENDING' }}).then(deploymentsPending => {
