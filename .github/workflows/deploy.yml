@@ -35,6 +35,8 @@ jobs:
           context: .
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          no-cache: true
+          pull: false
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@v1.0.3
