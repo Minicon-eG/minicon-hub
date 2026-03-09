@@ -1,0 +1,40 @@
+{
+  "changes": [
+    {
+      "company": "Minicon eG",
+      "lastCheck": "2026-03-07 09:24:29",
+      "status": "live"
+    },
+    {
+      "company": "Dahn",
+      "lastCheck": "2026-03-07 09:24:29",
+      "status": "failed"
+    },
+    {
+      "company": "Dorfkiste",
+      "lastCheck": "2026-03-07 09:24:29",
+      "status": "failed"
+    },
+    {
+      "company": "Amazing Goods",
+      "lastCheck": "2026-03-07 09:24:29",
+      "status": "failed"
+    },
+    {
+      "company": "PDF Management",
+      "lastCheck": "2026-03-07 09:24:29",
+      "status": "failed"
+    },
+    {
+      "company": "PUIC",
+      "lastCheck": "2026-03-07 09:24:29",
+      "status": "failed"
+    }
+  ],
+  "serversOnline": 2,
+  "sitesFailed": 6,
+  "sitesLive": 2,
+  "activitySummary": "Hub Status Update - 09:24:29\n- Checked 8 websites\n- Live: 2\n- Failed: 6\n- Servers: 2/2 online\n- Jira: DAHN project accessible but search endpoints deprecated\n- Production: 56% disk, 41% memory\n- Secondary: 22% disk, 22% memory",
+  "timestamp": "2026-03-07 09:24:29",
+  "websitesChecked": 8
+}

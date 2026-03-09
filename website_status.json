@@ -1,0 +1,58 @@
+[
+  {
+    "healthy": true,
+    "title": "Minicon eG | Individuelle Software mit KI &amp; Automatisierung",
+    "status": 200,
+    "domain": "minicon.eu",
+    "url": "https://minicon.eu"
+  },
+  {
+    "healthy": true,
+    "title": "Minicon Agent Command Center",
+    "status": 200,
+    "domain": "hub.minicon.eu",
+    "url": "https://hub.minicon.eu"
+  },
+  {
+    "healthy": false,
+    "title": "N/A",
+    "status": 404,
+    "domain": "dahn.minicon.eu",
+    "url": "https://dahn.minicon.eu"
+  },
+  {
+    "healthy": false,
+    "title": "N/A",
+    "status": 404,
+    "domain": "dorf.minicon.eu",
+    "url": "https://dorf.minicon.eu"
+  },
+  {
+    "healthy": false,
+    "title": "N/A",
+    "status": 404,
+    "domain": "ag.minicon.eu",
+    "url": "https://ag.minicon.eu"
+  },
+  {
+    "healthy": false,
+    "title": "N/A",
+    "status": 404,
+    "domain": "pdfm.minicon.eu",
+    "url": "https://pdfm.minicon.eu"
+  },
+  {
+    "healthy": false,
+    "title": "N/A",
+    "status": 404,
+    "domain": "puic.minicon.eu",
+    "url": "https://puic.minicon.eu"
+  },
+  {
+    "healthy": false,
+    "title": "N/A",
+    "status": 404,
+    "domain": "me.minicon.eu",
+    "url": "https://me.minicon.eu"
+  }
+]

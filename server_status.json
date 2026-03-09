@@ -1,0 +1,14 @@
+[
+  {
+    "online": true,
+    "ip": "91.98.30.140",
+    "server": "Production",
+    "uptime": " 08:24:15 up 20 days, 21:50,  3 users,  load average: 0.28, 0.25, 0.22"
+  },
+  {
+    "online": true,
+    "ip": "46.225.171.254",
+    "server": "Secondary",
+    "uptime": " 08:24:18 up 17 days, 23:29,  1 user,  load average: 0.03, 0.02, 0.00"
+  }
+]

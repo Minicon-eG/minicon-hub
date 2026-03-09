@@ -1,0 +1,737 @@
+<h2>Schritt 0: Original-Website Analyse (PFLICHT)</h2>
+<ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="2c2a66dc-c16d-43f3-b8cd-2bcc33179a9b"><ac:parameter ac:name="title">Pflichtschritt vor jedem Website-Build</ac:parameter><ac:rich-text-body>
+<p>Dieser Schritt muss IMMER vor dem Build durchgefuehrt werden. Websites die ohne Analyse gebaut werden, werden nicht deployed und muessen neu gebaut werden (Lesson Learned: Koehler + Sybagg, 02.03.2026).</p>
+</ac:rich-text-body></ac:structured-macro>
+<p><strong>Checkliste:</strong></p>
+<ac:structured-macro ac:name="task-list" ac:schema-version="1" ac:macro-id="14527264-c89f-42f1-9acb-26f0f08bb788"><ac:rich-text-body>
+<ul>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Screenshot Original-Website (Desktop + Mobile)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Logo extrahieren / modernisieren (NICHT ersetzen)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Farbschema dokumentieren (Prim&auml;rfarbe, Akzentfarbe, Text)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Alle Inhalte erfassen (Texte, Services, &Ouml;ffnungszeiten, Team, Galerie, Downloads)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Bilder herunterladen (Produktfotos, Team, Geb&auml;ude, Logos)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Impressum-Daten vollst&auml;ndig erfassen</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Alle Unterseiten + Links dokumentieren</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Analyse-Ergebnis als Jira-Kommentar dokumentieren</ac:task-body></ac:task></li>
+</ul>
+</ac:rich-text-body></ac:structured-macro>
+<p><strong>Prinzip:</strong> Der Relaunch ist eine <em>Modernisierung</em>, keine Neuerfindung. Die Markenidentit&auml;t (Farben, Logo, Branding) bleibt erhalten. Design und Technik werden modern &mdash; Inhalt und Wiedererkennungswert bleiben.</p>
+<table>
+<thead><tr><th>Darf ge&auml;ndert werden</th><th>Muss beibehalten werden</th></tr></thead>
+<tbody>
+<tr><td>Layout (modern, responsiv)</td><td>Prim&auml;rfarben / Markenfarben</td></tr>
+<tr><td>Typografie (moderne Schriften)</td><td>Logo (modernisiert, nicht ersetzt)</td></tr>
+<tr><td>Bilder (bessere Qualit&auml;t)</td><td>Alle vorhandenen Inhalte</td></tr>
+<tr><td>Struktur / Navigation</td><td>Branding-Partner (z.B. ESSO)</td></tr>
+<tr><td>Technologie (Next.js statt HTML-Tabellen)</td><td>Firmenpers&ouml;nlichkeit / Tonalit&auml;t</td></tr>
+</tbody>
+</table>
+<h3>Schritt 0b: Konkurrenzanalyse (optional, empfohlen)</h3>
+<p>Nach der Analyse der Original-Website: 2-3 direkte Konkurrenten oder Branchen-Vorbilder recherchieren und gezielt Verbesserungen &uuml;bernehmen.</p>
+<table>
+<thead><tr><th>Was analysieren</th><th>Wie umsetzen</th></tr></thead>
+<tbody>
+<tr><td>Strukturierung der Services</td><td>&Uuml;bernehmen wenn besser als Original</td></tr>
+<tr><td>Call-to-Action Formulierungen</td><td>Anpassen, nicht kopieren</td></tr>
+<tr><td>Vertrauenssignale (Zertifikate, Partner-Logos)</td><td>Eigene einbauen (z.B. ESSO-Partner-Badge)</td></tr>
+<tr><td>Mobile Usability</td><td>Best Practice &uuml;bernehmen</td></tr>
+<tr><td>SEO-Texte / Keywords</td><td>In eigene Texte einarbeiten</td></tr>
+</tbody>
+</table>
+<ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="5cf9c3e2-5aa4-4205-8ea9-13d3ef51f6a8"><ac:rich-text-body>
+<p><strong>Tools:</strong> Google-Suche nach Branche + Region (z.B. &quot;Heiz&ouml;l Pfalz&quot;), Google Maps Konkurrenten, Branchenverb&auml;nde-Websites. Maximal 30 Minuten &mdash; kein Perfektionismus.</p>
+</ac:rich-text-body></ac:structured-macro>
+<h1>Minicon Website-Service &mdash; Kundenprozess (Detail)</h1>
+<p><strong>Autor:</strong> Atlas (PM) | <strong>Datum:</strong> 02.03.2026 | <strong>Status:</strong> Konzept &mdash; Wartet auf PO-Freigabe</p>
+<p><strong>Verwandt:</strong> <ac:link><ri:page ri:content-title="Kundenwebsite Support-Bot System" ri:version-at-save="1" /></ac:link></p>
+<hr />
+
+<ac:structured-macro ac:name="toc" ac:schema-version="1" ac:macro-id="13eebde2-15bf-40e0-848f-d5fbfab380cc"><ac:parameter ac:name="maxLevel">3</ac:parameter></ac:structured-macro>
+
+<h2>1. Gesamtprozess &mdash; &Uuml;bersicht</h2>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="1738aaca-9480-4018-bdc5-b8b4fde32a96"><ac:plain-text-body><![CDATA[
+PHASE 1: AKQUISE                    PHASE 2: ONBOARDING                 PHASE 3: BETRIEB
+─────────────────                   ────────────────────                 ─────────────────
+Kunde findet uns                    Stripe Payment OK                   Kunde nutzt Bot
+  (minicon.eu/anfrage               → Account erstellen                 → Änderungswünsche
+   oder KI-Berater)                 → E-Mail einrichten                 → Preview → Live
+        ↓                           → Repo erstellen                    → Oversight durch PO
+Angebot (€200)                      → Bot konfigurieren
+        ↓                           → Website deployen
+Stripe Checkout                     → Login-Daten senden
+        ↓                           → Willkommensnachricht
+Payment Success ─────────────────→  Auto-Provisioning
+]]></ac:plain-text-body></ac:structured-macro>
+
+<h2>2. Phase 1 &mdash; Akquise</h2>
+
+<h3>2.1 Kontaktaufnahme</h3>
+<p>Kunde erreicht uns &uuml;ber einen von drei Wegen:</p>
+<table>
+<tbody><tr><th>Kanal</th><th>URL/Weg</th><th>Beschreibung</th></tr>
+<tr><td>KI-Berater</td><td>minicon.eu/anfrage</td><td>AI-Chat (Cloudflare Workers AI), beantwortet Fragen, sammelt Anfrage</td></tr>
+<tr><td>Landing Page</td><td>minicon.eu/webseiten</td><td>Angebotsseite mit Preisen, Referenzen, CTA</td></tr>
+<tr><td>Demo-Banner</td><td>Auf allen Demo-Sites</td><td>&quot;Nur &euro;200 inkl. 1 Jahr Hosting&quot; Banner mit Link</td></tr>
+</tbody></table>
+
+<h3>2.2 Angebot</h3>
+<table>
+<tbody><tr><th>Posten</th><th>Preis</th></tr>
+<tr><td>Website-Erstellung + 12 Monate Hosting + SSL</td><td>&euro;200 (Sonderangebot bis 01.04.2026)</td></tr>
+<tr><td>Danach: Hosting monatlich</td><td>&euro;5/Monat</td></tr>
+<tr><td>Textuelle &Auml;nderungen, einfache Artikel</td><td>Kostenlos (Fair Use)</td></tr>
+<tr><td>Umfangreichere Auftr&auml;ge</td><td>Individuelles Angebot</td></tr>
+</tbody></table>
+
+<h3>2.3 Kaufabschluss</h3>
+<p>Kunde klickt auf Stripe Checkout Link &rarr; Zahlung &rarr; Webhook an <code>api.dokukiste.de</code></p>
+
+<h2>3. Phase 2 &mdash; Onboarding (Auto-Provisioning)</h2>
+<p><strong>Trigger:</strong> Stripe Webhook <code>checkout.session.completed</code></p>
+<p><strong>Dauer:</strong> Vollautomatisch, &lt;5 Minuten</p>
+
+<h3>3.1 Schritt-f&uuml;r-Schritt</h3>
+
+<h4>Schritt 1: Kunden-Account erstellen</h4>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="36b4d0f5-67df-4317-ba7e-3f34a468e2ed"><ac:parameter ac:name="language">json</ac:parameter><ac:plain-text-body><![CDATA[{
+  "id": "koehler",
+  "company": "Brennstoffe Köhler GmbH",
+  "site": "koehler.minicon.eu",
+  "repo": "Minicon-eG/website-brennstoffe-koehler",
+  "email_support": "support-koehler@minicon.eu",
+  "status": "active",
+  "created": "2026-03-02T08:00:00Z",
+  "stripe_customer_id": "cus_xxx",
+  "subscription": {
+    "plan": "sonderangebot-200",
+    "paid_until": "2027-03-02"
+  },
+  "contacts": [],
+  "channel": null,
+  "limits": {
+    "messages_per_day": 20,
+    "deploys_per_day": 3,
+    "preview_ttl_minutes": 60
+  }
+}]]></ac:plain-text-body></ac:structured-macro>
+<p><strong>Speicherort:</strong> MongoDB (Control Plane DB auf api.dokukiste.de oder Hub-DB)</p>
+
+<h4>Schritt 2: Support-E-Mail einrichten</h4>
+<p><code>support-{site}@minicon.eu</code> via IONOS Mailbox (IMAP-Monitoring durch Bot)</p>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="e1ef66ea-d372-4849-a501-4697d882b13c"><ac:parameter ac:name="language">bash</ac:parameter><ac:plain-text-body><![CDATA[# IONOS E-Mail Rule erstellen
+POST /zones/{zone_id}/email/routing/rules
+{
+  "name": "support-koehler",
+  "enabled": true,
+  "matchers": [{"type": "literal", "field": "to", "value": "support-koehler@minicon.eu"}],
+  "actions": [{"type": "worker", "value": ["email-router"]}]
+}]]></ac:plain-text-body></ac:structured-macro>
+<p>Der <code>email-router</code> Worker leitet die E-Mail an den zust&auml;ndigen OpenClaw Agent weiter.</p>
+
+<h4>Schritt 3: GitHub Repository erstellen</h4>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="5bff8bdf-d73b-4fde-a914-6d893b90745b"><ac:parameter ac:name="language">bash</ac:parameter><ac:plain-text-body><![CDATA[# Via GitHub API (gh CLI oder REST)
+gh repo create Minicon-eG/website-brennstoffe-koehler --private
+cd website-brennstoffe-koehler
+git checkout -b preview
+git push origin preview
+git checkout main
+
+# Secrets setzen (pro Repo, nicht Org-level!)
+gh secret set DEPLOY_SSH_KEY_B64 --body "..."
+gh secret set CLOUDFLARE_EMAIL --body "..."
+gh secret set CLOUDFLARE_API_KEY --body "..."
+
+# Reusable Workflow referenzieren
+# .github/workflows/deploy.yml → uses: Minicon-eG/.github/.github/workflows/deploy-static-site.yml]]></ac:plain-text-body></ac:structured-macro>
+<p><strong>Branch-Struktur:</strong></p>
+<table>
+<tbody><tr><th>Branch</th><th>Trigger</th><th>Ziel</th><th>URL</th></tr>
+<tr><td><code>main</code></td><td>Push / Merge</td><td><code>/opt/sites/{site}/</code></td><td><code>{site}.minicon.eu</code> (LIVE)</td></tr>
+<tr><td><code>preview</code></td><td>Push</td><td><code>/opt/sites/{site}-preview/</code></td><td><code>preview-{site}.minicon.eu</code> (1h TTL)</td></tr>
+</tbody></table>
+
+<h4>Schritt 4: OpenClaw Agent konfigurieren</h4>
+<p>Ein dedizierter Agent pro Kunde mit eigenem Workspace und Scope.</p>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="d74cef4f-e354-4cd6-ab83-fa1228468d54"><ac:parameter ac:name="language">yaml</ac:parameter><ac:plain-text-body><![CDATA[# Agent-Konfiguration
+agent:
+  id: "support-koehler"
+  name: "Website-Assistent Köhler"
+  
+  # Kanal (wird beim Onboarding gesetzt)
+  channels:
+    telegram:
+      bot_token: "xxx"
+      allowed_chat_ids: ["123456"]  # Nur autorisierte Kontakte
+    email:
+      address: "support-koehler@minicon.eu"
+  
+  # Workspace
+  workspace: "/working/website-brennstoffe-koehler"
+  
+  # Berechtigungen
+  permissions:
+    deploy_target: "/opt/sites/koehler/"
+    preview_target: "/opt/sites/koehler-preview/"
+    github_repo: "Minicon-eG/website-brennstoffe-koehler"
+    allowed_branches: ["preview", "main"]
+  
+  # SOUL.md (automatisch generiert)
+  soul: |
+    Du bist der Website-Assistent für Brennstoffe Köhler GmbH.
+    Du verwaltest NUR die Website koehler.minicon.eu.
+    ...]]></ac:plain-text-body></ac:structured-macro>
+
+<h4>Schritt 5: Kanalwahl durch Kunden</h4>
+<p>Nach der Zahlung wird der Kunde auf <code>minicon.eu/webseiten/onboarding</code> weitergeleitet:</p>
+<ol>
+<li>Passwort setzen f&uuml;r Kundenportal</li>
+<li>Support-Kanal w&auml;hlen (Telegram / WhatsApp / Signal / Discord / E-Mail)</li>
+<li>Kontaktperson verifizieren (z.B. Telegram-Username eingeben, Bot sendet Best&auml;tigungscode)</li>
+<li>Fertig &rarr; Bot sendet Willkommensnachricht</li>
+</ol>
+
+<h4>Schritt 6: Website live deployen</h4>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="ac7d24df-f59f-4747-8433-72ce4b1e3b15"><ac:parameter ac:name="language">bash</ac:parameter><ac:plain-text-body><![CDATA[# Initiales Deployment
+cd /working/website-brennstoffe-koehler
+npm run build
+scp -r out/* root@91.98.30.140:/opt/sites/koehler/
+chmod -R 755 /opt/sites/koehler/
+
+# DNS (falls noch nicht vorhanden — Wildcard *.minicon.eu existiert bereits)
+# Traefik Route wird automatisch über Container-Labels oder File-Config erstellt]]></ac:plain-text-body></ac:structured-macro>
+
+<h4>Schritt 7: Support-Chatbot erstellen</h4>
+<p>Ein dedizierter <strong>Support-Chatbot</strong> wird fuer den Kunden eingerichtet:</p>
+<ol>
+<li><strong>OpenClaw Agent anlegen</strong> mit eigenem <code>SOUL.md</code> (Scope auf diese eine Website)</li>
+<li><strong>Kanal verbinden</strong> &mdash; je nach Kundenwahl: Telegram-Bot erstellen (BotFather), WhatsApp Business, Signal, Discord oder E-Mail</li>
+<li><strong>Kontakt-Whitelist setzen</strong> &mdash; Bot antwortet NUR den autorisierten Kontaktpersonen des Kunden</li>
+<li><strong>Workspace zuweisen</strong> &mdash; Bot hat nur Zugriff auf <code>C:\Working\{website-projekt}\</code></li>
+<li><strong>Deploy-Berechtigungen</strong> &mdash; Bot darf nur auf <code>/opt/sites/{site}/</code> und <code>/opt/sites/{site}-preview/</code> deployen</li>
+<li><strong>Rate Limits konfigurieren</strong> &mdash; 20 Nachrichten/Tag, 3 Deploys/Tag (anpassbar pro Kunde)</li>
+<li><strong>Topic Guard aktiv</strong> &mdash; Bot beantwortet ausschliesslich website-bezogene Anfragen</li>
+</ol>
+<ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="08f3af32-0026-4b6c-8212-90168cd468df"><ac:rich-text-body>
+<p>Der Chatbot ist der primaere Support-Kanal fuer den Kunden. Ueber ihn kann der Kunde Aenderungen an seiner Website anfragen, die als Preview bereitgestellt und nach Freigabe live geschaltet werden.</p>
+</ac:rich-text-body></ac:structured-macro>
+
+<h4>Schritt 8: Willkommensnachricht &amp; Onboarding-Info</h4>
+<p>Der Kunde erhaelt <strong>zwei Nachrichten</strong>: eine ueber den gewaehlten Support-Kanal und eine ausfuehrliche E-Mail.</p>
+
+<ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="1a46e75e-a1b8-496b-a39c-56847745c246"><ac:rich-text-body>
+<p><strong>WICHTIG &mdash; Kommunikationsregel:</strong> Der Kunde soll den Eindruck haben, dass sich <strong>echte Menschen</strong> um sein Anliegen kuemmern. Es wird <strong>NIEMALS</strong> erwaehnt, dass es sich um einen KI-Bot handelt. Die Kommunikation erfolgt im Namen des <strong>Minicon Support-Teams</strong>. Jeder Bot bekommt eine eigene Persoenlichkeit mit Branchenwissen.</p>
+</ac:rich-text-body></ac:structured-macro>
+
+<h5>8a) Bot-Persoenlichkeit (pro Kunde individuell)</h5>
+<p>Jeder Support-Bot erhaelt eine <strong>individuelle Persoenlichkeit</strong>, passend zur Branche des Kunden:</p>
+<table>
+<tbody><tr><th>Branche</th><th>Beispiel-Persoenlichkeit</th><th>Branchenwissen</th></tr>
+<tr><td>Gastronomie</td><td>Freundlich, locker, kennt Gastro-Begriffe</td><td>Speisekarten-Aufbau, Allergen-Kennzeichnung, Oeffnungszeiten-Formate, saisonale Angebote</td></tr>
+<tr><td>Handwerk/Bau</td><td>Direkt, pragmatisch, technisch versiert</td><td>Leistungsbeschreibungen, Maschinenpark, Zertifizierungen, Projektgalerien</td></tr>
+<tr><td>Verein/Sport</td><td>Engagiert, gemeinschaftlich, vereinsnah</td><td>Trainingszeiten, Spielberichte, Mannschaftsfotos, Vereins-Events</td></tr>
+<tr><td>Einzelhandel</td><td>Serviceorientiert, kundenfreundlich</td><td>Sortiment, Angebote, Oeffnungszeiten, Standort-Infos</td></tr>
+<tr><td>Dienstleistung/IT</td><td>Professionell, kompetent, sachlich</td><td>Service-Portfolios, Referenzen, Team-Profile, Case Studies</td></tr>
+<tr><td>Tourismus/Hotel</td><td>Herzlich, einladend, regional verbunden</td><td>Zimmer/Ferienwohnung-Beschreibungen, Ausflugsempfehlungen, saisonale Preise</td></tr>
+</tbody></table>
+
+<p><strong>SOUL.md Template (Auszug):</strong></p>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="007e18c1-a730-4b05-b1ab-16d7200717e6"><ac:parameter ac:name="language">markdown</ac:parameter><ac:plain-text-body><![CDATA[# SOUL.md — Support-Mitarbeiter fuer {Firmenname}
+
+Du bist ein Mitarbeiter des Minicon Support-Teams und betreust
+die Website von {Firmenname} ({site}.minicon.eu).
+
+## Deine Identitaet
+- Du bist {Vorname}, Mitarbeiter bei Minicon eG
+- Du kommunizierst freundlich, kompetent und persoenlich
+- Du hast Erfahrung mit Websites in der Branche {Branche}
+- Du duzt den Kunden nur wenn er dich zuerst duzt
+
+## NIEMALS
+- Erwaehnen dass du eine KI bist
+- "Ich bin ein Bot/Assistent/KI" oder aehnliches sagen
+- Technische Interna (GitHub, Deployments, Server) erwaehnen
+- Wenn direkt gefragt: "Ich bin {Vorname} vom Minicon Support-Team"
+
+## Branchenwissen {Branche}
+{Branchenspezifische Begriffe, typische Aenderungswuensche,
+ gaengige Seitenstrukturen fuer diese Branche}
+
+## Ablauf bei Aenderungen
+1. Aenderungswunsch verstehen und bestaetigen
+2. "Ich setze das fuer Sie um und schicke Ihnen gleich eine Vorschau."
+3. Preview bauen und Link senden
+4. "Passt das so fuer Sie? Dann schalte ich es live."
+5. Bei Freigabe: Live deployen
+6. "Ist live! Kann ich sonst noch etwas fuer Sie tun?"]]></ac:plain-text-body></ac:structured-macro>
+
+<h5>8b) Willkommensnachricht ueber Support-Kanal</h5>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="501b090a-4fbe-492d-bb5c-4afed91f14d1"><ac:plain-text-body><![CDATA[Hallo {Anrede} {Nachname},
+
+mein Name ist {Vorname} vom Minicon Support-Team.
+Ich kuemmere mich um Ihre Website {site}.minicon.eu.
+
+Ihre Seite ist ab sofort online — schauen Sie gerne mal rein!
+
+Wenn Sie etwas aendern moechten, schreiben Sie mir
+einfach hier. Zum Beispiel:
+
+  "Bitte die Oeffnungszeiten auf Mo-Sa 10-20 Uhr aendern"
+  "Hier ist ein neues Foto fuer die Startseite" (+ Bild senden)
+  "Kannst du einen Hinweis auf unser Sommerfest einbauen?"
+
+Ich setze das fuer Sie um und schicke Ihnen vorher immer
+eine Vorschau zum Pruefen, bevor es live geht.
+
+Bei Fragen stehe ich Ihnen gerne zur Verfuegung!
+
+Viele Gruesse,
+{Vorname}
+Minicon Support-Team]]></ac:plain-text-body></ac:structured-macro>
+
+<h5>8c) Willkommens-E-Mail</h5>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="41c77b7d-1825-4ad2-8a23-27eab120c17b"><ac:plain-text-body><![CDATA[Betreff: Ihre neue Website ist live — {site}.minicon.eu
+
+Sehr geehrte(r) {Anrede} {Nachname},
+
+vielen Dank fuer Ihr Vertrauen! Ihre neue Website ist
+ab sofort online:
+
+  https://{site}.minicon.eu
+
+
+IHR PERSOENLICHER SUPPORT
+--------------------------
+Unser Support-Team steht Ihnen fuer alle Aenderungen
+an Ihrer Website zur Verfuegung:
+
+  {Kanal}: {Bot-Link/Telefonnummer}
+  E-Mail:  support-{site}@minicon.eu
+
+Schreiben Sie uns einfach — wir kuemmern uns darum.
+
+
+WAS WIR FUER SIE TUN KOENNEN
+------------------------------
+  - Texte aendern (Oeffnungszeiten, Beschreibungen, Preise)
+  - Bilder austauschen (einfach per Chat oder E-Mail senden)
+  - Kontaktdaten aktualisieren
+  - Speisekarte oder Preisliste anpassen
+  - Events, News oder Ankuendigungen veroeffentlichen
+
+Aenderungen werden immer zuerst als Vorschau erstellt.
+Sie erhalten einen Link zum Pruefen. Erst nach Ihrer
+Freigabe wird die Aenderung live geschaltet.
+
+
+FUER GROESSERE AENDERUNGEN
+----------------------------
+Bei umfangreichen Anpassungen (neues Design, zusaetzliche
+Seiten, Sonderfunktionen) erstellen wir Ihnen gerne ein
+individuelles Angebot.
+
+
+IHR KUNDENPORTAL
+-----------------
+Unter https://minicon.eu/webseiten koennen Sie:
+  - Den Status Ihrer Website sehen
+  - Ihren Support-Kanal aendern
+  - Ihr Abonnement verwalten
+
+  Login: {E-Mail-Adresse}
+  Passwort: (beim Onboarding gesetzt)
+
+
+IHR ABO
+--------
+  Paket: Website + 12 Monate Hosting
+  Laufzeit: bis {Datum}
+  Danach: EUR 5,99/Monat (jederzeit kuendbar)
+
+
+KONTAKT
+--------
+  Minicon eG
+  info@minicon.eu
+  www.minicon.eu
+
+Wir freuen uns auf die Zusammenarbeit!
+
+Mit freundlichen Gruessen,
+Ihr Minicon Support-Team]]></ac:plain-text-body></ac:structured-macro>
+
+<h5>8d) Bot-Faehigkeiten im Detail</h5>
+<table>
+<tbody><tr><th>Kategorie</th><th>Beispiele</th><th>Support selbst</th><th>Weiterleitung an Minicon-Team</th></tr>
+<tr><td><strong>Texte</strong></td><td>Oeffnungszeiten, Beschreibungen, Preise, &quot;Ueber uns&quot;</td><td>&amp;check;</td><td></td></tr>
+<tr><td><strong>Medien</strong></td><td>Bilder austauschen, neues Teamfoto, Produktbilder</td><td>&amp;check;</td><td></td></tr>
+<tr><td><strong>Kontakt</strong></td><td>Telefonnummer, E-Mail, Adresse aendern</td><td>&amp;check;</td><td></td></tr>
+<tr><td><strong>Speisekarte/Preise</strong></td><td>Gerichte, Preise, Tagesangebote</td><td>&amp;check;</td><td></td></tr>
+<tr><td><strong>Events/News</strong></td><td>Veranstaltungen, Ankuendigungen, Saisonales</td><td>&amp;check;</td><td></td></tr>
+<tr><td><strong>Einfache Struktur</strong></td><td>Neuer Textabschnitt, FAQ-Eintrag</td><td>&amp;check;</td><td></td></tr>
+<tr><td><strong>Komplexe Struktur</strong></td><td>Neue Seite mit Navigation, Galerie-Umbau</td><td></td><td>&amp;check;</td></tr>
+<tr><td><strong>Design/Layout</strong></td><td>Farben, Fonts, Seitenaufbau</td><td></td><td>&amp;check; immer</td></tr>
+<tr><td><strong>Technik</strong></td><td>Domain, SSL, Performance</td><td></td><td>&amp;check; immer</td></tr>
+<tr><td><strong>Recht</strong></td><td>Impressum, Datenschutz</td><td></td><td>&amp;check; immer (Koeber prueft)</td></tr>
+</tbody></table>
+<ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="678ed34a-2f8d-4d88-b084-a1dd5ba610ab"><ac:rich-text-body>
+<p><strong>Fair-Use-Regel:</strong> Einfache textuelle Aenderungen und Bildaustausch sind im Hosting inklusive. Bei umfangreichen Umbauten wird ein individuelles Angebot erstellt.</p>
+</ac:rich-text-body></ac:structured-macro>
+<h2>4. Phase 3 &mdash; Laufender Betrieb</h2>
+
+<h3>4.1 &Auml;nderungsanfrage (Standard-Flow)</h3>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="d0cb8aea-86ca-4dc7-97c8-e94a2df81a76"><ac:plain-text-body><![CDATA[
+KUNDE                          BOT                            GITHUB                    SERVER
+  │                              │                              │                          │
+  │  "Öffnungszeiten ändern      │                              │                          │
+  │   auf Mo-Sa 11-22 Uhr"      │                              │                          │
+  │ ──────────────────────────→  │                              │                          │
+  │                              │                              │                          │
+  │                              │  1. Autorisierung prüfen     │                          │
+  │                              │  2. Anfrage verstehen        │                          │
+  │                              │  3. Code ändern              │                          │
+  │                              │                              │                          │
+  │  "Ich erstelle eine          │  4. git push preview         │                          │
+  │   Vorschau..."               │ ──────────────────────────→  │                          │
+  │ ←────────────────────────── │                              │                          │
+  │                              │                              │  5. GitHub Action:       │
+  │                              │                              │     Build + Deploy       │
+  │                              │                              │ ──────────────────────→  │
+  │                              │                              │                          │
+  │                              │                              │     preview-koehler.     │
+  │                              │                              │     minicon.eu LIVE      │
+  │                              │                              │     + .expires (1h)      │
+  │                              │                              │                          │
+  │  "Vorschau bereit:           │  6. Preview-Link senden      │                          │
+  │   preview-koehler.minicon.eu │ ←──────────────────────────  │                          │
+  │   Gültig für 1 Stunde.      │                              │                          │
+  │   Passt das so?"             │                              │                          │
+  │ ←────────────────────────── │                              │                          │
+  │                              │                              │                          │
+  │  "Ja, passt!"                │                              │                          │
+  │ ──────────────────────────→  │                              │                          │
+  │                              │  7. git merge preview → main │                          │
+  │                              │ ──────────────────────────→  │                          │
+  │                              │                              │  8. GitHub Action:       │
+  │                              │                              │     Build + Deploy LIVE  │
+  │                              │                              │ ──────────────────────→  │
+  │                              │                              │                          │
+  │  "Änderung ist live! ✅"     │                              │                          │
+  │ ←────────────────────────── │                              │                          │
+]]></ac:plain-text-body></ac:structured-macro>
+
+<h3>4.2 Autorisierungspr&uuml;fung</h3>
+<p>Bei <strong>jeder eingehenden Nachricht</strong> pr&uuml;ft der Bot:</p>
+<table>
+<tbody><tr><th>Pr&uuml;fung</th><th>Fehlschlag &rarr; Reaktion</th></tr>
+<tr><td>Absender in <code>contacts</code> Liste?</td><td>Nachricht ignorieren (kein Reply)</td></tr>
+<tr><td>Kanal korrekt?</td><td>&quot;Bitte nutzen Sie Ihren konfigurierten Support-Kanal.&quot;</td></tr>
+<tr><td>Rate-Limit erreicht?</td><td>&quot;Sie haben heute bereits {n} Anfragen gestellt. Limit: {max}/Tag.&quot;</td></tr>
+<tr><td>Inhalt website-bezogen?</td><td>&quot;Ich helfe Ihnen gerne bei &Auml;nderungen an Ihrer Website. F&uuml;r andere Anliegen: info@minicon.eu&quot;</td></tr>
+</tbody></table>
+
+<h3>4.3 Bot-F&auml;higkeiten</h3>
+<table>
+<tbody><tr><th>Kategorie</th><th>Beispiele</th><th>Bot selbst</th><th>Eskalation</th></tr>
+<tr><td>Text</td><td>&Ouml;ffnungszeiten, Beschreibungen, Preise, News</td><td>✅</td><td></td></tr>
+<tr><td>Medien</td><td>Bilder austauschen, neues Teamfoto</td><td>✅</td><td></td></tr>
+<tr><td>Kontakt</td><td>Telefon, E-Mail, Adresse &auml;ndern</td><td>✅</td><td></td></tr>
+<tr><td>Inhalt</td><td>Neues Event, Ank&uuml;ndigung, Speisekarte</td><td>✅</td><td></td></tr>
+<tr><td>Struktur</td><td>Neue Seite/Abschnitt</td><td>✅ (einfach)</td><td>✅ (komplex)</td></tr>
+<tr><td>Design</td><td>Farben, Layout, Fonts</td><td></td><td>✅ immer</td></tr>
+<tr><td>Technik</td><td>Domain, SSL, Performance</td><td></td><td>✅ immer</td></tr>
+<tr><td>Recht</td><td>Impressum, Datenschutz</td><td></td><td>✅ immer (K&ouml;ber pr&uuml;ft)</td></tr>
+</tbody></table>
+
+<h3>4.4 Preview-System</h3>
+
+<h4>Preview-Nginx (1 Container f&uuml;r alle Kunden)</h4>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="5c5499c1-464a-47de-b329-28dd4be02d06"><ac:parameter ac:name="language">nginx</ac:parameter><ac:plain-text-body><![CDATA[server {
+    server_name ~^preview-(?<site>.+)\.minicon\.eu$;
+    root /opt/sites/$site-preview;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Gelbes Vorschau-Banner automatisch injizieren
+    sub_filter '</body>' '<div style="position:fixed;bottom:0;left:0;right:0;
+      background:#f59e0b;color:#000;text-align:center;padding:10px;
+      font-family:system-ui;font-size:14px;font-weight:600;z-index:99999;
+      box-shadow:0 -2px 8px rgba(0,0,0,0.15)">
+      ⚠️ VORSCHAU — Diese Änderungen sind noch nicht live.
+    </div></body>';
+    sub_filter_once on;
+}]]></ac:plain-text-body></ac:structured-macro>
+
+<h4>Expiry-Mechanismus</h4>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="e039c253-a45d-489c-a5c9-38aa667b5936"><ac:parameter ac:name="language">bash</ac:parameter><ac:plain-text-body><![CDATA[# Bei Preview-Erstellung (durch GitHub Action oder Bot):
+echo $(date -d "+1 hour" +%s) > /opt/sites/{site}-preview/.expires
+
+# Cronjob alle 5 Minuten:
+# /opt/scripts/cleanup-previews.sh
+NOW=$(date +%s)
+for dir in /opt/sites/*-preview; do
+    [ -d "$dir" ] || continue
+    [ -f "$dir/.expires" ] || continue
+    EXPIRES=$(cat "$dir/.expires")
+    if [ "$NOW" -gt "$EXPIRES" ]; then
+        SITE=$(basename "$dir" | sed 's/-preview$//')
+        logger "Preview für $SITE abgelaufen, lösche $dir"
+        rm -rf "$dir"
+    fi
+done]]></ac:plain-text-body></ac:structured-macro>
+
+<h4>Live-Deployment bei Freigabe</h4>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="ba72109a-cd8c-40cc-98c8-99d1d5b24b9f"><ac:parameter ac:name="language">bash</ac:parameter><ac:plain-text-body><![CDATA[# Bot merged preview → main
+git checkout main
+git merge preview
+git push origin main
+# → GitHub Action triggered automatisch
+# → Build + Deploy auf /opt/sites/{site}/
+# → Cloudflare Cache Purge
+# → Preview wird beim nächsten Cronjob-Lauf gelöscht (oder sofort)]]></ac:plain-text-body></ac:structured-macro>
+
+<h2>5. Kundenportal (minicon.eu/webseiten)</h2>
+
+<h3>5.1 Login</h3>
+<table>
+<tbody><tr><th>Feld</th><th>Beschreibung</th></tr>
+<tr><td>URL</td><td><code>minicon.eu/webseiten/login</code></td></tr>
+<tr><td>Auth</td><td>E-Mail + Passwort (JWT Session)</td></tr>
+<tr><td>Passwort-Reset</td><td>Per E-Mail (support-{site}@minicon.eu als Absender)</td></tr>
+</tbody></table>
+
+<h3>5.2 Dashboard</h3>
+<p>Nach Login sieht der Kunde:</p>
+<table>
+<tbody><tr><th>Bereich</th><th>Inhalt</th></tr>
+<tr><td>Website-Status</td><td>URL, Live/Offline, letztes Update</td></tr>
+<tr><td>Support-Kanal</td><td>Aktiver Kanal + Bot-Link, Kanal wechseln</td></tr>
+<tr><td>Support-E-Mail</td><td><code>support-{site}@minicon.eu</code></td></tr>
+<tr><td>Letzte &Auml;nderungen</td><td>Log: Was, Wann, Status (Preview/Live/Abgelaufen)</td></tr>
+<tr><td>Aktive Vorschau</td><td>Preview-Link + verbleibende Zeit (falls vorhanden)</td></tr>
+<tr><td>Rechnung/Abo</td><td>Stripe Kundenportal-Link</td></tr>
+</tbody></table>
+
+<h3>5.3 Einstellungen</h3>
+<ul>
+<li>Support-Kanal &auml;ndern (Telegram &harr; WhatsApp &harr; Signal &harr; E-Mail)</li>
+<li>Kontaktperson hinzuf&uuml;gen/entfernen (mit Verifizierung)</li>
+<li>Passwort &auml;ndern</li>
+<li>Abo verwalten (&rarr; Stripe Customer Portal)</li>
+</ul>
+
+<h2>6. Oversight &mdash; Michael (PO)</h2>
+
+<h3>6.1 Hub-Dashboard (hub.minicon.eu)</h3>
+<p>Michael sieht zentral:</p>
+<ul>
+<li><strong>Alle Kunden</strong> mit Website-Status, Abo-Status, letzter Aktivit&auml;t</li>
+<li><strong>Alle Konversationen</strong> (Chat-Verlauf jedes Kunden-Bots)</li>
+<li><strong>&Auml;nderungs-Log</strong> pro Website (Was, Wann, Vorher/Nachher, Wer)</li>
+<li><strong>Offene Previews</strong> mit Countdown</li>
+<li><strong>Alerts</strong> bei: Eskalation, Rate-Limit erreicht, ungew&ouml;hnlichen Anfragen</li>
+<li><strong>Umsatz</strong> pro Kunde (Stripe-Daten)</li>
+</ul>
+
+<h3>6.2 Eingriffsm&ouml;glichkeiten</h3>
+<table>
+<tbody><tr><th>Aktion</th><th>Wie</th></tr>
+<tr><td>Chat mitlesen</td><td>Jederzeit im Hub einsehbar</td></tr>
+<tr><td>In Chat einsteigen</td><td>Als &quot;Minicon Team&quot; antworten</td></tr>
+<tr><td>&Auml;nderung r&uuml;ckg&auml;ngig machen</td><td>Git revert auf main, Auto-Deploy</td></tr>
+<tr><td>Bot pausieren</td><td>Agent deaktivieren (Kunde erh&auml;lt Hinweis)</td></tr>
+<tr><td>Kunden sperren</td><td>Account deaktivieren (bei Missbrauch)</td></tr>
+<tr><td>Limits anpassen</td><td>Pro Kunde konfigurierbar</td></tr>
+</tbody></table>
+
+<h2>7. E-Mail-System</h2>
+
+<h3>7.1 Adressen pro Kunde</h3>
+<p>Jeder Kunde bekommt: <code>support-{site}@minicon.eu</code></p>
+<p>Einrichtung via <strong>IONOS E-Mail</strong> (kostenlos, API-gesteuert):</p>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="2d3d8a9f-c9b8-4496-8074-9735dc327b5e"><ac:parameter ac:name="language">bash</ac:parameter><ac:plain-text-body><![CDATA[# Pro Kunde eine Routing-Rule:
+# support-koehler@minicon.eu → IMAP-Polling Bot → OpenClaw Agent "support-koehler"
+# support-sybagg@minicon.eu  → IMAP-Polling Bot → OpenClaw Agent "support-sybagg"
+# support-ischia@minicon.eu  → IMAP-Polling Bot → OpenClaw Agent "support-ischia"]]></ac:plain-text-body></ac:structured-macro>
+
+<h3>7.2 IMAP-Polling Bot</h3>
+<p>Cloudflare Worker der eingehende E-Mails parsed und an den richtigen Agent weiterleitet:</p>
+<ol>
+<li>Empf&auml;nger-Adresse parsen &rarr; Site-ID extrahieren</li>
+<li>Absender gegen autorisierte Kontakte pr&uuml;fen</li>
+<li>Inhalt + Anh&auml;nge extrahieren</li>
+<li>An OpenClaw Agent weiterleiten (via API)</li>
+</ol>
+
+<h2>8. GitHub CI/CD &mdash; Reusable Workflow</h2>
+
+<h3>8.1 Angepasster Workflow</h3>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="9f14f203-bd8d-40b8-bc20-b15121b5198d"><ac:parameter ac:name="language">yaml</ac:parameter><ac:plain-text-body><![CDATA[# Minicon-eG/.github/.github/workflows/deploy-static-site.yml
+name: Deploy Static Site
+
+on:
+  workflow_call:
+    inputs:
+      site-name:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      IS_PREVIEW: ${{ github.ref_name == 'preview' }}
+      DEPLOY_DIR: ${{ github.ref_name == 'preview' && format('{0}-preview', inputs.site-name) || inputs.site-name }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      
+      - run: npm ci
+      - run: npm run build
+      
+      - name: Deploy via SCP
+        run: |
+          scp -r out/* root@91.98.30.140:/opt/sites/${{ env.DEPLOY_DIR }}/
+          ssh root@91.98.30.140 "chmod -R 755 /opt/sites/${{ env.DEPLOY_DIR }}/"
+      
+      - name: Set Preview Expiry
+        if: env.IS_PREVIEW == 'true'
+        run: |
+          ssh root@91.98.30.140 "echo \$(date -d '+1 hour' +%s) > /opt/sites/${{ env.DEPLOY_DIR }}/.expires"
+      
+      - name: Purge Cloudflare Cache
+        if: env.IS_PREVIEW == 'false'
+        run: |
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+            -H "X-Auth-Email: ${{ secrets.CLOUDFLARE_EMAIL }}" \
+            -H "X-Auth-Key: ${{ secrets.CLOUDFLARE_API_KEY }}" \
+            -d '{"purge_everything":true}'
+      
+      - name: Verify
+        run: |
+          DOMAIN="${{ env.IS_PREVIEW == 'true' && format('preview-{0}', inputs.site-name) || inputs.site-name }}.minicon.eu"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://$DOMAIN")
+          echo "$DOMAIN → HTTP $STATUS"
+          [ "$STATUS" = "200" ]]]></ac:plain-text-body></ac:structured-macro>
+
+<h2>9. Missbrauchsschutz</h2>
+<table>
+<tbody><tr><th>Ma&szlig;nahme</th><th>Beschreibung</th><th>Konfigurierbar</th></tr>
+<tr><td>Kontakt-Whitelist</td><td>Bot antwortet NUR autorisierten Kontakten</td><td>Ja (Kundenportal)</td></tr>
+<tr><td>Rate Limit</td><td>Max 20 Nachrichten/Tag, 3 Deploys/Tag</td><td>Ja (pro Kunde)</td></tr>
+<tr><td>Topic Guard</td><td>Nur website-bezogene Anfragen</td><td>Nein (System-Prompt)</td></tr>
+<tr><td>Content Filter</td><td>Keine illegalen/anst&ouml;&szlig;igen Inhalte</td><td>Nein</td></tr>
+<tr><td>Impressum-Schutz</td><td>Pflichtangaben k&ouml;nnen nicht gel&ouml;scht werden</td><td>Nein</td></tr>
+<tr><td>Preview-Limit</td><td>Max 1 aktive Preview gleichzeitig</td><td>Nein</td></tr>
+<tr><td>Approval-Mode</td><td>Optional: &Auml;nderungen erst nach PO-Freigabe live</td><td>Ja (pro Kunde)</td></tr>
+</tbody></table>
+
+<h2>10. Kosten</h2>
+<table>
+<tbody><tr><th>Posten</th><th>Kosten/Kunde</th><th>Anmerkung</th></tr>
+<tr><td>OpenClaw Agent</td><td>~&euro;0</td><td>Shared Instance</td></tr>
+<tr><td>LLM pro Anfrage</td><td>~&euro;0.001-0.01</td><td>Sonnet/Haiku je nach Komplexit&auml;t</td></tr>
+<tr><td>E-Mail Routing</td><td>&euro;0</td><td>Cloudflare Free Tier</td></tr>
+<tr><td>Preview-Nginx</td><td>&euro;0</td><td>1 Container f&uuml;r alle</td></tr>
+<tr><td>GitHub Actions</td><td>~&euro;0</td><td>2.000 Min/Mo Free Tier</td></tr>
+<tr><td>Telegram Bot</td><td>&euro;0</td><td>Kostenlos</td></tr>
+<tr><td><strong>Gesamt</strong></td><td><strong>~&euro;1-5/Mo</strong></td><td>Gedeckt durch &euro;5/Mo Hosting</td></tr>
+</tbody></table>
+
+<h2>11. Implementierungsplan</h2>
+<table>
+<tbody><tr><th>Phase</th><th>Was</th><th>Aufwand</th><th>Prio</th></tr>
+<tr><td>Phase 1</td><td>Preview-Nginx + Expiry-Cronjob + Workflow anpassen</td><td>1 Tag</td><td>Hoch</td></tr>
+<tr><td>Phase 2</td><td>Kundenportal (Login, Dashboard, Kanalwahl)</td><td>3-5 Tage</td><td>Hoch</td></tr>
+<tr><td>Phase 3</td><td>IMAP-Polling Bot + Support-Email pro Kunde</td><td>1-2 Tage</td><td>Hoch</td></tr>
+<tr><td>Phase 4</td><td>Bot-System (OpenClaw Multi-Agent, SOUL.md Template)</td><td>2-3 Tage</td><td>Hoch</td></tr>
+<tr><td>Phase 5</td><td>Hub-Erweiterung (Chat-Logs, Oversight, Alerts)</td><td>3-5 Tage</td><td>Mittel</td></tr>
+<tr><td>Phase 6</td><td>Auto-Provisioning (Stripe &rarr; alles automatisch)</td><td>2-3 Tage</td><td>Mittel</td></tr>
+<tr><td>Phase 7</td><td>WhatsApp Business API Integration</td><td>2-3 Tage</td><td>Niedrig</td></tr>
+</tbody></table>
+<p><strong>Gesamtaufwand:</strong> ~15-22 Tage | <strong>Start:</strong> Nach PO-Freigabe, idealerweise vor erstem zahlenden Kunden</p>
+
+<hr />
+<p><em>N&auml;chster Schritt: PO-Freigabe &rarr; Phase 1 starten (Preview-Infrastruktur)</em></p><h2>Schritt 7: Website-Agenten &amp; Change-Request-Workflow</h2>
+<p><strong>Stand:</strong> 03.03.2026 | <strong>Details:</strong> <ac:link><ri:page ri:content-title="Change-Request-Workflow" /></ac:link></p>
+
+<h3>Website-Agenten</h3>
+<p>Jeder Kunde bekommt einen <strong>eigenen, namentlich benannten Website-Agenten</strong> (z.B. &bdquo;Katja&ldquo;, &bdquo;Leon&ldquo;). Der Agent wird bei Kundenerstellung automatisch generiert und ist im Admin-Panel anpassbar.</p>
+<p><strong>Was der Agent kann:</strong></p>
+<ul>
+<li>Inhalte &auml;ndern (Texte, &Ouml;ffnungszeiten, Kontaktdaten, Bilder)</li>
+<li>Neue Features/Seiten entwickeln lassen</li>
+<li>Fragen zur Website und zum Unternehmen beantworten</li>
+<li>Verbesserungen vorschlagen</li>
+</ul>
+<p><strong>Signatur:</strong> <code>{Name} &mdash; Teil des Minicon eG Agenten Teams</code></p>
+<p><strong>Absender:</strong> <code>{Name} &lt;{siteId}@support.minicon.eu&gt;</code></p>
+
+<h3>Einheitlicher Change-Request-Flow</h3>
+<ol>
+<li><strong>Kunde mailt</strong> an <code>{site}@support.minicon.eu</code></li>
+<li><strong>Agent antwortet sofort</strong> &mdash; best&auml;tigt oder fragt nach bei unklaren Anfragen</li>
+<li><strong>CR erstellt</strong> (status: new) &mdash; Follow-ups werden an bestehende CR angeh&auml;ngt</li>
+<li><strong>Admin entscheidet</strong> im Panel (<code>mein.minicon.eu/admin/changes</code>):
+  <ul>
+    <li>&amp;check; <strong>Freigeben</strong> (kostenlos) + Delay in Minuten</li>
+    <li>💰 <strong>Kostenpflichtig</strong> (Faktor &times; &euro;19) + Delay nach Zahlung</li>
+    <li>&amp;cross; <strong>Ablehnen</strong> mit Begr&uuml;ndung (E-Mail an Kunden)</li>
+  </ul>
+</li>
+<li><strong>Dev-Worker implementiert</strong> nach Delay (Cloudflare Workers AI + GitHub API, &euro;0)</li>
+<li><strong>QA-Pr&uuml;fung</strong>: AI-Review vor Commit + CI/CD-Checks (Umlaute, DSGVO, Build)</li>
+<li><strong>Preview</strong> per E-Mail an Kunden &rarr; Kunde pr&uuml;ft &rarr; Freigabe &rarr; Live</li>
+</ol>
+
+<h3>Konfiguration pro Kunde</h3>
+<table>
+<tbody><tr><th>Einstellung</th><th>Wo</th><th>Default</th></tr>
+<tr><td>Umsetzungs-Verz&ouml;gerung</td><td>Admin &rarr; Kunden-Detail</td><td>30 Min (0 = sofort)</td></tr>
+<tr><td>Agent-Persona</td><td>Admin &rarr; Kunden-Detail &rarr; Persona</td><td>Auto-generiert</td></tr>
+<tr><td>Agent-Richtlinien</td><td>Admin &rarr; Einstellungen</td><td>Global f&uuml;r alle Agenten</td></tr>
+</tbody></table>
+
+<h2>Build-Pflichtanforderungen &amp; QA-Checkliste</h2>
+<p><strong>Stand:</strong> 04.03.2026</p>
+
+<h3>Pflicht bei jedem Website-Build</h3>
+<ac:structured-macro ac:name="warning" ac:schema-version="1" ac:macro-id="7fe315fb-cb53-4001-9ac9-9b4c84f9765a"><ac:parameter ac:name="title">Jede Website MUSS diese Anforderungen erf&uuml;llen</ac:parameter><ac:rich-text-body>
+<p>Websites ohne diese Elemente werden nicht als &bdquo;fertig&ldquo; akzeptiert und m&uuml;ssen nachgebessert werden.</p>
+</ac:rich-text-body></ac:structured-macro>
+
+<table>
+<thead><tr><th>#</th><th>Anforderung</th><th>Details</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Schritt 0: Original-Analyse</strong></td><td>Screenshot, Logo, Farben, Inhalte, Bilder extrahieren</td></tr>
+<tr><td>2</td><td><strong>Individuelles Favicon</strong></td><td>Passend zum Unternehmen/Logo &mdash; kein generisches Icon</td></tr>
+<tr><td>3</td><td><strong>Custom 404-Seite</strong></td><td>Im Stil der Website gestaltet, mit Navigation zur&uuml;ck zur Startseite und beliebten Links. Nicht die nginx-Default-Seite!</td></tr>
+<tr><td>4</td><td><strong>Nav-Overlap-Check</strong></td><td>Logo + Men&uuml; d&uuml;rfen nicht &uuml;berlappen. Logo: <code>shrink-0</code>, responsive Breakpoints nutzen</td></tr>
+<tr><td>5</td><td><strong>charset utf-8</strong></td><td>nginx Config muss <code>charset utf-8;</code> enthalten</td></tr>
+<tr><td>6</td><td><strong>Landingpage registrieren</strong></td><td>Schritt 6b: Site in <code>siteNames</code> eintragen + minicon-landing deployen</td></tr>
+<tr><td>7</td><td><strong>Impressum + Datenschutz</strong></td><td>Vollst&auml;ndig, erreichbar, &sect; 18 Abs. 2 MStV</td></tr>
+</tbody>
+</table>
+
+<h3>QA-Checkliste (nach jedem Deploy)</h3>
+<ac:structured-macro ac:name="task-list" ac:schema-version="1" ac:macro-id="475baea8-12de-4af7-8234-8f3a5709d28d"><ac:rich-text-body>
+<ul>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>HTTP 200 auf Homepage</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Favicon vorhanden (kein Browser-Default)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body><strong>404-Seite:</strong> <code>/nicht-existierende-seite</code> zeigt Custom-404 im Website-Stil (nicht nginx default)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body><strong>Nav-Overlap:</strong> Logo + Men&uuml; auf Desktop (md: Breakpoint) ohne &Uuml;berlappung</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Impressum erreichbar + vollst&auml;ndig (&sect; 18 Abs. 2 MStV)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Datenschutz erreichbar</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Umlaute korrekt (keine <code>\u00XX</code>, kein <code>&acirc;&euro;</code>)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Banner sichtbar (au&szlig;er Spenden-Sites wie TV Dahn)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Landingpage-Link funktioniert (Banner-Klick &rarr; /angebot/&lt;name&gt;/)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Alle Original-Inhalte vorhanden (keine Platzhalter, kein &bdquo;Lorem Ipsum&ldquo;)</ac:task-body></ac:task></li>
+<li><ac:task><ac:task-status>incomplete</ac:task-status><ac:task-body>Mobile-Ansicht: Burger-Men&uuml; funktioniert, keine &Uuml;berlappung</ac:task-body></ac:task></li>
+</ul>
+</ac:rich-text-body></ac:structured-macro>

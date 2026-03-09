@@ -1,0 +1,212 @@
+<ac:structured-macro ac:name="info" ac:schema-version="1" ac:macro-id="3117a2b4-8fb4-429e-a43a-dbb253adfa5b"><ac:rich-text-body>
+<p>
+<strong>Repo:</strong> <a href="https://github.com/Minicon-eG/minicon-website-service">Minicon-eG/minicon-website-service</a> (Teil des website-service)<br />
+<strong>Relevante Dateien:</strong>
+<code>src/services/smtp.service.ts</code> |
+<code>src/services/support-bot.service.ts</code> |
+<code>src/services/email.service.ts</code> |
+<code>src/routes/mail.routes.ts</code> |
+<code>src/models/support-email.model.ts</code>
+</p>
+</ac:rich-text-body></ac:structured-macro><h1>E-Mail Support System</h1>
+<p><strong>Stand:</strong> 08.03.2026</p>
+
+<h2>&Uuml;bersicht</h2>
+<p>Jeder Kunde bekommt eine dedizierte Support-Adresse: <code>{siteId}@support.minicon.eu</code>.<br />
+Eingehende E-Mails werden vom SMTP-Server empfangen, in MongoDB gespeichert und vom Support-Bot (LLM) automatisch beantwortet.</p>
+
+<h2>Architektur</h2>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="33ce4334-341e-466c-93eb-75fe8ec3973a"><ac:parameter ac:name="language">text</ac:parameter><ac:plain-text-body><![CDATA[
+Kunde sendet E-Mail an tv-dahn@support.minicon.eu
+       ↓
+DNS: MX → mail.support.minicon.eu → 91.98.30.140
+       ↓ Port 25 → 25 (Container)
+┌─ website-service Container ────────────────────┐
+│  SMTP-Server (Node.js smtp-server)             │
+│  → Parsed To-Adresse → siteId                 │
+│  → Speichert in MongoDB (status: "new")        │
+│                                                 │
+│  Bot-Polling (alle 30s)                        │
+│  → Lädt Customer + botPersona aus MongoDB      │
+│  → Baut System-Prompt mit Persona              │
+│  → Sendet an Cloudflare Workers AI             │
+│  → Prüft auf [ESCALATE] Tag                   │
+│     ├─ Normal → Resend API → Antwort-Mail      │
+│     └─ Eskalation → Telegram-Alert an Michael  │
+│  → Update MongoDB (status: "replied")          │
+└─────────────────────────────────────────────────┘
+]]></ac:plain-text-body></ac:structured-macro>
+
+<h2>Komponenten</h2>
+<table>
+<tbody><tr><th>Komponente</th><th>Technologie</th><th>Container</th><th>Funktion</th></tr>
+<tr><td>SMTP-Server</td><td>Node.js <code>smtp-server</code></td><td>website-service</td><td>Empfang *@support.minicon.eu auf Port 25 (Host-Port 25 &rarr; Container-Port 25)</td></tr>
+<tr><td>Support-Bot</td><td>Node.js + Cloudflare Workers AI</td><td>website-service</td><td>LLM-Antworten generieren, alle 30s Polling</td></tr>
+<tr><td>Ausgehende Mails</td><td>Resend API</td><td>website-service</td><td>Antworten senden als &quot;{Name} &lt;noreply@support.minicon.eu&gt;&quot;</td></tr>
+<tr><td>Datenbank</td><td>MongoDB</td><td>hub-mongo</td><td>Collection: support-emails</td></tr>
+<tr><td>Telegram-Alerts</td><td>Telegram Bot API</td><td>website-service</td><td>Eskalation an Michael (Chat 521366093)</td></tr>
+</tbody></table>
+
+<h2>Cloudflare Workers AI &mdash; LLM-Integration</h2>
+<h3>Konfiguration</h3>
+<table>
+<tbody><tr><th>Parameter</th><th>Env-Variable</th><th>Wert</th></tr>
+<tr><td>Account ID</td><td><code>CLOUDFLARE_ACCOUNT_ID</code></td><td><code>06fa5f884b1fd8326b45c54475a2f910</code></td></tr>
+<tr><td>API Token</td><td><code>CLOUDFLARE_API_TOKEN</code></td><td>Dedicated Token mit Workers AI Read+Write</td></tr>
+<tr><td>Modell</td><td><code>BOT_MODEL</code></td><td><code>@cf/meta/llama-3.1-8b-instruct</code> (Standard)</td></tr>
+</tbody></table>
+
+<h3>API-Aufruf</h3>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="90f85d85-0b9f-472a-813c-2c54c5d013c4"><ac:parameter ac:name="language">bash</ac:parameter><ac:plain-text-body><![CDATA[POST https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/run/{MODEL}
+Authorization: Bearer {CF_API_TOKEN}
+Content-Type: application/json
+
+{
+  "messages": [
+    {"role": "system", "content": "Du bist Thomas, ein Agent vom Minicon Support-Team..."},
+    {"role": "user", "content": "Betreff: Logo ändern\n\nHallo, wir möchten..."}
+  ],
+  "max_tokens": 500,
+  "temperature": 0.7
+}]]></ac:plain-text-body></ac:structured-macro>
+
+<h3>Kosten</h3>
+<table>
+<tbody><tr><th>Free Tier</th><th>Dar&uuml;ber hinaus</th></tr>
+<tr><td>10.000 Neurons/Tag kostenlos (~20-30 Mails/Tag)</td><td>.011 / 1.000 Neurons</td></tr>
+</tbody></table>
+<p><strong>Aktuell: 0&euro; Kosten</strong> &mdash; Free Tier reicht f&uuml;r erwartetes Volumen.</p>
+
+<h3>Alternative Modelle</h3>
+<table>
+<tbody><tr><th>Modell</th><th>BOT_MODEL Wert</th><th>Qualit&auml;t Deutsch</th></tr>
+<tr><td>Llama 3.1 8B (Standard)</td><td><code>@cf/meta/llama-3.1-8b-instruct</code></td><td>Gut</td></tr>
+<tr><td>Llama 3.1 70B</td><td><code>@cf/meta/llama-3.1-70b-instruct</code></td><td>Sehr gut (mehr Neurons)</td></tr>
+<tr><td>Mistral 7B</td><td><code>@cf/mistral/mistral-7b-instruct-v0.2</code></td><td>Gut</td></tr>
+</tbody></table>
+
+<h3>Token-Erstellung</h3>
+<p>Der API-Token wurde &uuml;ber die Cloudflare API erstellt mit folgenden Berechtigungen:</p>
+<ul>
+<li><strong>Workers AI Read</strong> (ID: <code>a92d2450e05d4e7bb7d0a64968f83d11</code>)</li>
+<li><strong>Workers AI Write</strong> (ID: <code>bacc64e0f6c34fc0883a1223f938a104</code>)</li>
+<li><strong>Scope:</strong> Account <code>06fa5f884b1fd8326b45c54475a2f910</code></li>
+</ul>
+
+<h2>DNS-Konfiguration</h2>
+<table>
+<tbody><tr><th>Type</th><th>Name</th><th>Value</th><th>Prio</th><th>Proxied</th></tr>
+<tr><td>MX</td><td>support.minicon.eu</td><td>mail.support.minicon.eu</td><td>10</td><td>&mdash;</td></tr>
+<tr><td>A</td><td>mail.support.minicon.eu</td><td>91.98.30.140</td><td>&mdash;</td><td>Nein (DNS only)</td></tr>
+<tr><td>TXT (SPF)</td><td>support.minicon.eu</td><td>v=spf1 ip4:91.98.30.140 include:amazonses.com ~all</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td>TXT (DKIM)</td><td>resend._domainkey.support.minicon.eu</td><td>(Resend DKIM key)</td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody></table>
+
+<h2>Bot-Persona System</h2>
+<h3>Schema (MongoDB: customers.botPersona)</h3>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="832d271c-a1e9-420b-aa70-bbd482a1453c"><ac:parameter ac:name="language">javascript</ac:parameter><ac:plain-text-body><![CDATA[botPersona: {
+  name: "Thomas",                    // Vorname des Agenten
+  greeting: "Hallo! Ich bin ...",    // Begrüßungstext
+  personality: "engagiert, vereinsnah, sportbegeistert",
+  industry: "verein",                // Branchenzuordnung
+  knowledge: "TV Dahn 1910 e.V., Abteilungen: Turnen, Tischtennis...",
+  tone: "freundlich",                // freundlich | professionell | locker
+  enabled: true                      // Bot an/aus
+}]]></ac:plain-text-body></ac:structured-macro>
+
+<h3>Default-Personas (wenn keine individuelle gesetzt)</h3>
+<table>
+<tbody><tr><th>Branche</th><th>Name</th><th>Pers&ouml;nlichkeit</th><th>Ton</th></tr>
+<tr><td>Gastronomie</td><td>Lisa</td><td>freundlich, locker, kennt Speisekarten</td><td>locker</td></tr>
+<tr><td>Verein</td><td>Thomas</td><td>engagiert, vereinsnah</td><td>freundlich</td></tr>
+<tr><td>Handwerk</td><td>Stefan</td><td>praktisch, direkt</td><td>professionell</td></tr>
+<tr><td>IT</td><td>Julia</td><td>kompetent, modern</td><td>professionell</td></tr>
+<tr><td>Einzelhandel</td><td>Marie</td><td>herzlich, kundenorientiert</td><td>freundlich</td></tr>
+<tr><td>Standard</td><td>Anna</td><td>freundlich, hilfsbereit</td><td>freundlich</td></tr>
+</tbody></table>
+
+<h3>Kommunikationsregeln</h3>
+<ul>
+<li>Bot = <strong>Agent</strong> (pers&ouml;nlicher Ansprechpartner) &mdash; NICHT &quot;KI&quot;, &quot;Bot&quot;, &quot;automatisiert&quot;</li>
+<li>Signatur: &quot;Viele Gr&uuml;&szlig;e, {Name} &mdash; Ihr pers&ouml;nlicher Agent vom Minicon Support-Team&quot;</li>
+<li>Immer Deutsch, branchenspezifische Terminologie verwenden</li>
+</ul>
+
+<h2>Eskalation</h2>
+<ul>
+<li>Bot f&uuml;gt <code>[ESCALATE]</code> Tag ein bei: Rechtsfragen, K&uuml;ndigungen, Beschwerden, Unklarheiten</li>
+<li>Telegram-Alert an Michael (Chat 521366093) mit: siteId, Absender, Betreff, E-Mail-Text, Bot-Entwurf</li>
+<li>Status in MongoDB: <code>&quot;escalated&quot;</code></li>
+<li>Michael kann manuell antworten oder Bot-Entwurf freigeben</li>
+</ul>
+
+<h2>MongoDB Schema: support-emails</h2>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="ac9cfb52-30d1-4c5a-8577-5f01530832ca"><ac:parameter ac:name="language">javascript</ac:parameter><ac:plain-text-body><![CDATA[{
+  _id: ObjectId,
+  siteId: "tv-dahn",
+  from: "kunde@example.com",
+  fromName: "Max Mustermann",
+  to: "tv-dahn@support.minicon.eu",
+  subject: "Öffnungszeiten ändern",
+  body: "Bitte ändert...",
+  html: "<p>Bitte ändert...</p>",
+  receivedAt: ISODate,
+  status: "new" | "processing" | "replied" | "escalated" | "archived",
+  botReply: {
+    text: "Hallo, vielen Dank...",
+    sentAt: ISODate,
+    persona: "Thomas"
+  },
+  escalatedAt: ISODate,
+  archivedAt: ISODate
+}]]></ac:plain-text-body></ac:structured-macro>
+
+<h2>Admin API</h2>
+<table>
+<tbody><tr><th>Methode</th><th>Endpoint</th><th>Auth</th><th>Funktion</th></tr>
+<tr><td>GET</td><td>/api/mail/list?siteId=tv-dahn&amp;status=new&amp;limit=50</td><td>x-api-key</td><td>Mails auflisten</td></tr>
+<tr><td>GET</td><td>/api/mail/stats</td><td>x-api-key</td><td>Statistiken pro Site</td></tr>
+</tbody></table>
+
+<h2>Retention</h2>
+<ul>
+<li><strong>0&ndash;90 Tage:</strong> Live in MongoDB (durchsuchbar)</li>
+<li><strong>90 Tage&ndash;12 Monate:</strong> Komprimiertes JSON-Archiv auf Disk (<code>/opt/archive/support/</code>)</li>
+<li><strong>Nach 12 Monaten:</strong> L&ouml;schbar</li>
+</ul>
+
+<h2>Env-Variablen (Server: /opt/build/website-service.env)</h2>
+<table>
+<tbody><tr><th>Variable</th><th>Funktion</th><th>Pflicht</th></tr>
+<tr><td><code>CLOUDFLARE_ACCOUNT_ID</code></td><td>CF Account f&uuml;r Workers AI</td><td>Ja (f&uuml;r Bot)</td></tr>
+<tr><td><code>CLOUDFLARE_API_TOKEN</code></td><td>CF API Token (Workers AI Read+Write)</td><td>Ja (f&uuml;r Bot)</td></tr>
+<tr><td><code>BOT_MODEL</code></td><td>LLM-Modell (Standard: @cf/meta/llama-3.1-8b-instruct)</td><td>Nein</td></tr>
+<tr><td><code>RESEND_API_KEY</code></td><td>Resend API f&uuml;r ausgehende Mails</td><td>Ja</td></tr>
+<tr><td><code>RESEND_FROM</code></td><td>Absender (noreply@support.minicon.eu)</td><td>Ja</td></tr>
+<tr><td><code>TELEGRAM_BOT_TOKEN</code></td><td>F&uuml;r Eskalations-Alerts</td><td>Ja (konfiguriert seit 08.03.2026)</td></tr>
+<tr><td><code>TELEGRAM_ALERT_CHAT_ID</code></td><td>Telegram Chat f&uuml;r Alerts (Default: 521366093)</td><td>Ja (konfiguriert: 521366093)</td></tr>
+<tr><td><code>SMTP_PORT</code></td><td>SMTP intern (Default: 25)</td><td>Nein</td></tr>
+</tbody></table>
+
+<h2>Deployment</h2>
+<ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="5ffcf1e7-2e31-4f8e-aaad-fd2feb95acb2"><ac:parameter ac:name="language">bash</ac:parameter><ac:plain-text-body><![CDATA[# Container OHNE Docker Traefik-Labels, MIT Port-Mapping für SMTP
+docker run -d --name website-service --network web --restart unless-stopped \
+  --env-file /opt/build/website-service.env \
+  -p 25:25 \
+  minicon-website-service:latest
+
+# CI/CD: Push auf main → GitHub Actions deployt automatisch
+# Repo: Minicon-eG/minicon-website-service
+
+# Health-Check konfiguriert:
+#   --health-cmd 'wget -qO- http://localhost:4000/api/health || exit 1'
+#   --health-interval 30s --health-timeout 10s --health-retries 3]]></ac:plain-text-body></ac:structured-macro>
+
+<h2>&Auml;nderungshistorie</h2>
+<table>
+<tbody><tr><th>Datum</th><th>&Auml;nderung</th><th>Details</th></tr>
+<tr><td>08.03.2026</td><td><strong>Bugfix: Docker Port-Mapping</strong></td><td>SMTP-Server h&ouml;rt auf Container-Port 25 (nicht 2525). Port-Mapping korrigiert von <code>-p 25:2525</code> auf <code>-p 25:25</code>. Ohne diesen Fix kamen keine externen E-Mails an.</td></tr>
+<tr><td>08.03.2026</td><td><strong>Telegram-Alerts konfiguriert</strong></td><td><code>TELEGRAM_BOT_TOKEN</code> und <code>TELEGRAM_CHAT_ID</code> in <code>/opt/build/website-service.env</code> eingetragen. Eskalations-Alerts gehen jetzt an Chat 521366093.</td></tr>
+<tr><td>08.03.2026</td><td><strong>Container-Neustart mit --env-file</strong></td><td>Container nutzt jetzt <code>--env-file /opt/build/website-service.env</code> statt einzelner <code>-e</code> Flags. Verhindert Verlust von Secrets bei Neustarts.</td></tr>
+<tr><td>03.03.2026</td><td>Initiale Dokumentation</td><td>System-Architektur, Bot-Persona, DNS, Env-Variablen dokumentiert.</td></tr>
+</tbody></table>
