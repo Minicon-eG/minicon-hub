@@ -19,15 +19,10 @@ http:
       headers:
         accessControlAllowMethods: [GET, POST, PUT, DELETE, OPTIONS]
         accessControlAllowHeaders: [Content-Type, Authorization, X-API-Key]
-        accessControlAllowOriginListPolicy: allow-all-origins
-        accessControlMaxAge: 86400
-        addVaryHeader: true
-
-    cors-assistant:
-      headers:
-        accessControlAllowMethods: [GET, POST, PUT, DELETE, OPTIONS]
-        accessControlAllowHeaders: [Content-Type, Authorization]
-        accessControlAllowOriginListPolicy: allow-all-origins
+        accessControlAllowOriginList:
+          - https://dokukiste.de
+          - https://www.dokukiste.de
+          - https://app.dokukiste.de
         accessControlMaxAge: 86400
         addVaryHeader: true
 
@@ -35,11 +30,18 @@ http:
       headers:
         accessControlAllowMethods: [GET, POST, PATCH, PUT, DELETE, OPTIONS]
         accessControlAllowHeaders: [Content-Type, Authorization, X-API-Key, Stripe-Signature]
-        accessControlAllowOriginListPolicy: allow-all-origins
+        accessControlAllowOriginList:
+          - https://minicon.eu
+          - https://www.minicon.eu
+          - https://mein.minicon.eu
+          - https://preview-mein.minicon.eu
+          - https://admin.minicon.eu
+          - https://preview-www.minicon.eu
+          - https://assistant.minicon.eu
         accessControlMaxAge: 86400
         addVaryHeader: true
 
-    # Basic Auth fÔö£ÔòØr app.dokukiste.de
+    # Basic Auth f├ö├Â┬ú├ö├▓├ÿr app.dokukiste.de
     # User: admin, Password: dokukiste
     basic-auth-app:
       basicauth:
@@ -49,10 +51,33 @@ http:
   # =========================================================================
   # ROUTERS
   # =========================================================================
+
+    assistant-redirect:
+      redirectRegex:
+        regex: "^https://assistant\\.minicon\\.eu/$"
+        replacement: "https://assistant.minicon.eu/assistent/"
+        permanent: true
+
   routers:
+    # Assistant API
+    assistent-api:
+      rule: "Host(`assistent-api.minicon.eu`)"
+      service: assistant-service
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+      middlewares: [cors-api]
+
+    preview-assistent-api:
+      rule: "Host(`preview-assistent-api.minicon.eu`)"
+      service: preview-assistant-service
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+      middlewares: [cors-api]
     # PREVIEW - KUNDENPORTAL
     preview-kundenportal:
-      rule: "Host(\preview-mein.minicon.eu\)"
+      rule: "Host(`preview-mein.minicon.eu`)"
       service: preview-kundenportal
       entryPoints: [websecure]
       priority: 200
@@ -61,11 +86,20 @@ http:
 
     # PREVIEW - WEBSITE SERVICE
     preview-website-service:
-      rule: "Host(\preview-api.minicon.eu\)"
+      rule: "Host(`preview-api.minicon.eu`)"
       service: preview-website-service
       entryPoints: [websecure]
       priority: 200
       middlewares: [cors-website-service]
+      tls:
+        certResolver: cloudflare
+
+
+    # RUNNER STATUS (intern fuer Kuma)
+    runner-status:
+      rule: "Host(`runner-status.minicon.eu`)"
+      service: runner-status
+      entryPoints: [websecure]
       tls:
         certResolver: cloudflare
 
@@ -74,6 +108,7 @@ http:
     # -------------------------------------------------------------------------
     preview:
       rule: "HostRegexp(`^preview-.+[.]minicon[.]eu$`)"
+      priority: 1
       entryPoints:
         - websecure
       tls:
@@ -120,6 +155,17 @@ http:
         certResolver: cloudflare
       middlewares: [cors-website-service]
 
+    # -------------------------------------------------------------------------
+    # ADMIN DASHBOARD
+    # -------------------------------------------------------------------------
+    admin-dashboard:
+      rule: "Host(`admin.minicon.eu`)"
+      service: kundenportal
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+
     control-plane-web:
       rule: "Host(`app.dokukiste.de`)"
       service: control-plane-web
@@ -137,6 +183,15 @@ http:
       entryPoints: [websecure]
       tls:
         certResolver: cloudflare
+
+
+    assistant:
+      rule: "Host(`assistant.minicon.eu`)"
+      service: minicon
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+      middlewares: [assistant-redirect]
 
     # Minicon eG Domains (NS auf Cloudflare umgestellt 17.02.2026)
     minicon-eg:
@@ -198,10 +253,38 @@ http:
       tls:
         certResolver: cloudflare
 
+
+        # Mail API Worker (proxy to Cloudflare Worker)
+    # -------------------------------------------------------------------------
+    # MINICON HUB
+    # -------------------------------------------------------------------------
+    minicon-hub:
+      rule: "Host(`hub.minicon.eu`)"
+      service: minicon-hub
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    mail-api:
+      rule: "Host(`mail-api.minicon.eu`)"
+      service: mail-api-worker
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
   # =========================================================================
   # SERVICES
   # =========================================================================
   services:
+    # Assistant Service
+    assistant-service:
+      loadBalancer:
+        servers:
+          - url: "http://assistant-service:3000"
+
+    preview-assistant-service:
+      loadBalancer:
+        servers:
+          - url: "http://preview-assistant-service:3000"
     # Dokukiste
     dokukiste:
       loadBalancer:
@@ -277,7 +360,26 @@ http:
         servers:
           - url: "http://preview-website-service:4000"
 
+    runner-status:
+      loadBalancer:
+        servers:
+          - url: "http://runner-status:3099"
+
     preview:
       loadBalancer:
         servers:
           - url: "http://preview-nginx:80"
+
+
+    # Mail API -> Cloudflare Worker (Fallback fuer nicht-proxied DNS)
+    mail-api-worker:
+      loadBalancer:
+        servers:
+          - url: "https://tv-dahn-mail-worker.minicon.workers.dev"
+        passHostHeader: false
+
+
+    minicon-hub:
+      loadBalancer:
+        servers:
+          - url: "http://minicon-hub:3000"
