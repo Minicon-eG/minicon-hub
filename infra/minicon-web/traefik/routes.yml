@@ -147,6 +147,14 @@ http:
       tls:
         certResolver: cloudflare
 
+    # TORE TRACKER
+    tore-tracker:
+      rule: "Host(`tore-tracker.minicon.eu`)"
+      service: tore-tracker
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
     # Minicon eG Domains (NS auf Cloudflare umgestellt 17.02.2026)
     minicon-eg:
       rule: "Host(`minicon-eg.de`) || Host(`www.minicon-eg.de`) || Host(`minicon-genossenschaft.de`) || Host(`www.minicon-genossenschaft.de`)"
@@ -211,6 +219,12 @@ http:
   # SERVICES
   # =========================================================================
   services:
+    # Tore Tracker
+    tore-tracker:
+      loadBalancer:
+        servers:
+          - url: "http://static-sites-tore-tracker-1:80"
+
     # Dokukiste
     dokukiste:
       loadBalancer:
