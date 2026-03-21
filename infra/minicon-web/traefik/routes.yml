@@ -19,7 +19,7 @@ http:
       headers:
         accessControlAllowMethods: [GET, POST, PUT, DELETE, OPTIONS]
         accessControlAllowHeaders: [Content-Type, Authorization, X-API-Key]
-        accessControlAllowOriginListPolicy: allow-all-origins
+        accessControlAllowOriginList: allow-all-origins
         accessControlMaxAge: 86400
         addVaryHeader: true
 
@@ -27,7 +27,7 @@ http:
       headers:
         accessControlAllowMethods: [GET, POST, PUT, DELETE, OPTIONS]
         accessControlAllowHeaders: [Content-Type, Authorization]
-        accessControlAllowOriginListPolicy: allow-all-origins
+        accessControlAllowOriginList: allow-all-origins
         accessControlMaxAge: 86400
         addVaryHeader: true
 
@@ -35,7 +35,7 @@ http:
       headers:
         accessControlAllowMethods: [GET, POST, PATCH, PUT, DELETE, OPTIONS]
         accessControlAllowHeaders: [Content-Type, Authorization, X-API-Key, Stripe-Signature]
-        accessControlAllowOriginListPolicy: allow-all-origins
+        accessControlAllowOriginList: ["https://mein.minicon.eu", "https://preview-mein.minicon.eu"]
         accessControlMaxAge: 86400
         addVaryHeader: true
 
@@ -52,7 +52,7 @@ http:
   routers:
     # PREVIEW - KUNDENPORTAL
     preview-kundenportal:
-      rule: "Host(\preview-mein.minicon.eu\)"
+      rule: "Host(`preview-mein.minicon.eu`)"
       service: preview-kundenportal
       entryPoints: [websecure]
       priority: 200
@@ -61,7 +61,7 @@ http:
 
     # PREVIEW - WEBSITE SERVICE
     preview-website-service:
-      rule: "Host(\preview-api.minicon.eu\)"
+      rule: "Host(`preview-api.minicon.eu`)"
       service: preview-website-service
       entryPoints: [websecure]
       priority: 200
@@ -70,12 +70,13 @@ http:
         certResolver: cloudflare
 
     # -------------------------------------------------------------------------
-    # PREVIEW WILDCARD
+    # PREVIEW WILDCARD (fallback - lowest priority)
     # -------------------------------------------------------------------------
     preview:
       rule: "HostRegexp(`^preview-.+[.]minicon[.]eu$`)"
       entryPoints:
         - websecure
+      priority: 1
       tls:
         certResolver: cloudflare
         domains:
@@ -105,6 +106,14 @@ http:
     kundenportal:
       rule: "Host(`mein.minicon.eu`)"
       service: kundenportal
+      entryPoints: [websecure]
+      tls:
+        certResolver: cloudflare
+
+    # KUNDENPORTAL API
+    kundenportal-api:
+      rule: "Host(`api.mein.minicon.eu`)"
+      service: kundenportal-api
       entryPoints: [websecure]
       tls:
         certResolver: cloudflare
@@ -222,7 +231,7 @@ http:
     minicon:
       loadBalancer:
         servers:
-          - url: "http://minicon:80"
+          - url: "http://static-sites-minicon-eu-1:80"
 
     # Dorfkiste
     dorfkiste-frontend:
@@ -247,10 +256,15 @@ http:
         servers:
           - url: "http://kundenportal:3000"
 
+    kundenportal-api:
+      loadBalancer:
+        servers:
+          - url: "http://kundenportal-api:3000"
+
     website-service:
       loadBalancer:
         servers:
-          - url: "http://website-service:4000"
+          - url: "http://minicon-website-service:4000"
 
     datagen:
       loadBalancer:
