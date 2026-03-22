@@ -37,46 +37,25 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
-## Jira / Atlassian
+## Atlassian (Confluence & Jira)
 
-- **Instance:** `minicon.atlassian.net`
-- **Confluence Space:** `MINICON`
-- **User:** `michael.nikolaus@minicon.eu`
-- **Credentials-Datei:** `~/.clawdbot/mcp/atlassian.env`
-- **Jira API Endpoint (JQL):** `POST /rest/api/3/search/jql`
-- **Hinweis:** Alter Endpoint `/rest/api/3/search` ist deprecated (410).
+- **Instance:** https://minicon.atlassian.net
+- **User:** michael.nikolaus@minicon.eu
+- **Credentials:** C:\Users\Michael\.openclaw\secrets\atlassian.env
+- **Confluence Auth:** Basic Auth (base64 von mail:token)
 
-### Wichtiger Confluence-Link
-- **Autonome Website-Deployment-Plattform:**
-  - `https://minicon.atlassian.net/wiki/spaces/MINICON/pages/835813377/Autonome+Website-Deployment-Plattform`
-- **Immer mit Unterseiten betrachten** (Child-Pages als operative Detailquellen)
+### Confluence API (v1 — NICHT v2!)
+- **Base URL:** https://minicon.atlassian.net/wiki/rest/api
+- **Spaces:** GET/POST /space
+- **Pages:** GET/POST /content
+- **Example:** curl -s -X GET "https://minicon.atlassian.net/wiki/rest/api/space" -H "Authorization: Basic ""
 
-### Confluence-Inhalte (grobe Orientierung)
-- Plattform-Architektur & Rollen
-- Deployment-Ablauf (Build → Test → Rollout)
-- Domains/DNS/Cloudflare-Kontext
-- Monitoring, Alerting, Healthchecks
-- Rollback-/Incident-Runbooks
-- Sicherheits-/Zugriffsregeln
+### Jira API (v3)
+- **Base URL:** https://minicon.atlassian.net/rest/api/3
+- **Search:** POST /search/jql
+- **Example:** curl -s -X POST "https://minicon.atlassian.net/rest/api/3/search/jql" -H "Authorization: Basic """ -H "Content-Type: application/json" -d "'{"jql":"project = PDFM ORDER BY updated DESC","maxResults":10}'"
 
-## Hetzner (Zugriff)
-- **Status:** Zugriff vorhanden (Details lokal pflegen, nicht öffentlich teilen)
-- **Provider:** Hetzner Cloud / Robot (je nach Projekt)
-- **Produktionsserver:** `minicon-web` (Hetzner)
-- **Infrastruktur auf Prod:** Docker + Traefik Reverse Proxy
-- **Datenbankzugriff der Agenten:** über SSH-Tunnel `localhost:27018 -> prod:27017 (MongoDB)`
-- **Nutzung in Atlas:** Server-Betrieb, DNS-/Routing-nahe Deployments, Incident-Mitigation
-
-### Betriebskontext (aus Plattform-Doku)
-- KI-Agenten laufen in der Dev-Umgebung, **nicht** direkt auf dem Produktionsserver.
-- Deployments enden in dedizierten Website-Containern, Routing über Traefik auf `*.minicon.eu`.
-- QA nach Deployment: Container-Check, HTTP-Check, DB-Sync, Hub-Refresh.
-
-### Pflegehinweis
-- API-Tokens/Passwörter **nie im Klartext** in Git speichern.
-- Secrets nur über sichere lokale Dateien/Secret-Store referenzieren.
-- Bei Änderungen an Servern immer Runbook + Rollback-Schritt mit dokumentieren.
-
----
-
-Add whatever helps you do your job. This is your cheat sheet.
+### Spaces
+- **ME** - Minicon eG (Intern)
+- **PDFM** - PdfManagement (Produkt)
+- **DORF** - Dorfkiste
