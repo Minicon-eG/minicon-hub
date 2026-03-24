@@ -69,36 +69,38 @@ export async function GET() {
     getCustomerStats(),
   ]);
 
-  // "Live" = sites that have passed through the pipeline (build-done or further)
-  const sitesLive = customers.active + customers.promoted;
+  // Bezahlt = status "active" (Stripe payment confirmed)
+  const paidCustomers = customers.active;
   const sitesBuilt = customers.onboarding + customers.active + customers.promoted;
 
   const milestones: Milestone[] = [
     {
-      name: 'Dahn komplett',
+      name: '50 zahlende Kunden',
       target: 50,
       deadline: '2026-04-30',
-      current: sitesBuilt,
+      current: paidCustomers,
       pipelineBreakdown: {
-        'Discovery (neu)': discoveryNew,
-        'Discovery (fertig)': discoveryDone,
-        'Gebaut': buildDone,
-        'QA bestanden': qaPassed,
-        'Review fertig': reviewDone,
-        'Live (aktiv/beworben)': sitesLive,
+        'Bezahlt (aktiv)': customers.active,
+        'Angebot gesendet': customers.promoted,
+        'Website gebaut': customers.onboarding,
+        'In Pipeline': customers.pipeline,
+        'Jira: Discovery offen': discoveryNew,
+        'Jira: Bereit zum Bau': discoveryDone,
+        'Jira: QA bestanden': qaPassed,
+        'Jira: Review fertig': reviewDone,
       },
     },
     {
-      name: '1000 Websites',
+      name: '1000 zahlende Kunden',
       target: 1000,
       deadline: '2026-12-31',
-      current: sitesBuilt,
+      current: paidCustomers,
       pipelineBreakdown: {
-        'Kunden gesamt': customers.total,
+        'Bezahlt (aktiv)': customers.active,
+        'Angebot gesendet': customers.promoted,
+        'Website gebaut': customers.onboarding,
         'In Pipeline': customers.pipeline,
-        'Im Aufbau': customers.onboarding,
-        'Beworben': customers.promoted,
-        'Aktiv (bezahlt)': customers.active,
+        'Gesamt in DB': customers.total,
       },
     },
   ];
@@ -116,7 +118,7 @@ export async function GET() {
     customers,
   };
 
-  // Velocity: sites per day needed
+  // Velocity: zahlende Kunden pro Tag nötig
   const now = new Date();
   const m1Deadline = new Date('2026-04-30');
   const m2Deadline = new Date('2026-12-31');
@@ -125,14 +127,16 @@ export async function GET() {
 
   const velocity = {
     milestone1: {
-      remaining: Math.max(0, 50 - sitesBuilt),
+      remaining: Math.max(0, 50 - paidCustomers),
       daysLeft: daysToM1,
-      perDay: Math.ceil(Math.max(0, 50 - sitesBuilt) / daysToM1 * 10) / 10,
+      perDay: Math.round(Math.max(0, 50 - paidCustomers) / daysToM1 * 100) / 100,
+      label: 'zahlende Kunden pro Tag',
     },
     milestone2: {
-      remaining: Math.max(0, 1000 - sitesBuilt),
+      remaining: Math.max(0, 1000 - paidCustomers),
       daysLeft: daysToM2,
-      perDay: Math.ceil(Math.max(0, 1000 - sitesBuilt) / daysToM2 * 10) / 10,
+      perDay: Math.round(Math.max(0, 1000 - paidCustomers) / daysToM2 * 100) / 100,
+      label: 'zahlende Kunden pro Tag',
     },
   };
 

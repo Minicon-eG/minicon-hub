@@ -14,6 +14,7 @@ interface VelocityData {
   remaining: number;
   daysLeft: number;
   perDay: number;
+  label: string;
 }
 
 interface ApiResponse {
@@ -182,20 +183,20 @@ export default function MilestonesPage() {
         {/* Quick Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
-            <div className="text-3xl font-bold text-blue-400">{data.pipeline.customers.total}</div>
-            <div className="text-xs text-gray-400 mt-1">Kunden gesamt</div>
+            <div className="text-3xl font-bold text-green-400">{data.pipeline.customers.active}</div>
+            <div className="text-xs text-gray-400 mt-1">Bezahlt ✅</div>
           </div>
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
-            <div className="text-3xl font-bold text-green-400">{data.pipeline.customers.active + data.pipeline.customers.promoted}</div>
-            <div className="text-xs text-gray-400 mt-1">Live</div>
+            <div className="text-3xl font-bold text-yellow-400">{data.pipeline.customers.promoted}</div>
+            <div className="text-xs text-gray-400 mt-1">Angebot gesendet</div>
           </div>
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
-            <div className="text-3xl font-bold text-yellow-400">{data.pipeline.customers.onboarding}</div>
+            <div className="text-3xl font-bold text-blue-400">{data.pipeline.customers.onboarding}</div>
             <div className="text-xs text-gray-400 mt-1">Im Aufbau</div>
           </div>
           <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
-            <div className="text-3xl font-bold text-purple-400">{data.pipeline.totalTickets}</div>
-            <div className="text-xs text-gray-400 mt-1">Jira Tickets</div>
+            <div className="text-3xl font-bold text-purple-400">{data.pipeline.customers.total}</div>
+            <div className="text-xs text-gray-400 mt-1">Gesamt</div>
           </div>
         </div>
 
@@ -223,46 +224,45 @@ export default function MilestonesPage() {
             <div className="space-y-4">
               <div>
                 <div className="flex items-center justify-between text-sm mb-2">
-                  <span className="text-gray-400">Milestone 1: Dahn (50)</span>
-                  <span className={`font-bold ${data.velocity.milestone1.perDay <= 4 ? 'text-green-400' : 'text-red-400'}`}>
-                    {data.velocity.milestone1.perDay} Sites/Tag noetig
+                  <span className="text-gray-400">Milestone 1: 50 zahlende Kunden</span>
+                  <span className={`font-bold ${data.velocity.milestone1.perDay <= 1 ? 'text-green-400' : data.velocity.milestone1.perDay <= 2 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    {data.velocity.milestone1.perDay} {data.velocity.milestone1.label}
                   </span>
                 </div>
                 <div className="bg-gray-800 rounded-lg p-3 text-sm text-gray-300">
-                  {data.velocity.milestone1.remaining} Sites in {data.velocity.milestone1.daysLeft} Tagen
-                  {data.velocity.milestone1.perDay <= 2 && ' — Locker machbar! 🟢'}
-                  {data.velocity.milestone1.perDay > 2 && data.velocity.milestone1.perDay <= 4 && ' — Machbar mit Pipeline 🟡'}
-                  {data.velocity.milestone1.perDay > 4 && ' — Pipeline-Skalierung noetig! 🔴'}
+                  <strong>{data.velocity.milestone1.remaining}</strong> zahlende Kunden noch nötig in <strong>{data.velocity.milestone1.daysLeft}</strong> Tagen
+                  {data.velocity.milestone1.perDay <= 0.5 && ' — Locker machbar! 🟢'}
+                  {data.velocity.milestone1.perDay > 0.5 && data.velocity.milestone1.perDay <= 2 && ' — Machbar mit Akquise 🟡'}
+                  {data.velocity.milestone1.perDay > 2 && ' — Aggressive Akquise nötig! 🔴'}
                 </div>
               </div>
               <div>
                 <div className="flex items-center justify-between text-sm mb-2">
-                  <span className="text-gray-400">Milestone 2: 1000 Websites</span>
-                  <span className={`font-bold ${data.velocity.milestone2.perDay <= 4 ? 'text-green-400' : 'text-red-400'}`}>
-                    {data.velocity.milestone2.perDay} Sites/Tag noetig
+                  <span className="text-gray-400">Milestone 2: 1000 zahlende Kunden</span>
+                  <span className={`font-bold ${data.velocity.milestone2.perDay <= 2 ? 'text-green-400' : data.velocity.milestone2.perDay <= 4 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    {data.velocity.milestone2.perDay} {data.velocity.milestone2.label}
                   </span>
                 </div>
                 <div className="bg-gray-800 rounded-lg p-3 text-sm text-gray-300">
-                  {data.velocity.milestone2.remaining} Sites in {data.velocity.milestone2.daysLeft} Tagen
+                  <strong>{data.velocity.milestone2.remaining}</strong> zahlende Kunden noch nötig in <strong>{data.velocity.milestone2.daysLeft}</strong> Tagen
                   {data.velocity.milestone2.perDay <= 2 && ' — Locker machbar! 🟢'}
                   {data.velocity.milestone2.perDay > 2 && data.velocity.milestone2.perDay <= 4 && ' — Machbar mit Pipeline 🟡'}
-                  {data.velocity.milestone2.perDay > 4 && ' — Pipeline-Skalierung noetig! 🔴'}
+                  {data.velocity.milestone2.perDay > 4 && ' — Aggressive Skalierung nötig! 🔴'}
                 </div>
               </div>
             </div>
 
-            {/* Scale-up Requirements */}
+            {/* Conversion Strategy */}
             <div className="mt-6 border-t border-gray-800 pt-4">
-              <h3 className="text-sm font-semibold text-gray-300 mb-2">Skalierungs-Rechnung</h3>
-              <div className="text-xs text-gray-400 space-y-1">
-                <p>Aktuell: 6 Build-Runs/Tag (Cron: 0,3,6,16,19,22 Uhr)</p>
-                <p>Wenn jeder Run 1 Site baut: <strong className="text-white">6 Sites/Tag</strong></p>
-                <p>Fuer 1000 in {data.velocity.milestone2.daysLeft} Tagen: <strong className="text-white">{data.velocity.milestone2.perDay} Sites/Tag</strong></p>
+              <h3 className="text-sm font-semibold text-gray-300 mb-2">Conversion-Strategie</h3>
+              <div className="text-xs text-gray-400 space-y-2">
+                <p><strong className="text-white">Aktuell:</strong> {data.pipeline.customers.onboarding} Websites gebaut, {data.pipeline.customers.active} zahlend</p>
+                <p><strong className="text-white">Conversion Rate:</strong> {data.pipeline.customers.onboarding > 0 ? Math.round((data.pipeline.customers.active / data.pipeline.customers.onboarding) * 100) : 0}%</p>
                 <p className="mt-2 text-gray-300">
-                  {data.velocity.milestone2.perDay <= 6
-                    ? '✅ Aktuelle Pipeline reicht aus'
-                    : `⚠️ Pipeline muss auf ${Math.ceil(data.velocity.milestone2.perDay)} parallel Builds skaliert werden`
-                  }
+                  Nötig für M1 (50): <strong>{Math.max(50, Math.ceil(data.velocity.milestone1.remaining / 0.3))}</strong> Websites bauen (bei 30% Conversion)
+                </p>
+                <p className="text-gray-300">
+                  Nötig für M2 (1000): <strong>{Math.max(1000, Math.ceil(data.velocity.milestone2.remaining / 0.3))}</strong> Websites bauen (bei 30% Conversion)
                 </p>
               </div>
             </div>
