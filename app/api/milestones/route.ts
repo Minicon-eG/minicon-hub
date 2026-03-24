@@ -37,7 +37,9 @@ async function getCustomerStats() {
     });
     if (!res.ok) return { total: 0, active: 0, promoted: 0, onboarding: 0, pipeline: 0 };
     const data = await res.json();
-    const customers = data.customers || [];
+    // Eigene Websites (minicon.eu etc.) nicht als zahlende Kunden zählen
+    const INTERNAL_SITES = ['minicon-eu', 'minicon'];
+    const customers = (data.customers || []).filter((c: any) => !INTERNAL_SITES.includes(c.id));
     return {
       total: customers.length,
       active: customers.filter((c: any) => c.status === 'active').length,
