@@ -17,7 +17,8 @@ interface Milestone {
 async function jiraCount(jql: string): Promise<number> {
   const auth = Buffer.from(`${JIRA_USER}:${JIRA_TOKEN}`).toString('base64');
   try {
-    const res = await fetch(`${JIRA_INSTANCE}/rest/api/3/search/jql`, {
+    // Use v2 /search (returns total), NOT v3 /search/jql (no total field)
+    const res = await fetch(`${JIRA_INSTANCE}/rest/api/2/search`, {
       method: 'POST',
       headers: { 'Authorization': `Basic ${auth}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ jql, maxResults: 1, fields: ['summary'] }),
