@@ -1,13 +1,8 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  // Skip Uptime Kuma fetch during build (no server running)
-  if (process.env.NEXT_PHASE === 'phase-production-build') {
-    return NextResponse.json({ monitors: [], source: 'build-skip' });
-  }
-
-  const UPTIME_KUMA_URL = 'http://localhost:3001';
-  const API_KEY = 'uk1_pkcyZM0lDxNlv7UNTYgX8eCe_rOWLALUE4I9hRIc';
+  const UPTIME_KUMA_URL = process.env.UPTIME_KUMA_URL || 'http://localhost:3001';
+  const API_KEY = process.env.UPTIME_KUMA_API_KEY || 'uk1_pkcyZM0lDxNlv7UNTYgX8eCe_rOWLALUE4I9hRIc';
 
   try {
     const authHeader = 'Basic ' + Buffer.from(API_KEY + ':').toString('base64');
@@ -33,7 +28,7 @@ export async function GET() {
 
     return NextResponse.json({ monitors, source: 'uptime-kuma' });
   } catch (error) {
-    // Graceful fallback — don't fail the page when Uptime Kuma is unreachable
+    // Graceful fallback — don't fail when Uptime Kuma is unreachable
     return NextResponse.json({ monitors: [], source: 'unreachable' }, { status: 200 });
   }
 }
