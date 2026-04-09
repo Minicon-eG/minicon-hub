@@ -33,10 +33,10 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          dockerfile: ./Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          no-cache: true
-          pull: false
+          tags: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME }}:latest
+          pull: true
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@v1.0.3
