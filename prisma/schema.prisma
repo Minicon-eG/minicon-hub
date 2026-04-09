@@ -1,0 +1,16 @@
+// This is your Prisma schema file
+// Update with your actual database schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// Placeholder models - update with actual schema
+model Example {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
