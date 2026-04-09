@@ -3,6 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches: [ "main", "master" ]
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
@@ -18,6 +19,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: false
+          clean: true
+
+      - name: Clean stale files
+        run: |
+          rm -rf temp-clean-waldhuette website-briefs/temp-clean-waldhuette 2>/dev/null || true
+          rm -f .gitmodules 2>/dev/null || true
+          rm -rf .git/modules 2>/dev/null || true
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
@@ -45,7 +55,6 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             cd /root/minicon-hub
-            docker-compose pull
-            docker-compose up -d
+            docker-compose pull || true
+            docker-compose up -d || docker-compose -f docker-compose.yml up -d
