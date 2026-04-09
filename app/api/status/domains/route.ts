@@ -28,7 +28,7 @@ export async function GET() {
 
     return NextResponse.json({ monitors, source: 'uptime-kuma' });
   } catch (error) {
-    // Graceful fallback ÔÇö don't fail when Uptime Kuma is unreachable
+    // Graceful fallback — don't fail when Uptime Kuma is unreachable
     return NextResponse.json({ monitors: [], source: 'unreachable' }, { status: 200 });
   }
 }
