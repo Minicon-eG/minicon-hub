@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  minicon-hub:
+    image: ghcr.io/minicon-eg/minicon-hub:latest
+    container_name: minicon-hub
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mongodb://91.97.30.147:27017
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    volumes:
+      - /root/minicon-hub/data:/app/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minicon-hub.tls=true"
+      - "traefik.http.routers.minicon-hub.rule=Host(`api.minicon.eu`)"
+      - "traefik.http.routers.minicon-hub.entrypoints=websecure"
+      - "traefik.http.services.minicon-hub.loadbalancer.server.port=3000"
+      - "traefik.docker.network=minicon-web"
+    networks:
+      - minicon-web
+
+networks:
+  minicon-web:
+    name: minicon-web
+    external: false
